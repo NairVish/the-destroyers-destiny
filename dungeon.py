@@ -25,10 +25,6 @@ class Dungeon():
     def advance(self):
         self.current_cell_num += 1
 
-        globals.this_player.current_health += (globals.this_player.total_health * .2)
-        if globals.this_player.current_health > globals.this_player.total_health:
-            globals.this_player.current_health = globals.this_player.total_health
-
         del self.cell
 
         if self.current_cell_num == self.total_cells:
