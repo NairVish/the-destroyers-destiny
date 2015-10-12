@@ -77,7 +77,7 @@ def load_player():
     else:
         saved_stats = [line.rstrip('\n') for line in save.readlines()]
         try:
-            inventory = [line for line in saved_stats[10:(len(saved_stats)-1)]]
+            inventory = [line for line in saved_stats[12:(len(saved_stats)-1)]]
         except IndexError:
             inventory = []
         else:

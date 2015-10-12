@@ -53,7 +53,7 @@ def declare_existing_player(saved_stats, inventory):
     global this_player
     this_player = player.Player(saved_stats[0], saved_stats[1], saved_stats[2], saved_stats[3], saved_stats[4],
                                 saved_stats[5], saved_stats[6], saved_stats[7], saved_stats[8], saved_stats[9],
-                                inventory)
+                                saved_stats[10], saved_stats[11], inventory)
 
 
 def clear_screen():
