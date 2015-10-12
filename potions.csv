@@ -1,6 +1,6 @@
-Potion,5,
-Potion+,10,
-Potion++,15,
-AttackUP,,attack
-DefenseUP,,defense
-SpeedUP,,speed
+Potion,5,health,10
+Potion+,10,health,20
+Potion++,15,health,30
+AttackUP,2,attack,30
+DefenseUP,2,defense,30
+SpeedUP,2,speed,30
