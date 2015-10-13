@@ -4,10 +4,11 @@ import globals
 
 class Player():
 
-    def __init__(self, init_name, init_level=1, init_xp=0, init_target_xp=10, init_health=20, init_attack=2,
+    def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20, init_attack=2,
                  init_defense=3.5, init_speed=3, init_main_quest_stage=0, init_money=10, init_assistant=False,
-                 init_weapon=None, init_inventory=[]):
+                 init_weapon=None, init_day=0, init_sidequest=False, init_inventory=[]):
         self.name = init_name
+        self.home = init_province
         self.level = init_level
         self.xp = init_xp
         self.target_xp = init_target_xp
@@ -20,6 +21,8 @@ class Player():
         self.money = init_money
         self.assistant = init_assistant
         self.equip_weapon(init_weapon)
+        self.day = init_day
+        self.sidequests = init_sidequest
         self.inventory = init_inventory
 
 
