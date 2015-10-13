@@ -1,6 +1,5 @@
 __author__ = 'vishnunair'
 import sys
-import os
 import globals
 
 def exit_program():
