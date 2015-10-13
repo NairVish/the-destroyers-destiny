@@ -1,10 +1,10 @@
 __author__ = 'vishnunair'
 import sys
 import os
-
+import globals
 
 def exit_program():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    globals.clear_screen()
     print("The program has ended. Thank you for playing.")
     print('\n')
     sys.exit()

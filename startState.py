@@ -18,7 +18,8 @@ def print_intro():
 
 def show_start_menu():  # The startup menu
     """
-    Prints the main startup menu and and requests user input of either starting New Game, continuing (if save is found)
+    Prints the main startup menu and and requests user input of either starting New Game, continuing (if save is found),
+    or quitting.
     """
     print('Main Menu')
     print('\t1. Start a New Game.')
