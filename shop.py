@@ -31,6 +31,34 @@ def selling():
         input("Press enter to return home...")
         return
 
+    tabular_data = []
+    for item in globals.this_player.inventory:
+        for num in range(len(globals.this_player.inventory)):
+            tmp = []
+            tmp.append(num)
+            tmp.append(item)
+            if item in globals.potion_names:
+                tmp.append(globals.potion_cost[globals.potion_names.index(item)])
+            elif item in globals.weapon_names:
+                tmp.append(globals.weapon_cost[globals.weapon_names.index(item)])
+            elif item in globals.loot_names:
+                tmp.append(globals.loot_values[globals.loot_names.index(item)])
+            elif item in globals.rare_loot_names:
+                tmp.append(globals.rare_loot_values[globals.rare_loot_names.index(item)])
+            tabular_data.append(tmp)
 
+    print(tabulate(tabular_data, headers=["No." "Item Name" "Value ($)"]))
 
-        # TODO: selling implementation
+    inp = ""
+    while inp is not 'q':
+        inp = "Please enter the number of the item you would like to sell. Enter the letter 'q' to leave. "
+
+        if inp is not 'q':
+            try:
+                inp = int(inp)
+            except ValueError:
+                print("You did not enter a number. Please try again.")
+            else:
+                inventory.remove(inventory[inp])
+
+    # TODO: return to home screen

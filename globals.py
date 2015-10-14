@@ -78,8 +78,8 @@ def init_globals():
     loot_values = []
     global rare_loot_values
     rare_loot_values = []
-    amount_of_loot = 11
-    amount_of_rare_loot = 7
+    # amount_of_loot = 11
+    # amount_of_rare_loot = 7
     loot = csv.reader(open("loot.csv", 'r'))
     rare_loot = csv.reader(open("rare_loot.csv", 'r'))
     for row in loot:
