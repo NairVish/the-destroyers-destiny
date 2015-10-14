@@ -1,6 +1,7 @@
 __author__ = 'vishnunair'
 
 import globals
+from tabulate import tabulate
 
 class Player():
 
@@ -20,7 +21,7 @@ class Player():
         self.main_quest_stage = init_main_quest_stage
         self.money = init_money
         self.assistant = init_assistant
-        self.equip_weapon(init_weapon)
+        self.current_weapon = Weapon(init_weapon)
         self.day = init_day
         self.sidequests = init_sidequest
         self.inventory = init_inventory
@@ -83,17 +84,45 @@ class Player():
                 print("Speed increased by %s points!" % boost)
 
     def equip_weapon(self, weapon):
-        if weapon is None:
-            self.current_weapon = None
-            return
+        tabular_weapon_inv = []
+        number_of_weapons = 0
+        for item in self.inventory:
+            tmp = []
+            if item in globals.weapon_names:
+                tmp.append(number_of_weapons)
+                tmp.append(item)
+                tmp.append(globals.weapon_powers[globals.weapon_names.index(weapon_name)])
+                number_of_weapons += 1
+            if tmp is False:
+                continue
+            else:
+                tabular_weapon_inv.append(tmp)
 
-        try:
-            del self.current_weapon
-        except NameError:
-            pass
-        else:
-            print("The %s has been equipped." % weapon)
-        self.current_weapon = Weapon(weapon)
+        if tabular_weapon_inv is False:
+            print("You have no weapons to equip.")
+            input("Press enter to continue...")
+            return
+        print("WEAPON CHOOSER\n")
+        print(tabulate(tabular_weapon_inv, headers=["No." "Name" "Power"], tablefmt="fancy_grid"))
+
+        inp = input("\nEnter the number of the weapon you wish to equip: ")
+
+        input_legal = False
+        while input_legal is False:
+            try:
+                inp = int(inp)
+            except ValueError:
+                inp = input("That is an invalid option. Please try again: ")
+            else:
+                if input >= len(globals.weapon_names):
+                    inp = input("That is an invalid option. Please try again: ")
+                    continue
+                input_legal = True
+
+        print("The %s has been equipped." % globals.weapon_names[inp])
+        self.current_weapon = Weapon(globals.weapon_names[inp])
+
+        # TODO: Return
 
 
 class Weapon():
