@@ -14,9 +14,14 @@ def print_home_screen():
     print("\t3. Check for side jobs.")
     print("\t4. See detailed statistics.")
     print("\t5. See your inventory.")
-    print("\t5. Exit (and Save).\n")
+    print("\t6. Equip another weapon.")
+    print("\t7. Use a potion.")
+    print("\t8. Exit (and Save).\n")
 
-    return input("What would you like to do? ")
+    inp = input("What would you like to do? ")
+    while input not in range(1,9):
+        inp = input("You have entered an invalid option. Please try again: ")
+    return inp
 
 def print_shop_selector():
     print("SHOPS\n")
@@ -26,7 +31,10 @@ def print_shop_selector():
     print("\t3. The Really Rich Guy that Buys Everything")
     print("\t4. Return to Home Screen.\n")
 
-    return input("Where would you like to go? ")
+    inp = input("Where would you like to go? ")
+    while input not in range(1,5):
+        inp = input("You have entered an invalid option. Please try again: ")
+    return inp
 
 def grab_home_input():
     # TODO: handle home screen input
