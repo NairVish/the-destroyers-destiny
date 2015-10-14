@@ -32,33 +32,37 @@ def selling():
         return
 
     tabular_data = []
+    inventory_dict = {}
     for item in globals.this_player.inventory:
         for num in range(len(globals.this_player.inventory)):
             tmp = []
+            val = 0
             tmp.append(num)
             tmp.append(item)
             if item in globals.potion_names:
-                tmp.append(globals.potion_cost[globals.potion_names.index(item)])
+                val = globals.potion_cost[globals.potion_names.index(item)]
             elif item in globals.weapon_names:
-                tmp.append(globals.weapon_cost[globals.weapon_names.index(item)])
+                val = globals.weapon_cost[globals.weapon_names.index(item)]
             elif item in globals.loot_names:
-                tmp.append(globals.loot_values[globals.loot_names.index(item)])
+                val = globals.loot_values[globals.loot_names.index(item)]
             elif item in globals.rare_loot_names:
-                tmp.append(globals.rare_loot_values[globals.rare_loot_names.index(item)])
+                val = globals.rare_loot_values[globals.rare_loot_names.index(item)]
+            tmp.append(val)
+            inventory_dict[item] = val
             tabular_data.append(tmp)
 
     print(tabulate(tabular_data, headers=["No." "Item Name" "Value ($)"]))
 
-    inp = ""
+    inp = "Please enter the number of the item you would like to sell. Enter the letter 'q' to leave. "
     while inp is not 'q':
-        inp = "Please enter the number of the item you would like to sell. Enter the letter 'q' to leave. "
-
         if inp is not 'q':
             try:
                 inp = int(inp)
             except ValueError:
                 print("You did not enter a number. Please try again.")
             else:
-                inventory.remove(inventory[inp])
+                globals.this_player.money += inventory_dict[globals.this_player.inventory[inp]]
+                globals.this_player.inventory.remove(globals.this_player.inventory[inp])
+                inp = input("Please enter the number of another item you would like to sell, else enter the letter 'q' to leave.")
 
     # TODO: return to home screen
