@@ -4,10 +4,7 @@ import globals
 from tabulate import tabulate
 
 
-# TODO: shop implementation
-
 def weapon_shop():
-    # TODO: weapon shop implementation
     print("The Crazy Weapons Specialist\n".upper())
     print("Welcome to The Craxy Weapons Specialist. What would you like to buy?")
     print(tabulate(globals.tabular_potions, headers=["No.", "Potion Name", "Potion Type", "Cost ($)"],
@@ -34,9 +31,8 @@ def weapon_shop():
 
 
 def potion_shop():
-    # TODO: potion shop implementation
     print("The Oddly Unique Alchemist\n".upper())
-    # TODO: write a welcome message
+
     print(tabulate(globals.tabular_weapons, headers=["No.", "Strength (Points)", "Type", "Cost ($)"],
                    tablefmt="fancy_grid"))
 
