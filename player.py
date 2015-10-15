@@ -6,9 +6,8 @@ from tabulate import tabulate
 
 class Player():
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
-                 init_attack=2,
-                 init_defense=3.5, init_speed=3, init_main_quest_stage=0, init_money=10, init_assistant=False,
-                 init_weapon=None, init_day=0, init_sidequest=False, init_inventory=[]):
+                 init_attack=2,init_defense=3.5, init_speed=3, init_main_quest_stage=0, init_money=10,
+                 init_assistant=False, init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
         self.name = init_name
         self.home = init_province
         self.level = init_level
@@ -44,6 +43,7 @@ class Player():
         self.level += 1
 
     def print_stats(self):
+        globals.clear_screen()
         print("STATISTICS FOR PLAYER %s" % self.name)
         print("Level: %s" % self.level)
         print("Current XP: %s" % self.xp)
@@ -172,12 +172,20 @@ class Player():
         print("YOUR INVENTORY\n")
 
         if self.inventory is False:
-            print("You have nothing in your inventory.")
+            print("You have nothing in your inventory\n")
         else:
             for item in self.inventory:
                 print(item)
+            print('\n')
 
         input("Press enter to return home...")
+
+    def sleep(self):
+        self.day += 1
+
+        # TODO: if main quest stage is less than some amount
+        # then we're going to have a function monitor our player's status,
+        # using progression of dialogue and maybe even day.
 
 
 class Weapon():
