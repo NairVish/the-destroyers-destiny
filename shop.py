@@ -70,7 +70,6 @@ def selling():
     for item in globals.this_player.inventory:
         for num in range(len(globals.this_player.inventory)):
             tmp = []
-            val = 0
             tmp.append(num)
             tmp.append(item)
             if item in globals.potion_names:

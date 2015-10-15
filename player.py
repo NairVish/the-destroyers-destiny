@@ -3,9 +3,10 @@ __author__ = 'vishnunair'
 import globals
 from tabulate import tabulate
 
-class Player():
 
-    def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20, init_attack=2,
+class Player():
+    def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
+                 init_attack=2,
                  init_defense=3.5, init_speed=3, init_main_quest_stage=0, init_money=10, init_assistant=False,
                  init_weapon=None, init_day=0, init_sidequest=False, init_inventory=[]):
         self.name = init_name
@@ -25,7 +26,6 @@ class Player():
         self.day = init_day
         self.sidequests = init_sidequest
         self.inventory = init_inventory
-
 
     def __repr__(self):
         return self.name
@@ -64,29 +64,69 @@ class Player():
     def toggle_assistant_flag(self):
         self.assistant = not self.assistant
 
-    def use_enhancement_potion(self):
-        pass
-        # TODO: create implementation similar to equip_weapon()
+    def use_potion(self, enhancement=False):
+        tabular_potion_inv = []
+        number_of_potions = 0
+        potion_dict = {}
+        for item in self.inventory:
+            tmp = []
+            if item not in globals.potion_names:
+                continue
+            if enhancement is True:
+                if globals.potion_type[globals.potion_names.index(item)] is "health":
+                    continue
+            potion_power = globals.potion_powers[globals.potion_names.index(item)]
+            potion_type = globals.potion_type[globals.potion_names.index(item)]
+            tmp.append(number_of_potions)
+            tmp.append(item)
+            tmp.append(potion_type)
+            tmp.append(potion_power)
+            tabular_potion_inv.append(tmp)
+            potion_dict[item] = potion_power
+            number_of_potions += 1
 
-    def use_any_potion(self, potion):
-        with globals.potion_names.index(potion) as pIndex:
-            boost = globals.potion_powers[pIndex]
-            type = globals.potion_type[pIndex]
-            if type is "health":
-                self.current_health += boost
-                if self.current_health > self.total_health:
-                    self.current_health = self.total_health
-                print("Current health increased by %s points!" % boost)
-            elif type is "attack":
-                self.attack += boost
-                print("Attack increased by %s points!" % boost)
-            elif type is "defense":
-                self.defense += boost
-                print("Defense increased by %s points!" % boost)
-            elif type is "speed":
-                self.speed += boost
-                print("Speed increased by %s points!" % boost)
-        # TODO: create implementation similar to equip_weapon()
+        print("USE A POTION\n")
+        print(tabulate(tabular_potion_inv, headers=["No." "Potion Name" "Type" "Strength (Points)"]))
+
+        items_to_remove = []
+        inp = input("Please enter the number of the potion you would like to use. Enter the letter 'q' to leave: ")
+        while inp is not 'q':
+            try:
+                inp = int(inp)
+            except ValueError:
+                inp = input("You did not enter a number. Please enter a valid option: ")
+            else:
+                if tabular_potion_inv[inp][0] is "USED!" or inp >= len(globals.this_player.inventory):
+                    inp = input("You have entered an invalid option. Please enter a valid option: ")
+                    continue
+                item_to_remove = self.inventory.index(tabular_potion_inv[inp][1])
+                boost = tabular_potion_inv[inp][3]
+                type = tabular_potion_inv[inp][2]
+                if type is "health":
+                    self.current_health += boost
+                    if self.current_health > self.total_health:
+                        self.current_health = self.total_health
+                        print("Current health increased by %s points!" % boost)
+                elif type is "attack":
+                    self.attack += boost
+                    print("Attack increased by %s points!" % boost)
+                elif type is "defense":
+                    self.defense += boost
+                    print("Defense increased by %s points!" % boost)
+                elif type is "speed":
+                    self.speed += boost
+                    print("Speed increased by %s points!" % boost)
+                items_to_remove.append(item_to_remove)
+                for index in range(0, 4):
+                    tabular_potion_inv[inp][index] = "USED!"
+                print(tabulate(tabular_potion_inv, headers=["No." "Potion Name" "Type" "Strength (Points)"]))
+                inp = input(
+                    "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
+
+        for item in items_to_remove:
+            globals.this_player.inventory.remove(item)
+
+        # TODO: Return
 
     def equip_weapon(self):
         tabular_weapon_inv = []
@@ -131,7 +171,6 @@ class Player():
 
 
 class Weapon():
-
     def __init__(self, weapon_name):
         self.name = weapon_name
         self.power = globals.weapon_powers[globals.weapon_names.index(weapon_name)]
