@@ -1,16 +1,29 @@
 __author__ = 'vishnunair'
 import globals
+from random import randrange
 
 class Cell():
     def __init__(self, num_cell):
-        self.enemy = ""
-        self.loot = ""
-        self.property = self.determineProperty()
+        self.determineProperty()
         self.number = num_cell
 
     def determineProperty(self):
+        result = randrange(0,100)
+        if result in range(0,20):
+            self.enemy = None
+            self.loot = None
+        elif result in range(20,50):
+            self.enemy = None
+            self.loot = # TODO: random selection of loot
+        elif result in range(50,100):
+            self.enemy = # TODO: selection of enemy depends on main quest flag
+            self.loot = None
+
+    def loot_selector(self):
         pass
-        # TODO write the selection function.
+
+    def enemy_selector(self):
+        pass
 
 
 class Dungeon():
@@ -51,6 +64,6 @@ class Dungeon():
         print('You are currently on cell %s of %d.' % (self.current_cell_num, self.total_cells))
         print("Current Health: %s of %d" % (globals.this_player.current_health, globals.this_player.total_health))
 
-def traverse_dungeon():
-    pass
-    # TODO how do we traverse our dungeon?
+    def traverse_dungeon(self):
+        pass
+        # TODO how do we traverse our dungeon?
