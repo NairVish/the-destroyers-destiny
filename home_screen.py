@@ -1,6 +1,8 @@
 __author__ = 'vishnunair'
 
 import globals
+import shop
+import exit
 
 def print_home_screen():
     print("HOME SCREEN\n")
@@ -23,6 +25,36 @@ def print_home_screen():
         inp = input("You have entered an invalid option. Please try again: ")
     return inp
 
+def process_home():
+    while True:
+        inp = print_home_screen()
+        globals.clear_screen()
+        if inp is '1':
+            globals.this_player.sleep()
+        elif inp is '2':
+            shop_input = print_shop_selector()
+            globals.clear_screen()
+            if shop_input is '1':
+                shop.potion_shop()
+            elif shop_input is '2':
+                shop.weapon_shop()
+            elif shop_input is '3':
+                shop.selling()
+        elif inp is '3':
+            pass # until radiant mechanic is ready
+        elif inp is '4':
+            globals.this_player.print_stats()
+        elif inp is '5':
+            globals.this_player.see_inventory()
+        elif inp is '6':
+            globals.this_player.equip_weapon()
+        elif inp is '7':
+            globals.this_player.use_potion(enhancement=True)
+        elif inp is '8':
+            exit.exit_sequence()
+        globals.clear_screen()
+        # TODO: maybe return certain values to indicate state transition?
+
 def print_shop_selector():
     print("SHOPS\n")
 
@@ -35,7 +67,3 @@ def print_shop_selector():
     while input not in range(1,5):
         inp = input("You have entered an invalid option. Please try again: ")
     return inp
-
-def grab_home_input():
-    # TODO: handle home screen input
-    pass
