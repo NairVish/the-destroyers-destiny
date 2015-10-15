@@ -23,12 +23,14 @@ def weapon_shop():
             if inp >= len(globals.weapon_names):
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
+            cost = globals.weapon_cost[inp]
+            if cost > globals.this_player.money:
+                inp = input("You don't have enough money. Try buying something else, else enter the letter 'q' to leave: ")
+                continue
             globals.this_player.inventory.append(globals.weapon_names[inp])
-            globals.this_player.money -= globals.weapon_cost[inp]
+            globals.this_player.money -= cost
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
-
-    # TODO: Return to home
 
 
 def potion_shop():
@@ -48,11 +50,15 @@ def potion_shop():
             if inp >= len(globals.potion_names):
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
+            cost = globals.potion_cost[inp]
+            if cost > globals.this_player.money:
+                inp = input("You don't have enough money. Try buying something else, else enter the letter 'q' to leave: ")
+                continue
             globals.this_player.inventory.append(globals.potion_names[inp])
-            globals.this_player.money -= globals.potion_cost[inp]
+            globals.this_player.money -= cost
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
-    # TODO: Return to home
+
 
 
 def selling():
@@ -100,7 +106,7 @@ def selling():
                 inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]
-            print("%s sold for $%d" % (item_to_remove, item_value))
+            print("%s sold for $%d!" % (item_to_remove, item_value))
             globals.this_player.money += item_value
             items_to_remove.append(item_to_remove)
             tabular_data[inp][0] = "SOLD!"
@@ -112,4 +118,3 @@ def selling():
     for item in items_to_remove:
         globals.this_player.inventory.remove(item)
 
-        # TODO: return to home screen

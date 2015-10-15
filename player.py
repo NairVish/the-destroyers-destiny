@@ -58,7 +58,7 @@ class Player():
         print("Current inventory: ")
         for item in self.inventory:
             print('\t' + item)
-        input("\nPress any key to return to previous screen.")
+        input("\nPress any key to return to previous screen...")
         globals.clear_screen()
 
     def toggle_assistant_flag(self):
@@ -126,7 +126,6 @@ class Player():
         for item in items_to_remove:
             globals.this_player.inventory.remove(item)
 
-        # TODO: Return
 
     def equip_weapon(self):
         tabular_weapon_inv = []
@@ -167,7 +166,18 @@ class Player():
         print("The %s has been equipped." % globals.weapon_names[inp])
         self.current_weapon = Weapon(globals.weapon_names[inp])
 
-        # TODO: Return
+        input("Press enter to return home...")
+
+    def see_inventory(self):
+        print("YOUR INVENTORY\n")
+
+        if self.inventory is False:
+            print("You have nothing in your inventory.")
+        else:
+            for item in self.inventory:
+                print(item)
+
+        input("Press enter to return home...")
 
 
 class Weapon():
