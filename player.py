@@ -64,7 +64,11 @@ class Player():
     def toggle_assistant_flag(self):
         self.assistant = not self.assistant
 
-    def use_potion(self, potion):
+    def use_enhancement_potion(self):
+        pass
+        # TODO: create implementation similar to equip_weapon()
+
+    def use_any_potion(self, potion):
         with globals.potion_names.index(potion) as pIndex:
             boost = globals.potion_powers[pIndex]
             type = globals.potion_type[pIndex]
@@ -82,8 +86,9 @@ class Player():
             elif type is "speed":
                 self.speed += boost
                 print("Speed increased by %s points!" % boost)
+        # TODO: create implementation similar to equip_weapon()
 
-    def equip_weapon(self, weapon):
+    def equip_weapon(self):
         tabular_weapon_inv = []
         number_of_weapons = 0
         for item in self.inventory:

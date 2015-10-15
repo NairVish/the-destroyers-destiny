@@ -15,7 +15,7 @@ def print_home_screen():
     print("\t4. See detailed statistics.")
     print("\t5. See your inventory.")
     print("\t6. Equip another weapon.")
-    print("\t7. Use a potion.")
+    print("\t7. Use an enhancement potion.")
     print("\t8. Exit (and Save).\n")
 
     inp = input("What would you like to do? ")
