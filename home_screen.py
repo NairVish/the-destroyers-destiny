@@ -1,6 +1,7 @@
 __author__ = 'vishnunair'
 
 import globals
+from globals import clear_screen
 import shop
 import exit
 
@@ -52,7 +53,7 @@ def process_home():
             globals.this_player.use_potion(enhancement=True)
         elif inp is '8':
             exit.exit_sequence()
-        globals.clear_screen()
+        clear_screen()
         # TODO: maybe return certain values to indicate state transition?
 
 def print_shop_selector():

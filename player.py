@@ -1,6 +1,7 @@
 __author__ = 'vishnunair'
 
 import globals
+from globals import clear_screen
 from tabulate import tabulate
 
 
@@ -59,7 +60,7 @@ class Player():
         for item in self.inventory:
             print('\t' + item)
         input("\nPress any key to return to previous screen...")
-        globals.clear_screen()
+        clear_screen()
 
     def toggle_assistant_flag(self):
         self.assistant = not self.assistant
@@ -126,6 +127,8 @@ class Player():
         for item in items_to_remove:
             globals.this_player.inventory.remove(item)
 
+        clear_screen()
+
 
     def equip_weapon(self):
         tabular_weapon_inv = []
@@ -167,6 +170,8 @@ class Player():
         self.current_weapon = Weapon(globals.weapon_names[inp])
 
         input("Press enter to return home...")
+        clear_screen()
+
 
     def see_inventory(self):
         print("YOUR INVENTORY\n")
