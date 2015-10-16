@@ -25,7 +25,7 @@ class Cell():
 
     def enemy_selector(self):
         pass
-        # TODO: selection of enemy depends on main quest flag AND/OR name of dungeon
+        # TODO: selection of enemy depends on name of dungeon
 
 
 class Dungeon():
@@ -109,3 +109,7 @@ class Dungeon():
             self.show_status()
             self.execute_cell_action()
             self.cell = self.advance()
+
+    def monitor_main_quest(self):
+        pass
+        # TODO: monitor main quest
