@@ -1,6 +1,7 @@
 __author__ = 'vishnunair'
 import globals
-from random import randrange
+from globals import clear_screen
+from random import randrange, choice
 
 class Cell():
     def __init__(self, num_cell):
@@ -14,16 +15,17 @@ class Cell():
             self.loot = None
         elif result in range(20,50):
             self.enemy = None
-            self.loot = # TODO: random selection of loot
+            self.loot = self.loot_selector()
         elif result in range(50,100):
-            self.enemy = # TODO: selection of enemy depends on main quest flag
+            self.enemy = self.enemy_selector()
             self.loot = None
 
     def loot_selector(self):
-        pass
+        return choice(globals.loot_names)
 
     def enemy_selector(self):
         pass
+        # TODO: selection of enemy depends on main quest flag AND/OR name of dungeon
 
 
 class Dungeon():
@@ -42,28 +44,68 @@ class Dungeon():
 
         del self.cell
 
-        if self.current_cell_num == self.total_cells:
-            self.cell = Cell(self.current_cell_num)
+        if self.current_cell_num <= self.total_cells:
+            return Cell(self.current_cell_num)
         else:
-            pass
+            return None
 
-    def wait_for_cell_action(self):
+    def execute_cell_action(self):
         if self.cell.enemy is not None and self.cell.loot is None:
             pass
             # TODO pass self.cell.enemy to battle mechanic
         elif self.cell.loot is not None and self.cell.enemy is None:
-            pass
-            # TODO Modified version of standby dungeon screen but also showing loot and option to accept.
-            # show loot on screen and add to inventory if selected
+            print("You've found the following loot: %s" % self.cell.loot)
+            inp = input("Would you like to add it to your inventory?"
+                        "You can sell it later for some more money. (y/n)")
+            if inp is 'y':
+                globals.this_player.inventory.append(self.cell.loot)
+                print("\n%s added to your inventory!\n" % self.cell.loot)
+            else:
+                print("\n%s was NOT added to your inventory!\n" % self.cell.loot)
+
+            self.show_menu()
         else:
-            pass
-            # TODO stay on current cell and do nothing, simply showing stats
+            print("There's nothing in this cell...\n")
+            self.show_menu()
 
     def show_status(self):
-        print(self)
-        print('You are currently on cell %s of %d.' % (self.current_cell_num, self.total_cells))
-        print("Current Health: %s of %d" % (globals.this_player.current_health, globals.this_player.total_health))
+        print(self.__repr__().upper())
+        print("You are currently in cell %s of %d.\n" % (self.current_cell_num, self.total_cells))
+
+    def show_menu(self):
+        print("\ta. Advance.")
+        print("\t1. Show current stats.")
+        print("\t2. Use a potion.")
+        print("\t3. Switch weapon.")
+
+        inp = input("\nChoose an option: ")
+
+        while inp is not 'a':
+            try:
+                inp = int(inp)
+            except ValueError:
+                inp = input("You have entered an invalid option. Please enter a valid option: ")
+                continue
+            else:
+                if inp not in range(1,4):
+                    inp = input("You have entered an invalid option. Please enter a valid option: ")
+                    continue
+                if inp is 1:
+                    clear_screen()
+                    globals.this_player.print_stats()
+                elif inp is 2:
+                    clear_screen()
+                    globals.this_player.use_potion(enhancement=True)
+                elif inp is 3:
+                    clear_screen()
+                    globals.this_player.equip_weapon()
+
+
 
     def traverse_dungeon(self):
-        pass
-        # TODO how do we traverse our dungeon?
+        while self.current_cell_num <= self.total_cells:
+            if self.cell is None:
+                return
+            self.show_status()
+            self.execute_cell_action()
+            self.cell = self.advance()
