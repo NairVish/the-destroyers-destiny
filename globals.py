@@ -89,6 +89,15 @@ def init_globals():
         rare_loot_names.append(row[0])
         rare_loot_values.append(row[1])
 
+    global main_quest_enemies
+    global main_quest_bosses
+    with open("main_enemies.txt", 'r') as main_enemy_fIle:
+        all_enemies = main_enemy_fIle.readlines()
+        main_quest_enemies = [enemy.rstrip('\n') for enemy in all_enemies]
+    with open("main_bosses.txt", 'r') as main_boss_fIle:
+        all_bosses = main_boss_fIle.readlines()
+        main_quest_bosses = [boss.rstrip('\n') for boss in all_bosses]
+
 def select_province():
     return random.choice(province_names)
 
