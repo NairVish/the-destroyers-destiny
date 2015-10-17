@@ -100,6 +100,7 @@ def selling():
                 continue
             if tabular_data[inp][0] is globals.this_player.current_weapon.name:
                 inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
+                continue
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]
             print("%s sold for $%d!" % (item_to_remove, item_value))
