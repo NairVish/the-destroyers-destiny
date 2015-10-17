@@ -1,0 +1,3 @@
+Rookie Bandit, Scrub Bandit, Bandit Highwayman
+Rookie Looter, Scrub Looter, Skilled Looter
+Rookie Mobster, Scrub Mobster, Experienced Mobster

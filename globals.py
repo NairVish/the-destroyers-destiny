@@ -91,12 +91,26 @@ def init_globals():
 
     global main_quest_enemies
     global main_quest_bosses
+    global main_quest_dungeons
     with open("main_enemies.txt", 'r') as main_enemy_fIle:
         all_enemies = main_enemy_fIle.readlines()
         main_quest_enemies = [enemy.rstrip('\n') for enemy in all_enemies]
     with open("main_bosses.txt", 'r') as main_boss_fIle:
         all_bosses = main_boss_fIle.readlines()
         main_quest_bosses = [boss.rstrip('\n') for boss in all_bosses]
+    with open("main_dungeons.txt", 'r') as main_dungeon_fIle:
+        all_dungeons = main_dungeon_fIle.readlines()
+        main_quest_dungeons = [dungeon.rstrip('\n') for dungeon in all_dungeons]
+
+    global side_enemy_types
+    global side_quest_enemies
+    side_enemy_types = ["bandit", "looter", "mobster"]
+    with open("side_enemies.txt", 'r') as side_enemy_fIle:
+        all_enemies = side_enemy_fIle.readlines()
+        for group in all_enemies:
+            group = group.rstrip('\n')
+            group = group.split(', ')
+            side_quest_enemies.append(group)
 
 def select_province():
     return random.choice(province_names)

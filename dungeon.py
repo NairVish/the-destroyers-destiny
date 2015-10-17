@@ -4,9 +4,15 @@ from globals import clear_screen
 from random import randrange, choice
 
 class Cell():
-    def __init__(self, num_cell):
-        self.determineProperty()
+    def __init__(self, num_cell, name, enemy_type, final=False):
         self.number = num_cell
+        self.name = name
+        self.enemy_type = enemy_type
+        if final:
+            self.enemy_selector()
+            self.loot = None
+        else:
+            self.determineProperty()
 
     def determineProperty(self):
         result = randrange(0,100)
@@ -17,21 +23,37 @@ class Cell():
             self.enemy = None
             self.loot = self.loot_selector()
         elif result in range(50,100):
-            self.enemy = self.enemy_selector()
+            self.enemy = self.enemy_selector(self.name)
             self.loot = None
 
     def loot_selector(self):
         return choice(globals.loot_names)
 
     def enemy_selector(self):
-        pass
-        # TODO: selection of enemy depends on name of dungeon
+        if self.final is True and self.enemy_type is "valstr":
+            boss_index = globals.main_quest_dungeons.index(self.name)
+            self.enemy = globals.main_quest_bosses[boss_index]
+        elif self.final is True:
+            if self.enemy_type is "bandit":
+                self.enemy = "Bandit Chief"
+            elif self.enemy_type is "looter":
+                self.enemy = "Lead Looter"
+            elif self.enemy_type is "mobster":
+                self.enemy = "Master Mobster"
+        else:
+            if self.enemy_type is "bandit":
+                self.enemy = choice(globals.side_quest_enemies[0])
+            elif self.enemy_type is "looter":
+                self.enemy = choice(globals.side_quest_enemies[1])
+            elif self.enemy_type is "mobster":
+                self.enemy = choice(globals.side_quest_enemies[2])
 
 
 class Dungeon():
-    def __init__(self, init_name, init_length, main_quest=False):
+    def __init__(self, init_name, init_length, enemy_type, main_quest=False):
         self.name = init_name
         self.total_cells = init_length
+        self.enemy_type = enemy_type
         self.current_cell_num = 1
         self.cell = Cell(self.current_cell_num)
         self.main_quest_flag = main_quest
@@ -44,8 +66,10 @@ class Dungeon():
 
         del self.cell
 
-        if self.current_cell_num <= self.total_cells:
-            return Cell(self.current_cell_num)
+        if self.current_cell_num < self.total_cells:
+            return Cell(self.current_cell_num, self.name, self.enemy_type)
+        elif self.current_cell_num is self.total_cells:
+            return Cell(self.current_cell_num, self.name, self.enemy_type, final=True)
         else:
             return None
 
