@@ -103,8 +103,8 @@ def init_globals():
         main_quest_dungeons = [dungeon.rstrip('\n') for dungeon in all_dungeons]
 
     global side_enemy_types
-    global side_quest_enemies
     side_enemy_types = ["bandit", "looter", "mobster"]
+    global side_quest_enemies
     with open("side_enemies.txt", 'r') as side_enemy_fIle:
         all_enemies = side_enemy_fIle.readlines()
         for group in all_enemies:
