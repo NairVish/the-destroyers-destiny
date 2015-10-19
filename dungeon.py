@@ -4,7 +4,7 @@ from globals import clear_screen
 from random import randrange, choice
 
 class Cell():
-    def __init__(self, num_cell, name, enemy_type, final=False):
+    def __init__(self, name, num_cell, enemy_type, final=False):
         self.number = num_cell
         self.name = name
         self.enemy_type = enemy_type
@@ -81,6 +81,9 @@ class Dungeon():
             print("You've found the following loot: %s" % self.cell.loot)
             inp = input("Would you like to add it to your inventory?"
                         "You can sell it later for some more money. (y/n)")
+            accepted_answers = ['y','n']
+            while inp not in accepted_answers:
+                inp = input("You have entered an invalid option. Please try again: ")
             if inp is 'y':
                 globals.this_player.inventory.append(self.cell.loot)
                 print("\n%s added to your inventory!\n" % self.cell.loot)

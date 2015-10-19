@@ -22,7 +22,8 @@ def print_home_screen():
     print("\t8. Exit (and Save).\n")
 
     inp = input("What would you like to do? ")
-    while input not in range(1,9):
+    accepted_answers = ['1','2','3','4','5','6','7','8']
+    while input not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
     return inp
 
