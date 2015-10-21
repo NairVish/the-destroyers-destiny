@@ -127,8 +127,6 @@ class Dungeon():
                     clear_screen()
                     globals.this_player.equip_weapon()
 
-
-
     def traverse_dungeon(self):
         while self.current_cell_num <= self.total_cells:
             if self.cell is None:

@@ -4,6 +4,7 @@ import globals
 from globals import clear_screen
 import shop
 import exit
+import sidequest
 
 def print_home_screen():
     print("HOME SCREEN\n")
@@ -28,6 +29,7 @@ def print_home_screen():
     return inp
 
 def process_home():
+    sidequest.setup_quest_board()
     while True:
         inp = print_home_screen()
         globals.clear_screen()
@@ -43,7 +45,7 @@ def process_home():
             elif shop_input is '3':
                 shop.selling()
         elif inp is '3':
-            pass # until radiant mechanic is ready
+            sidequest.quest_board()
         elif inp is '4':
             globals.this_player.print_stats()
         elif inp is '5':
