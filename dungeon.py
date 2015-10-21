@@ -8,6 +8,7 @@ class Cell():
         self.number = num_cell
         self.name = name
         self.enemy_type = enemy_type
+        self.final = final
         if final:
             self.enemy_selector()
             self.loot = None
@@ -23,7 +24,7 @@ class Cell():
             self.enemy = None
             self.loot = self.loot_selector()
         elif result in range(50,100):
-            self.enemy = self.enemy_selector(self.name)
+            self.enemy = self.enemy_selector()
             self.loot = None
 
     def loot_selector(self):
@@ -51,11 +52,12 @@ class Cell():
 
 class Dungeon():
     def __init__(self, init_name, init_length, enemy_type, main_quest=False):
+        globals.clear_screen()
         self.name = init_name
         self.total_cells = init_length
         self.enemy_type = enemy_type
         self.current_cell_num = 1
-        self.cell = Cell(self.current_cell_num)
+        self.cell = Cell(self.name, self.current_cell_num, self.enemy_type)
         self.main_quest_flag = main_quest
 
     def __repr__(self):
@@ -79,8 +81,8 @@ class Dungeon():
             # TODO pass self.cell.enemy to battle mechanic
         elif self.cell.loot is not None and self.cell.enemy is None:
             print("You've found the following loot: %s" % self.cell.loot)
-            inp = input("Would you like to add it to your inventory?"
-                        "You can sell it later for some more money. (y/n)")
+            inp = input("Would you like to add it to your inventory?\n"
+                        "You can sell it later for some more money. (y/n) ")
             accepted_answers = ['y','n']
             while inp not in accepted_answers:
                 inp = input("You have entered an invalid option. Please try again: ")

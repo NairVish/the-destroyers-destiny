@@ -1,10 +1,10 @@
 __author__ = 'vishnunair'
 
 import globals
-from globals import clear_screen
 import tabulate
 import dungeon
 from random import randrange, choice
+from time import sleep
 
 def setup_quest_board():
     global numbers
@@ -87,7 +87,8 @@ class sidequest():
         return choice(globals.side_enemy_types)
 
     def execute_quest(self):
-        clear_screen()
+        globals.clear_screen()
+        sleep(0.1)
         if self.type is 'delivery':
             self.execute_delivery()
         elif self.type is 'kidnap':
@@ -118,13 +119,70 @@ class sidequest():
         input("Press enter to return home...")
 
     def execute_kidnap(self):
-        pass
+        print("%s, a citizen of %s, has been kidnapped by bandits!\n"
+              "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.quest_giver))
+        input("Press enter to continue...")
+
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr.traverse_dungeon()
+
+        reward = randrange(15,26)
+        globals.this_player.money += reward
+        print("%s's family is extremely thankful to you for saving %s.\n"
+              "You have been given %s for your efforts.\n" % (self.quest_giver, self.quest_giver, str(reward)))
+
+        input("Press enter to return home...")
+
 
     def execute_scare(self):
-        pass
+        print("%s hired a group of bandits to sabotage his competitors in the business.\n"
+              "However, the bandits have stepped out of line and have stopped listening to %s.\n"
+              "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
+              % (self.quest_giver, self.quest_giver, self.quest_giver))
+        input("Press enter to continue...")
+
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr.traverse_dungeon()
+
+        reward = randrange(15,26)
+        globals.this_player.money += reward
+        print("The bandits will cause no more trouble for %s after your rampage.\n"
+              "You have been given %s for your efforts.\n" % (self.quest_giver, str(reward)))
+
+        input("Press enter to return home...")
 
     def execute_gang(self):
-        pass
+        print("The imperial police have asked for your help in assualting a gang's hideout.\n"
+              "The gang is nororious for unimaginable crimes, and it is up to you to stop\n"
+              "their eveil ways.")
+        input("Press enter to continue...")
+
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "mobster")
+        curr.traverse_dungeon()
+
+        reward = randrange(15,26)
+        globals.this_player.money += reward
+        print("The gang won't terrorize any one else now that you've destroyed them.\n"
+              "You have been given %s for your efforts.\n" % (str(reward)))
+
+        input("Press enter to return home...")
 
     def execute_recovery(self):
-        pass
+        print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n"
+              "Your job is simple. You break into the bandits' hideout, destroy the bandits,\n"
+              "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))
+        input("Press enter to continue...")
+
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr.traverse_dungeon()
+
+        reward = randrange(20,30)
+        globals.this_player.money += reward
+        print("%s will be forever thankful to you for retrieving her family's heirloom.\n"
+              "You have been given %s for your efforts.\n" % (self.quest_giver, str(reward)))
+
+        input("Press enter to return home...")
+
+# globals.init_globals()
+# curr = sidequest("scare", "The Ratway", "Vishnu", "Whiterun")
+# curr.execute_quest()
