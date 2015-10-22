@@ -1,5 +1,6 @@
 __author__ = 'vishnunair'
 import globals
+import battle
 from globals import clear_screen
 from random import randrange, choice
 
@@ -17,13 +18,13 @@ class Cell():
 
     def determineProperty(self):
         result = randrange(0,100)
-        if result in range(0,20):
+        if result in range(0,10):
             self.enemy = None
             self.loot = None
-        elif result in range(20,50):
+        elif result in range(20,40):
             self.enemy = None
             self.loot = self.loot_selector()
-        elif result in range(50,100):
+        elif result in range(40,100):
             self.enemy = self.enemy_selector()
             self.loot = None
 
@@ -33,21 +34,21 @@ class Cell():
     def enemy_selector(self):
         if self.final is True and self.enemy_type is "valstr":
             boss_index = globals.main_quest_dungeons.index(self.name)
-            self.enemy = globals.main_quest_bosses[boss_index]
+            return globals.main_quest_bosses[boss_index]
         elif self.final is True:
             if self.enemy_type is "bandit":
-                self.enemy = "Bandit Chief"
+                return "Bandit Chief"
             elif self.enemy_type is "looter":
-                self.enemy = "Lead Looter"
+                return "Lead Looter"
             elif self.enemy_type is "mobster":
-                self.enemy = "Master Mobster"
+                return "Master Mobster"
         else:
             if self.enemy_type is "bandit":
-                self.enemy = choice(globals.side_quest_enemies[0])
+                return choice(globals.side_quest_enemies[0])
             elif self.enemy_type is "looter":
-                self.enemy = choice(globals.side_quest_enemies[1])
+                return choice(globals.side_quest_enemies[1])
             elif self.enemy_type is "mobster":
-                self.enemy = choice(globals.side_quest_enemies[2])
+                return choice(globals.side_quest_enemies[2])
 
 
 class Dungeon():
@@ -77,8 +78,14 @@ class Dungeon():
 
     def execute_cell_action(self):
         if self.cell.enemy is not None and self.cell.loot is None:
-            pass
-            # TODO pass self.cell.enemy to battle mechanic
+            if self.cell.final is True:
+                this_battle = battle.battle(self.cell.enemy, "boss")
+            else:
+                this_battle = battle.battle(self.cell.enemy)
+            try:
+                this_battle.do_battle()
+            except globals.GameOver():
+                pass # TODO: implement game over
         elif self.cell.loot is not None and self.cell.enemy is None:
             print("You've found the following loot: %s" % self.cell.loot)
             inp = input("Would you like to add it to your inventory?\n"
@@ -128,6 +135,7 @@ class Dungeon():
                 elif inp is 3:
                     clear_screen()
                     globals.this_player.equip_weapon()
+            inp = input("\nChoose an option: ")
 
     def traverse_dungeon(self):
         while self.current_cell_num <= self.total_cells:

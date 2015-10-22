@@ -41,6 +41,10 @@ class Player():
         self.current_health = self.total_health
 
         self.level += 1
+        print("\nLEVEL UP!")
+        print("You are now at level %s.\n" % self.level)
+
+        input("Press enter to continue...")
 
     def print_stats(self):
         globals.clear_screen()
