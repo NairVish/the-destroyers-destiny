@@ -45,7 +45,13 @@ def process_home():
             elif shop_input is '3':
                 shop.selling()
         elif inp is '3':
-            sidequest.quest_board()
+            try:
+                sidequest.quest_board()
+            except globals.GameOver():
+                print("As the world fades to black, a white light suddenly flashes before you.\n"
+                      "In an instant, you find yourself back at your home. You look at the time.\n"
+                      "It's right before you went into that fateful encounter.\n")
+                input("Press enter to continue...")
         elif inp is '4':
             globals.this_player.print_stats()
         elif inp is '5':

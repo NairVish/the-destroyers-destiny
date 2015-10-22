@@ -85,7 +85,7 @@ class Dungeon():
             try:
                 this_battle.do_battle()
             except globals.GameOver():
-                pass # TODO: implement game over
+                raise globals.GameOver()
         elif self.cell.loot is not None and self.cell.enemy is None:
             print("You've found the following loot: %s" % self.cell.loot)
             inp = input("Would you like to add it to your inventory?\n"
