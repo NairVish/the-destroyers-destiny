@@ -62,7 +62,6 @@ def init_globals():
             weapon_names.append(row[0])
             weapon_powers.append(float(row[1]))
             weapon_cost.append(float(row[2]))
-            # TODO: add a nested list for tabular weapons
             tmp = []
             tmp.append(num)
             tmp.append(weapon_names[num])

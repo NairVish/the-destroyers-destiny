@@ -46,6 +46,12 @@ def process_home():
                 shop.selling()
         elif inp is '3':
             try:
+                if globals.this_player.sidequests is False:
+                    print("You are an Unknown.\n"
+                          "Unknowns are not allowed to view or participate in quests on the quest board.\n"
+                          "You must return home.\n")
+                    input("Press enter to continue...")
+                    continue
                 sidequest.quest_board()
             except globals.GameOver():
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
