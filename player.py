@@ -2,6 +2,7 @@ __author__ = 'vishnunair'
 
 import globals
 from tabulate import tabulate
+from random import randrange
 
 
 class Player():
@@ -190,6 +191,13 @@ class Player():
 
     def sleep(self):
         self.day += 1
+
+        if globals.this_player.assistant is True:
+            money = randrange(5,15)
+            print("Assistant Alert: Merlona made $%s today." % money)
+            globals.this_player.money += money
+            input("Press enter to continue...")
+
 
         # TODO: if main quest stage is less than some amount
         # then we're going to have a function monitor our player's status,

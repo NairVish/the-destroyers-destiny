@@ -1,5 +1,6 @@
 __author__ = 'vishnunair'
 import globals
+from random import randrange
 
 class enemy():
     def __init__(self, enemy_name, enemy_type):
@@ -59,6 +60,13 @@ class battle():
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
             print("You dealt %s of damage to the enemy!" % str(p_damage))
             self.enemy.health -= p_damage
+
+        if globals.this_player.assistant is True:
+            prob = randrange(0,100)
+            if prob in range(0,10):
+                a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5))/4
+                self.enemy.health -= a_damage
+                print("Merlona dealt %s damage to the enemy!" & a_damage)
 
         e_damage = self.enemy.attack
         print("The enemy dealt %s of damage to you!" % e_damage)
