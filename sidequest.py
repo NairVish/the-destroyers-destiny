@@ -40,7 +40,7 @@ def setup_quest_board():
 
 
 def quest_board():
-    tabulate.tabulate(quest_tabulate, headers=["No." "Type" "Description" "Job Giver" "Home City"])
+    print(tabulate.tabulate(quest_tabulate, headers=["No.", "Type", "Description", "Job Giver", "Home City"]))
     accepted_answers = ['0','1','2','q']
     inp = input("\nWhat job would you like to take? To go back, enter the letter 'q': ")
     while inp not in accepted_answers:
@@ -182,6 +182,11 @@ class sidequest():
               "You have been given %s for your efforts.\n" % (self.quest_giver, str(reward)))
 
         input("Press enter to return home...")
+
+# globals.init_globals()
+# setup_quest_board()
+# quest_board()
+
 
 # globals.init_globals()
 # curr = sidequest("scare", "The Ratway", "Vishnu", "Whiterun")

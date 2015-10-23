@@ -91,7 +91,7 @@ class Player():
             number_of_potions += 1
 
         print("USE A POTION\n")
-        print(tabulate(tabular_potion_inv, headers=["No." "Potion Name" "Type" "Strength (Points)"]))
+        print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]))
 
         items_to_remove = []
         inp = input("Please enter the number of the potion you would like to use. Enter the letter 'q' to leave: ")
@@ -124,7 +124,7 @@ class Player():
                 items_to_remove.append(item_to_remove)
                 for index in range(0, 4):
                     tabular_potion_inv[inp][index] = "USED!"
-                print(tabulate(tabular_potion_inv, headers=["No." "Potion Name" "Type" "Strength (Points)"]))
+                print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]))
                 inp = input(
                     "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
@@ -154,7 +154,7 @@ class Player():
             input("Press enter to continue...")
             return
         print("WEAPON CHOOSER\n")
-        print(tabulate(tabular_weapon_inv, headers=["No." "Name" "Power"], tablefmt="fancy_grid"))
+        print(tabulate(tabular_weapon_inv, headers=["No.", "Name", "Power"], tablefmt="fancy_grid"))
 
         inp = input("\nEnter the number of the weapon you wish to equip: ")
 

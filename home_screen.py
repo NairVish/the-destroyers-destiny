@@ -35,6 +35,8 @@ def process_home():
         globals.clear_screen()
         if inp is '1':
             globals.this_player.sleep()
+            sidequest.purge_quest_board()
+            sidequest.setup_quest_board()
         elif inp is '2':
             shop_input = print_shop_selector()
             globals.clear_screen()
@@ -53,6 +55,8 @@ def process_home():
                     input("Press enter to continue...")
                     continue
                 sidequest.quest_board()
+                sidequest.purge_quest_board()
+                sidequest.setup_quest_board()
             except globals.GameOver():
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
