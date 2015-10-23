@@ -17,7 +17,7 @@ def prompt_for_save():
         return
 
 def save_game():
-    with open("save,data",'w') as save:
+    with open("save.data",'w') as save:
         save.truncate()
         player = globals.this_player
         save.writelines(player.name + '\n')
