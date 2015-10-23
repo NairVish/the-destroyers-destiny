@@ -10,6 +10,7 @@ Illia
 James
 Kolia
 Lars
+Manjekar
 Melia
 Nostra
 Ova
@@ -20,6 +21,7 @@ Solo
 Tomas
 Uva
 Veks
+Vishnu
 Wilhelm
 Xenia
 Yag
