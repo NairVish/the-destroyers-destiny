@@ -124,9 +124,11 @@ def declare_new_player(name):
 
 def declare_existing_player(saved_stats, inventory):
     global this_player
-    this_player = player.Player(saved_stats[0], saved_stats[1], saved_stats[2], saved_stats[3], saved_stats[4],
-                                saved_stats[5], saved_stats[6], saved_stats[7], saved_stats[8], saved_stats[9],
-                                saved_stats[10], saved_stats[11], saved_stats[12], saved_stats[13], inventory)
+    this_player = player.Player(saved_stats[0], saved_stats[1], int(saved_stats[2]), int(saved_stats[3]),
+                                int(saved_stats[4]), int(saved_stats[5]), int(saved_stats[6]), int(saved_stats[7]),
+                                int(saved_stats[8]), int(saved_stats[9]), int(saved_stats[10]),
+                                (saved_stats[11] == "True"), saved_stats[12], int(saved_stats[13]),
+                                (saved_stats[14] == "True"), inventory)
 
 
 def clear_screen():

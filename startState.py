@@ -27,8 +27,8 @@ def show_start_menu():  # The startup menu
     save = find_save()
     if save is not None:
         print('\t2. Continue from existing save.')
-        print('\tq. Quit')
         accepted_answers = ['1','2','q']
+    print('\tq. Quit')
     answer = input('Choose your desired option. ')
     while answer not in accepted_answers:
         answer = input('You have entered an inavlid option. Please enter a valid option,')
@@ -57,7 +57,7 @@ def find_save():
     If found, returns opened file.
     """
     result = find_file('save.data', os.getcwd())
-    if result == None:
+    if result is None:
         return None
     else:
         return open('save.data','r')
@@ -78,7 +78,7 @@ def load_player():
     else:
         saved_stats = [line.rstrip('\n') for line in save.readlines()]
         try:
-            inventory = [line for line in saved_stats[16:(len(saved_stats)-1)]]
+            inventory = [line for line in saved_stats[15:(len(saved_stats)-1)]]
         except IndexError:
             inventory = []
         else:
