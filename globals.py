@@ -102,8 +102,8 @@ def init_globals():
         main_quest_dungeons = [dungeon.rstrip('\n') for dungeon in all_dungeons]
 
     global side_enemy_types
-    side_enemy_types = ["bandit", "looter", "mobster"]
     global side_quest_enemies
+    side_enemy_types = ["bandit", "looter", "mobster"]
     side_quest_enemies = []
     with open("side_enemies.txt", 'r') as side_enemy_fIle:
         all_enemies = side_enemy_fIle.readlines()
@@ -111,6 +111,18 @@ def init_globals():
             group = group.rstrip('\n')
             group = group.split(', ')
             side_quest_enemies.append(group)
+
+    global dialogue
+    global dialogue_types
+    global dialogue_jump_targets
+    dialogue = []
+    dialogue_types = []
+    dialogue_jump_targets = []
+    all_dialogue = csv.reader(open("dialogue.csv",'r'))
+    for row in all_dialogue:
+        dialogue.append(row[0])
+        dialogue_types.append(row[1])
+        dialogue_jump_targets.append(int(row[2]))
 
 def select_province():
     return random.choice(province_names)
@@ -136,3 +148,8 @@ def clear_screen():
 
 class GameOver(Exception):
     pass
+
+init_globals()
+print(dialogue)
+print(dialogue_types)
+print(dialogue_jump_targets)

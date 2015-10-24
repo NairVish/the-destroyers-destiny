@@ -62,7 +62,7 @@
 "Uhh...",r,67
 "Wait, how do you know where these guys are?",r,68
 "I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
-"We have been engaging in "diplomacy" talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
+"We have been engaging in 'diplomacy' talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
 "And how do you expect these missiles to get there in time? If I'm correct, then the nearest *star* is light-years away.",r,0
 "Ah, you underestimate us there. Surely, you've heard that nothing can go past the speed of light. Well, that's rubbish! We've created something called a 'warp drive.' Basically, we've found a way to configure the energy-density field around these missiles such that...",rn,0
 "OK! OK! What on Nirn do you want us to do?",r,0
@@ -83,7 +83,6 @@
 "Quick! There's no time. We have to launch the missiles before they send reinforcements here.",r,0
 "Right, let's go.",p,0
 "The two of you enter the missile control room. It's full of screens and buttons of various sorts. But one screen in particular stand out to you. You press the button next to it and are greeted with a terminal prompt.",term,0
-<terminal_sequence>,None,None
 "You and your assistant look at the other screens in the room that are tracking the missiles. It is five agonizing minutes before the missiles reach the Valst'r's home system. You realize that (the commander of the Imperials) was not joking, when he was talking about the warp drive.",c,0
 "On the radars, you notice other objects trying to head toward the missiles, but the missiles are just too fast for them.",c,0
 "The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from the radars.",c,0
