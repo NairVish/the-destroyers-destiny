@@ -36,7 +36,7 @@ def process_home():
         if inp is '1':
             globals.this_player.sleep()
             sidequest.purge_quest_board()
-            sidequest.setup_quest_board()
+            sidequest.setup_quest_board() # return to main game loop instead and do all this there.
         elif inp is '2':
             shop_input = print_shop_selector()
             globals.clear_screen()
@@ -71,7 +71,7 @@ def process_home():
         elif inp is '7':
             globals.this_player.use_potion(enhancement=True)
         elif inp is '8':
-            exit.exit_sequence()
+            exit.exit_sequence() # return to main game loop instead and do all this there.
         clear_screen()
         # TODO: maybe return certain values to indicate state transition?
 

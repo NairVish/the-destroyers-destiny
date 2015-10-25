@@ -148,8 +148,3 @@ def clear_screen():
 
 class GameOver(Exception):
     pass
-
-init_globals()
-print(dialogue)
-print(dialogue_types)
-print(dialogue_jump_targets)
