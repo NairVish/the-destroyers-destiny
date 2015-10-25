@@ -32,23 +32,31 @@ def game_loop():
                     return
                 else:
                     globals.this_player.sleep()
-            elif alert_day == None:
+            elif alert_day is None:
                 alert_day = globals.this_player.day + 2
                 exit_bool = home_screen.process_home()
                 if exit_bool is True:
                     return
                 else:
                     globals.this_player.sleep()
+                    globals.this_player.main_quest_stage += 1
             elif alert_day is not None:
                 if globals.this_player.day == alert_day:
                     globals.this_player.main_quest_stage += 1
                     alert_day = None
+                else:
+                    exit_bool = home_screen.process_home()
+                    if exit_bool is True:
+                        return
+                    else:
+                        globals.this_player.sleep()
         elif curr is 'p':
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
             globals.clear_screen()
             globals.this_player.main_quest_stage += 1
-        elif curr is 'sw':
+        elif curr.startswith('sw'):
+            print(globals.dialogue[player_stage] + '\n')
             globals.clear_screen()
             sw_tabular = [['0.', 'Generic Plasma Blaster', '3.2'], ['1.', 'Generic Electrocuter', '3',],
                           ['2.', 'Generic Fire-Starter', '2.8']]
