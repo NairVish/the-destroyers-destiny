@@ -7,13 +7,14 @@ from exit import exit_program
 
 def print_intro():
     """ Print the intro screen. """
+    globals.clear_screen()
     intro_text = (
-        "THIS IS SOME INTRO TEXT."
-        "I HAVE NO IDEA WHAT I'M GOING TO PUT HERE."
-        "SO I'M PUTTING SOME PLACEHOLDER TEXT HERE."
+        "THIS IS SOME INTRO TEXT.\n"
+        "I HAVE NO IDEA WHAT I'M GOING TO PUT HERE.\n"
+        "SO I'M PUTTING SOME PLACEHOLDER TEXT HERE.\n"
     )
     print(intro_text)
-    time.sleep(4)
+    time.sleep(1)
     globals.clear_screen()
 
 def show_start_menu():  # The startup menu
@@ -31,7 +32,7 @@ def show_start_menu():  # The startup menu
     print('\tq. Quit')
     answer = input('Choose your desired option. ')
     while answer not in accepted_answers:
-        answer = input('You have entered an inavlid option. Please enter a valid option,')
+        answer = input('You have entered an invalid option. Please try again: ')
     globals.clear_screen()
     if answer is '1':
         return None
@@ -87,10 +88,14 @@ def load_player():
         print("Loading save data for %s" % saved_stats[0])
         globals.declare_existing_player(saved_stats, inventory)
         save.close()
+    print("\nThe game was successfully loaded!")
+    input("(Press enter to continue...)")
+    globals.clear_screen()
 
 def startSequence():
     """
     Executes start sequence for start state
     """
+    globals.init_globals()
     print_intro()
     load_player()

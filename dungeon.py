@@ -1,7 +1,6 @@
 __author__ = 'vishnunair'
-import globals
 import battle
-from globals import clear_screen
+import globals
 from random import randrange, choice
 
 class Cell():
@@ -71,7 +70,7 @@ class Dungeon():
 
         if self.current_cell_num < self.total_cells:
             return Cell(self.current_cell_num, self.name, self.enemy_type)
-        elif self.current_cell_num is self.total_cells:
+        elif self.current_cell_num == self.total_cells:
             return Cell(self.current_cell_num, self.name, self.enemy_type, final=True)
         else:
             return None
@@ -127,13 +126,13 @@ class Dungeon():
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
                     continue
                 if inp is 1:
-                    clear_screen()
+                    globals.clear_screen()
                     globals.this_player.print_stats()
                 elif inp is 2:
-                    clear_screen()
+                    globals.clear_screen()
                     globals.this_player.use_potion(enhancement=True)
                 elif inp is 3:
-                    clear_screen()
+                    globals.clear_screen()
                     globals.this_player.equip_weapon()
             inp = input("\nChoose an option: ")
 
@@ -141,10 +140,38 @@ class Dungeon():
         while self.current_cell_num <= self.total_cells:
             if self.cell is None:
                 return
+            if self.main_quest_flag is True:
+                self.monitor_main_quest()
             self.show_status()
             self.execute_cell_action()
             self.cell = self.advance()
 
     def monitor_main_quest(self):
-        pass
-        # TODO: monitor main quest
+        if self.cell.final is True:
+            while globals.dialogue_type[globals.this_player.main_quest_stage] is not 'b':
+                globals.this_player.main_quest_stage += 1
+                player_stage = globals.this_player.main_quest_stage
+                curr = globals.dialogue_type[player_stage]
+                if curr == "c_interrupt" or curr == "c":
+                    print(globals.dialogue[player_stage] + '\n')
+                    globals.this_player.main_quest_stage += 1
+                elif curr == "p":
+                    print(globals.dialogue[player_stage] + '\n')
+                    input("(Press enter to continue...)")
+                    globals.this_player.main_quest_stage += 1
+                elif curr == "rn":
+                    print(globals.dialogue[player_stage] + '\n')
+                    print("[Enter the number of the response you would like to make:]")
+                    i = 1
+                    while globals.dialogue_type[player_stage + i] == 'r':
+                        print('\t' + i + '. ' + globals.dialogue[player_stage + i] + '\n')
+                        i += 1
+                    selection = input("Selection: ")
+                    while selection > player_stage + i - 1:
+                        input("You have entered an invalid option. Please try again: ")
+                    globals.this_player.main_quest_stage += selection
+                    globals.clear_screen()
+                    print("You: " + globals.dialogue[player_stage] + '\n')
+                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[player_stage]
+            print(globals.dialogue[globals.this_player.main_quest_stage] + '\n')
+            input("(Press enter to continue...)")

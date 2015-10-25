@@ -21,7 +21,10 @@ class Player():
         self.main_quest_stage = init_main_quest_stage
         self.money = init_money
         self.assistant = init_assistant
-        self.current_weapon = Weapon(init_weapon)
+        if init_weapon is None:
+            self.current_weapon = None
+        else:
+            self.current_weapon = Weapon(init_weapon)
         self.day = init_day
         self.sidequests = init_sidequest
         self.inventory = init_inventory
@@ -51,14 +54,13 @@ class Player():
         print("STATISTICS FOR PLAYER %s" % self.name)
         print("Level: %s" % self.level)
         print("Current XP: %s" % self.xp)
-        print("XP Needed for Level Up: " % self.target_xp)
+        print("XP Needed for Level Up: %s" % self.target_xp)
         print("Current Health: %s" % self.current_health)
-        print("Total Health: " % self.total_health)
-        print("Total Attack: " % self.attack)
-        print("Total Defense: " % self.defense)
-        print("Total Speed: " % self.speed)
-        print("Current Money: " % self.money)
-        print("Current Weapon: " % self.current_weapon)
+        print("Total Health: %s" % self.total_health)
+        print("Total Attack: %s" % self.attack)
+        print("Total Defense: %s" % self.defense)
+        print("Current Money: %s" % self.money)
+        print("Current Weapon: %s" % self.current_weapon)
         print("Current inventory: ")
         for item in self.inventory:
             print('\t' + item)
@@ -90,6 +92,11 @@ class Player():
             number_of_potions += 1
 
         print("USE A POTION\n")
+
+        if number_of_potions is 0:
+            print("You have no potions in your inventory that you can use right now.\n")
+            input("Press enter to return...")
+            return
         print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]))
 
         items_to_remove = []
@@ -148,11 +155,11 @@ class Player():
             else:
                 tabular_weapon_inv.append(tmp)
 
-        if tabular_weapon_inv is False:
-            print("You have no weapons to equip.")
+        print("WEAPON CHOOSER\n")
+        if number_of_weapons is 0:
+            print("You have no weapons to equip.\n")
             input("Press enter to continue...")
             return
-        print("WEAPON CHOOSER\n")
         print(tabulate(tabular_weapon_inv, headers=["No.", "Name", "Power"], tablefmt="fancy_grid"))
 
         inp = input("\nEnter the number of the weapon you wish to equip: ")
@@ -179,8 +186,8 @@ class Player():
     def see_inventory(self):
         print("YOUR INVENTORY\n")
 
-        if self.inventory is False:
-            print("You have nothing in your inventory\n")
+        if len(self.inventory) is 0:
+            print("You have nothing in your inventory.\n")
         else:
             for item in self.inventory:
                 print(item)
@@ -190,18 +197,14 @@ class Player():
 
     def sleep(self):
         self.day += 1
+        globals.clear_screen()
 
         if globals.this_player.assistant is True:
             money = randrange(5,15)
             print("Assistant Alert: Merlona made $%s today." % money)
             globals.this_player.money += money
             input("Press enter to continue...")
-
-
-        # TODO: if main quest stage is less than some amount
-        # then we're going to have a function monitor our player's status,
-        # using progression of dialogue and maybe even day.
-
+            globals.clear_screen()
 
 class Weapon():
     def __init__(self, weapon_name):

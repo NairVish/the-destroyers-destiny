@@ -24,7 +24,7 @@ def print_home_screen():
 
     inp = input("What would you like to do? ")
     accepted_answers = ['1','2','3','4','5','6','7','8']
-    while input not in accepted_answers:
+    while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
     return inp
 
@@ -34,9 +34,7 @@ def process_home():
         inp = print_home_screen()
         globals.clear_screen()
         if inp is '1':
-            globals.this_player.sleep()
-            sidequest.purge_quest_board()
-            sidequest.setup_quest_board() # return to main game loop instead and do all this there.
+            return False
         elif inp is '2':
             shop_input = print_shop_selector()
             globals.clear_screen()
@@ -53,11 +51,14 @@ def process_home():
                           "Unknowns are not allowed to view or participate in quests on the quest board.\n"
                           "You must return home.\n")
                     input("Press enter to continue...")
+                    globals.clear_screen()
                     continue
                 sidequest.quest_board()
                 sidequest.purge_quest_board()
                 sidequest.setup_quest_board()
             except globals.GameOver():
+                globals.clear_screen()
+                print("<Player Note: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
                       "It's right before you went into that fateful encounter.\n")
@@ -71,9 +72,8 @@ def process_home():
         elif inp is '7':
             globals.this_player.use_potion(enhancement=True)
         elif inp is '8':
-            exit.exit_sequence() # return to main game loop instead and do all this there.
+            return True
         clear_screen()
-        # TODO: maybe return certain values to indicate state transition?
 
 def print_shop_selector():
     print("SHOPS\n")

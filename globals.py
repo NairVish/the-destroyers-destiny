@@ -113,16 +113,17 @@ def init_globals():
             side_quest_enemies.append(group)
 
     global dialogue
-    global dialogue_types
+    global dialogue_type
     global dialogue_jump_targets
     dialogue = []
-    dialogue_types = []
+    dialogue_type = []
     dialogue_jump_targets = []
     all_dialogue = csv.reader(open("dialogue.csv",'r'))
     for row in all_dialogue:
         dialogue.append(row[0])
-        dialogue_types.append(row[1])
+        dialogue_type.append(row[1])
         dialogue_jump_targets.append(int(row[2]))
+
 
 def select_province():
     return random.choice(province_names)

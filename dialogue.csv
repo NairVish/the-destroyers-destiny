@@ -73,7 +73,7 @@
 "Merlona: I understand too.",p,0
 "Oh, and one more thing. The missile launch system is going to ask for a password to actually launch the missiles. The password is:",c,0
 "valstrDestroy",d,0
-"You reach the central room and encounter the Leader of the Valst'r forces. The same person you encountered at the town center during that first invasion.",c_interrupt,0
+"You reach the central room and encounter the Commander-in-Chief of the Valst'r forces...once again",c_interrupt,0
 "Leader: So, you've finally reached me...",c,0
 "Let's get to the point here. (unsheathes weapons)",p,0
 "Prepare to die!",b,0
