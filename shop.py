@@ -6,8 +6,9 @@ from tabulate import tabulate
 
 def weapon_shop():
     print("The Crazy Weapons Specialist\n".upper())
-    print("Welcome to The Craxy Weapons Specialist. What would you like to buy?")
-    print(tabulate(globals.tabular_potions, headers=["No.", "Potion Name", "Potion Type", "Cost ($)"],
+    print("Your current money: $%s\n" % globals.this_player.money)
+    print("Welcome to The Crazy Weapons Specialist. What would you like to buy?")
+    print(tabulate(globals.tabular_weapons, headers=["No.", "Weapon Name", "Weapon Power", "Cost ($)"],
                    tablefmt="fancy_grid"))
 
     inp = input("\nPlease enter the number of the item you would like to buy. Enter the letter 'q' to leave: ")
@@ -15,25 +16,28 @@ def weapon_shop():
         try:
             inp = int(inp)
         except ValueError:
-            inp = input("You did not enter a number. Please enter a valid option: ")
+            inp = input("You have entered an invalid option. Please enter a valid option: ")
         else:
             if inp >= len(globals.weapon_names):
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
-            cost = globals.weapon_cost[inp]
+            cost = int(globals.weapon_cost[inp])
             if cost > globals.this_player.money:
                 inp = input("You don't have enough money. Try buying something else, else enter the letter 'q' to leave: ")
                 continue
             globals.this_player.inventory.append(globals.weapon_names[inp])
             globals.this_player.money -= cost
+            print("<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.weapon_names[inp], globals.this_player.money))
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
 
 def potion_shop():
     print("The Oddly Unique Alchemist\n".upper())
+    print("Your current money: $%s\n" % globals.this_player.money)
+    print("Welcome to The Oddly Unique Alchemist. What would you like to buy?")
 
-    print(tabulate(globals.tabular_weapons, headers=["No.", "Strength (Points)", "Type", "Cost ($)"],
+    print(tabulate(globals.tabular_potions, headers=["No.", "Strength (Points)", "Type", "Cost ($)"],
                    tablefmt="fancy_grid"))
 
     inp = input("\nPlease enter the number of the item you would like to buy. Enter the letter 'q' to leave: ")
@@ -41,17 +45,18 @@ def potion_shop():
         try:
             inp = int(inp)
         except ValueError:
-            inp = input("You did not enter a number. Please enter a valid option: ")
+            inp = input("You have entered an invalid option. Please enter a valid option: ")
         else:
             if inp >= len(globals.potion_names):
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
-            cost = globals.potion_cost[inp]
+            cost = int(globals.potion_cost[inp])
             if cost > globals.this_player.money:
                 inp = input("You don't have enough money. Try buying something else, else enter the letter 'q' to leave: ")
                 continue
             globals.this_player.inventory.append(globals.potion_names[inp])
             globals.this_player.money -= cost
+            print("<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.potion_names[inp], globals.this_player.money))
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
@@ -59,56 +64,64 @@ def potion_shop():
 
 def selling():
     print("The Really Rich Guy that Buys Everything\n".upper())
+    print("Your current money: $%s\n" % globals.this_player.money)
 
     if not globals.this_player.inventory:
-        print("The Rich Guy: You have nothing to sell me. Why on Nira are you here?\n")
-        print("You have nothing in your inventory. Come back when you have something to sell.\n")
+        print("The Rich Guy: You have nothing to sell me. Why on Nira are you here?")
+        print("<Alert: You have nothing in your inventory. Come back when you have something to sell.>\n")
         input("Press enter to return home...")
         return
 
     tabular_data = []
     inventory_dict = {}
     items_to_remove = []
+    num = 0
     for item in globals.this_player.inventory:
-        for num in range(len(globals.this_player.inventory)):
-            tmp = []
-            tmp.append(num)
-            tmp.append(item)
-            if item in globals.potion_names:
-                val = globals.potion_cost[globals.potion_names.index(item)]
-            elif item in globals.weapon_names:
-                val = globals.weapon_cost[globals.weapon_names.index(item)]
-            elif item in globals.loot_names:
-                val = globals.loot_values[globals.loot_names.index(item)]
-            elif item in globals.rare_loot_names:
-                val = globals.rare_loot_values[globals.rare_loot_names.index(item)]
-            tmp.append(val)
-            inventory_dict[item] = val
-            tabular_data.append(tmp)
+        tmp = []
+        tmp.append(num)
+        tmp.append(item)
+        if item in globals.potion_names:
+            val = globals.potion_cost[globals.potion_names.index(item)]
+        elif item in globals.weapon_names:
+            val = globals.weapon_cost[globals.weapon_names.index(item)]
+        elif item in globals.loot_names:
+            val = globals.loot_values[globals.loot_names.index(item)]
+        elif item in globals.rare_loot_names:
+            val = globals.rare_loot_values[globals.rare_loot_names.index(item)]
+        tmp.append(val)
+        inventory_dict[item] = val
+        tabular_data.append(tmp)
+        num += 1
 
-    print(tabulate(tabular_data, headers=["No." "Item Name" "Value ($)"]))
+    print(tabulate(tabular_data, headers=["No.", "Item Name", "Value ($)"]) + '\n')
 
     inp = input("Please enter the number of the item you would like to sell. Enter the letter 'q' to leave: ")
     while inp is not 'q':
         try:
             inp = int(inp)
         except ValueError:
-            inp = input("You did not enter a number. Please enter a valid option: ")
+            inp = input("You have entered an invalid option. Please enter a valid option: ")
         else:
-            if tabular_data[inp][0] is "SOLD!" or inp >= len(globals.this_player.inventory):
+            if inp >= len(globals.this_player.inventory):
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
-            if tabular_data[inp][0] is globals.this_player.current_weapon.name:
-                inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
+            if tabular_data[inp][0] is "SOLD!":
+                inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
+            if globals.this_player.current_weapon is not None:
+                if tabular_data[inp][0] is globals.this_player.current_weapon.name:
+                    inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
+                    continue
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]
             print("%s sold for $%d!" % (item_to_remove, item_value))
             globals.this_player.money += item_value
+            print("You now have $%s.\n" % globals.this_player.money)
             items_to_remove.append(item_to_remove)
             tabular_data[inp][0] = "SOLD!"
             tabular_data[inp][1] = "SOLD!"
-            print(tabulate(tabular_data, headers=['No.' 'Item Name' 'Value ($)']))
+            tabular_data[inp][2] = "SOLD!"
+            print(tabulate(tabular_data, headers=['No.', 'Item Name', 'Value ($)']) + '\n')
             inp = input(
                 "Please enter the number of another item you would like to sell, else enter the letter 'q' to leave: ")
 

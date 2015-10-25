@@ -31,21 +31,22 @@ def init_globals():
     potion_cost = []
     global tabular_potions
     tabular_potions = []
-    amount_of_potions = 6
+    # amount_of_potions = 6
     potions = csv.reader(open("potions.csv", 'r'))
+    num = 0
     for row in potions:
-        for num in range(amount_of_potions):
-            potion_names.append(row[0])
-            potion_powers.append(float(row[1]))
-            potion_type.append(row[2])
-            potion_cost.append(float(row[3]))
-            tmp = []
-            tmp.append(num)
-            tmp.append(potion_names[num])
-            tmp.append(potion_powers[num])
-            tmp.append(potion_type[num])
-            tmp.append(potion_cost[num])
-            tabular_potions.append(tmp)
+        potion_names.append(row[0])
+        potion_powers.append(float(row[1]))
+        potion_type.append(row[2])
+        potion_cost.append(float(row[3]))
+        tmp = []
+        tmp.append(num)
+        tmp.append(row[0])
+        tmp.append(float(row[1]))
+        tmp.append(row[2])
+        tmp.append(float(row[3]))
+        tabular_potions.append(tmp)
+        num += 1
 
     global weapon_names
     weapon_names = []
@@ -55,19 +56,20 @@ def init_globals():
     weapon_cost = []
     global tabular_weapons
     tabular_weapons = []
-    amount_of_weapons = 12
+    # amount_of_weapons = 12
     weapons = csv.reader(open("weapons.csv", 'r'))
+    num = 0
     for row in weapons:
-        for num in range(amount_of_weapons):
-            weapon_names.append(row[0])
-            weapon_powers.append(float(row[1]))
-            weapon_cost.append(float(row[2]))
-            tmp = []
-            tmp.append(num)
-            tmp.append(weapon_names[num])
-            tmp.append(weapon_powers[num])
-            tmp.append(weapon_cost[num])
-            tabular_weapons.append(tmp)
+        weapon_names.append(row[0])
+        weapon_powers.append(float(row[1]))
+        weapon_cost.append(float(row[2]))
+        tmp = []
+        tmp.append(num)
+        tmp.append(row[0])
+        tmp.append(float(row[1]))
+        tmp.append(float(row[2]))
+        tabular_weapons.append(tmp)
+        num += 1
 
     global loot_names
     loot_names = []
@@ -137,11 +139,14 @@ def declare_new_player(name):
 
 def declare_existing_player(saved_stats, inventory):
     global this_player
+    if saved_stats[11] == "None":
+        weapon = None
+    else:
+        weapon = saved_stats[11]
     this_player = player.Player(saved_stats[0], saved_stats[1], int(saved_stats[2]), int(saved_stats[3]),
-                                int(saved_stats[4]), int(saved_stats[5]), int(saved_stats[6]), int(saved_stats[7]),
-                                int(saved_stats[8]), int(saved_stats[9]), int(saved_stats[10]),
-                                (saved_stats[11] == "True"), saved_stats[12], int(saved_stats[13]),
-                                (saved_stats[14] == "True"), inventory)
+                                int(saved_stats[4]), int(saved_stats[5]), float(saved_stats[6]), float(saved_stats[7]),
+                                int(saved_stats[8]), float(saved_stats[9]),(saved_stats[10] == "True"), weapon,
+                                int(saved_stats[12]), (saved_stats[12] == "True"), inventory)
 
 
 def clear_screen():

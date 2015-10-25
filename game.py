@@ -25,7 +25,8 @@ def game_loop():
             print(globals.dialogue[player_stage] + '\n')
             globals.this_player.main_quest_stage += 1
         elif curr.startswith('m'):
-            if player_stage == 90:
+            print(globals.dialogue[player_stage] + '\n')
+            if player_stage == 91:
                 exit_bool = home_screen.process_home()
                 if exit_bool is True:
                     return

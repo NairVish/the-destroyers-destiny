@@ -7,7 +7,7 @@ from random import randrange
 
 class Player():
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
-                 init_attack=2,init_defense=3.5, init_main_quest_stage=0, init_money=10,init_assistant=False,
+                 init_attack=2.0,init_defense=3.5, init_main_quest_stage=0, init_money=100,init_assistant=False,
                  init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
         self.name = init_name
         self.home = init_province
@@ -59,11 +59,13 @@ class Player():
         print("Total Health: %s" % self.total_health)
         print("Total Attack: %s" % self.attack)
         print("Total Defense: %s" % self.defense)
-        print("Current Money: %s" % self.money)
+        print("Current Money: $%s" % self.money)
         print("Current Weapon: %s" % self.current_weapon)
         print("Current inventory: ")
         for item in self.inventory:
             print('\t' + item)
+        if len(self.inventory) == 0:
+            print('\tNone')
         input("\nPress any key to return to previous screen...")
         globals.clear_screen()
 
@@ -124,9 +126,6 @@ class Player():
                 elif type is "defense":
                     self.defense += boost
                     print("Defense increased by %s points!" % boost)
-                elif type is "speed":
-                    self.speed += boost
-                    print("Speed increased by %s points!" % boost)
                 items_to_remove.append(item_to_remove)
                 for index in range(0, 4):
                     tabular_potion_inv[inp][index] = "USED!"
@@ -135,7 +134,7 @@ class Player():
                     "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
         for item in items_to_remove:
-            globals.this_player.inventory.remove(item)
+            del globals.this_player.inventory[item]
 
         globals.clear_screen()
 
@@ -148,7 +147,7 @@ class Player():
             if item in globals.weapon_names:
                 tmp.append(number_of_weapons)
                 tmp.append(item)
-                tmp.append(globals.weapon_powers[globals.weapon_names.index(weapon_name)])
+                tmp.append(globals.weapon_powers[globals.weapon_names.index(item)])
                 number_of_weapons += 1
             if tmp is False:
                 continue
@@ -171,7 +170,7 @@ class Player():
             except ValueError:
                 inp = input("That is an invalid option. Please try again: ")
             else:
-                if input >= len(globals.weapon_names):
+                if inp >= len(globals.weapon_names):
                     inp = input("That is an invalid option. Please try again: ")
                     continue
                 input_legal = True
@@ -190,7 +189,7 @@ class Player():
             print("You have nothing in your inventory.\n")
         else:
             for item in self.inventory:
-                print(item)
+                print('* ' + item)
             print('\n')
 
         input("Press enter to return home...")

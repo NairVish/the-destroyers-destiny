@@ -79,7 +79,7 @@ def load_player():
     else:
         saved_stats = [line.rstrip('\n') for line in save.readlines()]
         try:
-            inventory = [line for line in saved_stats[15:(len(saved_stats)-1)]]
+            inventory = [item for item in saved_stats[14:(len(saved_stats))]]
         except IndexError:
             inventory = []
         else:
@@ -87,6 +87,8 @@ def load_player():
         print("Loading existing save...")
         print("Loading save data for %s" % saved_stats[0])
         globals.declare_existing_player(saved_stats, inventory)
+        print(saved_stats)
+        print(inventory)
         save.close()
     print("\nThe game was successfully loaded!")
     input("(Press enter to continue...)")

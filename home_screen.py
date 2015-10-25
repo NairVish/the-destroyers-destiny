@@ -84,6 +84,8 @@ def print_shop_selector():
     print("\t4. Return to Home Screen.\n")
 
     inp = input("Where would you like to go? ")
-    while input not in range(1,5):
+    accepted_answers = ['1','2','3','4','5']
+    while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
+
     return inp
