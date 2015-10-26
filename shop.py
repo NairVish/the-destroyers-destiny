@@ -114,8 +114,8 @@ def selling():
                     continue
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]
-            print("%s sold for $%d!" % (item_to_remove, item_value))
-            globals.this_player.money += item_value
+            print("%s sold for $%s!" % (item_to_remove, item_value))
+            globals.this_player.money += float(item_value)
             print("You now have $%s.\n" % globals.this_player.money)
             items_to_remove.append(item_to_remove)
             tabular_data[inp][0] = "SOLD!"

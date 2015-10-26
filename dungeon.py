@@ -10,7 +10,7 @@ class Cell():
         self.enemy_type = enemy_type
         self.final = final
         if final:
-            self.enemy_selector()
+            self.enemy = self.enemy_selector()
             self.loot = None
         else:
             self.determineProperty()
@@ -23,7 +23,7 @@ class Cell():
         elif result in range(20,40):
             self.enemy = None
             self.loot = self.loot_selector()
-        elif result in range(40,100):
+        else:
             self.enemy = self.enemy_selector()
             self.loot = None
 
@@ -34,6 +34,8 @@ class Cell():
         if self.final is True and self.enemy_type is "valstr":
             boss_index = globals.main_quest_dungeons.index(self.name)
             return globals.main_quest_bosses[boss_index]
+        elif self.enemy_type is "valstr":
+            return choice(globals.main_quest_enemies)
         elif self.final is True:
             if self.enemy_type is "bandit":
                 return "Bandit Chief"
@@ -69,9 +71,9 @@ class Dungeon():
         del self.cell
 
         if self.current_cell_num < self.total_cells:
-            return Cell(self.current_cell_num, self.name, self.enemy_type)
+            return Cell(self.name, self.current_cell_num, self.enemy_type)
         elif self.current_cell_num == self.total_cells:
-            return Cell(self.current_cell_num, self.name, self.enemy_type, final=True)
+            return Cell(self.name, self.current_cell_num, self.enemy_type, final=True)
         else:
             return None
 
@@ -85,6 +87,7 @@ class Dungeon():
                 this_battle.do_battle()
             except globals.GameOver():
                 raise globals.GameOver()
+            self.show_status()
         elif self.cell.loot is not None and self.cell.enemy is None:
             print("You've found the following loot: %s" % self.cell.loot)
             inp = input("Would you like to add it to your inventory?\n"
@@ -94,26 +97,29 @@ class Dungeon():
                 inp = input("You have entered an invalid option. Please try again: ")
             if inp is 'y':
                 globals.this_player.inventory.append(self.cell.loot)
-                print("\n%s added to your inventory!\n" % self.cell.loot)
+                print("\n%s was added to your inventory!\n" % self.cell.loot)
             else:
                 print("\n%s was NOT added to your inventory!\n" % self.cell.loot)
-
-            self.show_menu()
         else:
             print("There's nothing in this cell...\n")
-            self.show_menu()
+
+        self.show_menu()
 
     def show_status(self):
         print(self.__repr__().upper())
         print("You are currently in cell %s of %d.\n" % (self.current_cell_num, self.total_cells))
 
     def show_menu(self):
-        print("\ta. Advance.")
-        print("\t1. Show current stats.")
-        print("\t2. Use a potion.")
-        print("\t3. Switch weapon.")
+        def print_menu():
+            print("\ta. Advance.")
+            print("\t1. Show current stats.")
+            print("\t2. Use a potion.")
+            print("\t3. Switch weapon.\n")
+            return input("\nChoose an option: ")
 
-        inp = input("\nChoose an option: ")
+        inp = print_menu()
+        if inp is 'a':
+            globals.clear_screen()
 
         while inp is not 'a':
             try:
@@ -134,7 +140,9 @@ class Dungeon():
                 elif inp is 3:
                     globals.clear_screen()
                     globals.this_player.equip_weapon()
-            inp = input("\nChoose an option: ")
+            self.show_status()
+            inp = print_menu()
+            globals.clear_screen()
 
     def traverse_dungeon(self):
         while self.current_cell_num <= self.total_cells:
@@ -142,6 +150,7 @@ class Dungeon():
                 return
             if self.main_quest_flag is True:
                 self.monitor_main_quest()
+            globals.clear_screen()
             self.show_status()
             self.execute_cell_action()
             self.cell = self.advance()
@@ -152,7 +161,7 @@ class Dungeon():
                 globals.this_player.main_quest_stage += 1
                 player_stage = globals.this_player.main_quest_stage
                 curr = globals.dialogue_type[player_stage]
-                if curr == "c_interrupt" or curr == "c":
+                if curr.startswith("c"):
                     print(globals.dialogue[player_stage] + '\n')
                     globals.this_player.main_quest_stage += 1
                 elif curr == "p":
@@ -164,14 +173,25 @@ class Dungeon():
                     print("[Enter the number of the response you would like to make:]")
                     i = 1
                     while globals.dialogue_type[player_stage + i] == 'r':
-                        print('\t' + i + '. ' + globals.dialogue[player_stage + i] + '\n')
+                        print('\t' + str(i) + '. ' + globals.dialogue[player_stage + i])
                         i += 1
                     selection = input("Selection: ")
-                    while selection > player_stage + i - 1:
-                        input("You have entered an invalid option. Please try again: ")
+                    while True:
+                        try:
+                            selection = int(selection)
+                        except ValueError:
+                            selection = input("You have entered an invalid option. Please try again: ")
+                            continue
+                        else:
+                            if int(selection) > i or int(selection) <= 0:
+                                selection = input("You have entered an invalid option. Please try again: ")
+                                continue
+                            break
                     globals.this_player.main_quest_stage += selection
                     globals.clear_screen()
-                    print("You: " + globals.dialogue[player_stage] + '\n')
-                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[player_stage]
+                    print("You: " + globals.dialogue[globals.this_player.main_quest_stage] + '\n')
+                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
             print(globals.dialogue[globals.this_player.main_quest_stage] + '\n')
+            if globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] != 0:
+                globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] - 1
             input("(Press enter to continue...)")

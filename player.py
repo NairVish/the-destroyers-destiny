@@ -39,15 +39,12 @@ class Player():
 
         self.attack += 1
         self.defense += 1
-        self.speed += 1
         self.total_health += 5
         self.current_health = self.total_health
 
         self.level += 1
         print("\nLEVEL UP!")
         print("You are now at level %s.\n" % self.level)
-
-        input("Press enter to continue...")
 
     def print_stats(self):
         globals.clear_screen()
@@ -66,11 +63,14 @@ class Player():
             print('\t' + item)
         if len(self.inventory) == 0:
             print('\tNone')
-        input("\nPress any key to return to previous screen...")
+        input("\nPress enter to return to previous screen...")
         globals.clear_screen()
 
     def toggle_assistant_flag(self):
         self.assistant = not self.assistant
+
+    def toggle_sidequest_flag(self):
+        self.sidequests = not self.sidequests
 
     def use_potion(self, enhancement=False):
         tabular_potion_inv = []
@@ -99,7 +99,7 @@ class Player():
             print("You have no potions in your inventory that you can use right now.\n")
             input("Press enter to return...")
             return
-        print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]))
+        print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
 
         items_to_remove = []
         inp = input("Please enter the number of the potion you would like to use. Enter the letter 'q' to leave: ")
@@ -113,8 +113,8 @@ class Player():
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
                     continue
                 item_to_remove = self.inventory.index(tabular_potion_inv[inp][1])
-                boost = tabular_potion_inv[inp][3]
                 type = tabular_potion_inv[inp][2]
+                boost = tabular_potion_inv[inp][3]
                 if type is "health":
                     self.current_health += boost
                     if self.current_health > self.total_health:
@@ -129,7 +129,8 @@ class Player():
                 items_to_remove.append(item_to_remove)
                 for index in range(0, 4):
                     tabular_potion_inv[inp][index] = "USED!"
-                print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]))
+                globals.clear_screen()
+                print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) +'\n')
                 inp = input(
                     "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
@@ -149,9 +150,6 @@ class Player():
                 tmp.append(item)
                 tmp.append(globals.weapon_powers[globals.weapon_names.index(item)])
                 number_of_weapons += 1
-            if tmp is False:
-                continue
-            else:
                 tabular_weapon_inv.append(tmp)
 
         print("WEAPON CHOOSER\n")
@@ -161,13 +159,15 @@ class Player():
             return
         print(tabulate(tabular_weapon_inv, headers=["No.", "Name", "Power"], tablefmt="fancy_grid"))
 
-        inp = input("\nEnter the number of the weapon you wish to equip: ")
+        inp = input("\nEnter the number of the weapon you wish to equip. Enter 'q' to go back: ")
 
         input_legal = False
         while input_legal is False:
             try:
                 inp = int(inp)
             except ValueError:
+                if inp is 'q':
+                    break
                 inp = input("That is an invalid option. Please try again: ")
             else:
                 if inp >= len(globals.weapon_names):
@@ -175,10 +175,12 @@ class Player():
                     continue
                 input_legal = True
 
-        print("The %s has been equipped." % globals.weapon_names[inp])
-        self.current_weapon = Weapon(globals.weapon_names[inp])
+        if inp is not 'q':
+            w_name = globals.weapon_names[globals.weapon_names.index(tabular_weapon_inv[inp][1])]
+            print("The %s has been equipped." % w_name)
+            self.current_weapon = Weapon(w_name)
+            input("Press enter to return home...")
 
-        input("Press enter to return home...")
         globals.clear_screen()
 
 

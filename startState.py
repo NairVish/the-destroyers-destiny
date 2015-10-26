@@ -23,7 +23,7 @@ def show_start_menu():  # The startup menu
     or quitting.
     """
     print('Main Menu')
-    print('\t1. Start a New Game.')
+    print('\t1. Start a new game.')
     accepted_answers = ['1','q']
     save = find_save()
     if save is not None:
@@ -85,10 +85,8 @@ def load_player():
         else:
             pass
         print("Loading existing save...")
-        print("Loading save data for %s" % saved_stats[0])
+        print("Loading save data for %s..." % saved_stats[0])
         globals.declare_existing_player(saved_stats, inventory)
-        print(saved_stats)
-        print(inventory)
         save.close()
     print("\nThe game was successfully loaded!")
     input("(Press enter to continue...)")

@@ -146,11 +146,12 @@ def declare_existing_player(saved_stats, inventory):
     this_player = player.Player(saved_stats[0], saved_stats[1], int(saved_stats[2]), int(saved_stats[3]),
                                 int(saved_stats[4]), int(saved_stats[5]), float(saved_stats[6]), float(saved_stats[7]),
                                 int(saved_stats[8]), float(saved_stats[9]),(saved_stats[10] == "True"), weapon,
-                                int(saved_stats[12]), (saved_stats[12] == "True"), inventory)
+                                int(saved_stats[12]), (saved_stats[13] == "True"), inventory)
 
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-class GameOver(Exception):
+
+class GameOver(BaseException):
     pass
