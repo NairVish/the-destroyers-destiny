@@ -157,18 +157,25 @@ class Dungeon():
 
     def monitor_main_quest(self):
         if self.cell.final is True:
+            globals.clear_screen()
             while globals.dialogue_type[globals.this_player.main_quest_stage] is not 'b':
-                globals.this_player.main_quest_stage += 1
                 player_stage = globals.this_player.main_quest_stage
                 curr = globals.dialogue_type[player_stage]
                 if curr.startswith("c"):
                     print(globals.dialogue[player_stage] + '\n')
-                    globals.this_player.main_quest_stage += 1
-                elif curr == "p":
+                    if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
+                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
+                    else:
+                        globals.this_player.main_quest_stage += 1
+                elif curr.startswith("p"):
                     print(globals.dialogue[player_stage] + '\n')
                     input("(Press enter to continue...)")
-                    globals.this_player.main_quest_stage += 1
-                elif curr == "rn":
+                    globals.clear_screen()
+                    if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
+                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
+                    else:
+                        globals.this_player.main_quest_stage += 1
+                elif curr.startswith("rn"):
                     print(globals.dialogue[player_stage] + '\n')
                     print("[Enter the number of the response you would like to make:]")
                     i = 1
@@ -191,6 +198,7 @@ class Dungeon():
                     globals.clear_screen()
                     print("You: " + globals.dialogue[globals.this_player.main_quest_stage] + '\n')
                     globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
+                    globals.this_player.main_quest_stage
             print(globals.dialogue[globals.this_player.main_quest_stage] + '\n')
             if globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] != 0:
                 globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] - 1

@@ -16,7 +16,7 @@ def game_sequence():
 def game_loop():
      alert_day = None
 
-     while True:  # until we return from the function
+     while True:  # until we hit a return statement
 
         player_stage = globals.this_player.main_quest_stage
         curr = globals.dialogue_type[player_stage]
@@ -45,6 +45,7 @@ def game_loop():
                     globals.this_player.main_quest_stage += 1
                     alert_day = None
                 else:
+                    print(globals.dialogue[player_stage] + '\n')
                     exit_bool = home_screen.process_home()
                     if exit_bool is True:
                         return
@@ -81,7 +82,7 @@ def game_loop():
                 globals.this_player.inventory.append(globals.potion_names[0])
             globals.this_player.current_weapon = player.Weapon(globals.weapon_names[inp])
             globals.this_player.main_quest_stage += 1
-        elif curr is 'rn': # response needed
+        elif curr.startswith('rn'): # response needed
             print(globals.dialogue[player_stage] + '\n')
             print("[Enter the number of the response you would like to make:]")
             i = 1
@@ -102,22 +103,24 @@ def game_loop():
                     break
             globals.this_player.main_quest_stage += selection
             globals.clear_screen()
-            print("You: " + globals.dialogue[player_stage] + '\n')
-            globals.this_player.main_quest_stage = globals.dialogue_jump_targets[player_stage]
+            print("You: " + globals.dialogue[globals.this_player.main_quest_stage] + '\n')
+            globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
         elif curr.startswith('d'):
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
+            if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
+                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
             if player_stage < 15:
                 curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0], init_length=10, enemy_type="valstr", main_quest=True)
                 curr.traverse_dungeon()
                 globals.this_player.toggle_sidequest_flag()
             elif curr.endswith('sneak'):
                 globals.this_player.toggle_assistant_flag()
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr", main_quest=True)
+                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11, enemy_type="valstr", main_quest=True)
                 curr.traverse_dungeon()
             elif curr.endswith('fight'):
                 globals.this_player.toggle_assistant_flag()
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11, enemy_type="valstr", main_quest=True)
+                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr", main_quest=True)
                 curr.traverse_dungeon()
             elif player_stage > 70 and player_stage < 80:
                 curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr", main_quest=True)
