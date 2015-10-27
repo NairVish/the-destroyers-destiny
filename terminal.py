@@ -170,5 +170,3 @@ def stage4():
           "EXIT SUCCESS.\n")
 
     input("Press enter to exit...")
-
-terminal()

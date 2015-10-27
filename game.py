@@ -1,5 +1,5 @@
 __author__ = 'vishnunair'
-import startState
+import start_state
 import exit
 import globals
 import terminal
@@ -9,7 +9,7 @@ import dungeon
 from tabulate import tabulate
 
 def game_sequence():
-    startState.startSequence()
+    start_state.startSequence()
     game_loop()
     exit.exit_sequence()
 
@@ -108,24 +108,35 @@ def game_loop():
         elif curr.startswith('d'):
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
+            game_over_reversion_target = globals.this_player.main_quest_stage
             if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
                     globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
-            if player_stage < 15:
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0], init_length=10, enemy_type="valstr", main_quest=True)
-                curr.traverse_dungeon()
-                globals.this_player.toggle_sidequest_flag()
-            elif curr.endswith('sneak'):
-                globals.this_player.toggle_assistant_flag()
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11, enemy_type="valstr", main_quest=True)
-                curr.traverse_dungeon()
-            elif curr.endswith('fight'):
-                globals.this_player.toggle_assistant_flag()
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr", main_quest=True)
-                curr.traverse_dungeon()
-            elif player_stage > 70 and player_stage < 80:
-                curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr", main_quest=True)
-                curr.traverse_dungeon()
-            globals.this_player.main_quest_stage += 1
+            try:
+                if player_stage < 15:
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0], init_length=10, enemy_type="valstr", main_quest=True)
+                    curr.traverse_dungeon()
+                    globals.this_player.toggle_sidequest_flag()
+                elif curr.endswith('sneak'):
+                    globals.this_player.toggle_assistant_flag()
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11, enemy_type="valstr", main_quest=True)
+                    curr.traverse_dungeon()
+                elif curr.endswith('fight'):
+                    globals.this_player.toggle_assistant_flag()
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr", main_quest=True)
+                    curr.traverse_dungeon()
+                elif player_stage > 70 and player_stage < 80:
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr", main_quest=True)
+                    curr.traverse_dungeon()
+            except globals.GameOver():
+                globals.clear_screen()
+                print("<Player Note: Your current health has reached zero!>\n")
+                print("As the world fades to black, a white light suddenly flashes before you.\n"
+                      "In an instant, you find yourself back at your home. You look at the time.\n"
+                      "It's right before you went into that fateful encounter.\n")
+                input("Press enter to continue...")
+                globals.this_player.main_quest_stage = game_over_reversion_target
+            else:
+                globals.this_player.main_quest_stage += 1
         elif curr is "term":
             terminal.terminal()
             globals.this_player.main_quest_stage += 1

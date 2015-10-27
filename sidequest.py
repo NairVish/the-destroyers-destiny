@@ -20,9 +20,9 @@ def setup_quest_board():
     home_cities = []
 
     for num in numbers:
-        curr = choice(sidequest.types)
+        curr = choice(Sidequest.types)
         curr_types.append(curr)
-        descriptions.append(sidequest.quest_dict[curr])
+        descriptions.append(Sidequest.quest_dict[curr])
         names.append(choice(globals.people_names))
         home_cities.append(choice(globals.province_names))
 
@@ -52,11 +52,11 @@ def quest_board():
         return
 
     inp = int(inp)
-    curr = sidequest(curr_types[inp], choice(globals.cave_names), names[inp], home_cities[inp])
+    curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp], home_cities[inp])
     curr.execute_quest()
 
 
-class sidequest():
+class Sidequest():
     types = ['delivery', 'kidnap', 'scare', 'gang', 'recovery']
     quest_dict = {'delivery': "Deliver a message for someone.",
                   'kidnap': "Search and rescue mission.",
