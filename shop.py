@@ -109,7 +109,7 @@ def selling():
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
             if globals.this_player.current_weapon is not None:
-                if tabular_data[inp][0] is globals.this_player.current_weapon.name:
+                if tabular_data[inp][1] == globals.this_player.current_weapon.name:
                     inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
                     continue
             item_to_remove = globals.this_player.inventory[inp]
