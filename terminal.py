@@ -36,8 +36,8 @@ def stage1():
     inp = print_menu()
     while True:
         while inp not in accepted_answers:
-            if inp.startswith(('pwd', 'ls', 'rm', 'mv', 'bash', 'sudo')):
-                print("-launch: %s: Normal shell functions disabled. Operation aborted.\n" % (inp.split(' ', 1)[0]))
+            if inp.startswith(('pwd', 'ls', 'rm', 'mv', 'bash', 'sudo', 'awk', 'sed')):
+                print("-launch: %s: Normal shell functions disabled. Operation aborted." % (inp.split(' ', 1)[0]))
                 inp = receive_input()
                 continue
             print("-launch: %s: command not found" % (inp.split(' ', 1)[0]))
@@ -51,6 +51,7 @@ def stage1():
             print("Fatal error: Self-destruction program not configured.\n"
                   "Operation aborted.\n")
             input("Press enter to continue...")
+            inp = print_menu()
         elif inp is '3':
             globals.clear_screen()
             print("Missile 1 Status\n"
@@ -62,11 +63,10 @@ def stage1():
                   "* Guidance systems: OK!\n"
                   "* Hexonium status: Dormant. Ready for ultimate reactions.\n")
             input("Press enter to continue...")
+            inp = print_menu()
         elif inp is '4':
-            globals.clear_screen()
-            print("-launch: quit: Quitting failed. Once started, missile launch procedure cannot be aborted.\n")
-            input("Press enter to continue...")
-        inp = print_menu()
+            print("-launch: quit: Quitting failed. Once started, missile launch procedure cannot be aborted.")
+            inp = receive_input()
 
 
 def stage2():
@@ -171,4 +171,4 @@ def stage4():
 
     input("Press enter to exit...")
 
-
+terminal()
