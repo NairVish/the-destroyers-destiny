@@ -80,9 +80,9 @@ class Dungeon():
     def execute_cell_action(self):
         if self.cell.enemy is not None and self.cell.loot is None:
             if self.cell.final is True:
-                this_battle = battle.battle(self.cell.enemy, "boss")
+                this_battle = battle.Battle(self.cell.enemy, "boss")
             else:
-                this_battle = battle.battle(self.cell.enemy)
+                this_battle = battle.Battle(self.cell.enemy)
             try:
                 this_battle.do_battle()
             except globals.GameOver():
@@ -118,6 +118,7 @@ class Dungeon():
             return input("\nChoose an option: ")
 
         inp = print_menu()
+        
         if inp is 'a':
             globals.clear_screen()
 
