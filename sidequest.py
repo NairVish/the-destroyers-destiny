@@ -40,31 +40,20 @@ def setup_quest_board():
 
 
 def quest_board():
+    print("QUEST BOARD")
+    print("Welcome to the quest board!\n")
     print(tabulate.tabulate(quest_tabulate, headers=["No.", "Type", "Description", "Job Giver", "Home City"]))
     accepted_answers = ['0','1','2','q']
     inp = input("\nWhat job would you like to take? To go back, enter the letter 'q': ")
     while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
 
-    if input is 'q':
+    if inp is 'q':
         return
 
     inp = int(inp)
     curr = sidequest(curr_types[inp], choice(globals.cave_names), names[inp], home_cities[inp])
     curr.execute_quest()
-    purge_quest_board()
-
-
-def purge_quest_board():
-    global numbers
-    global descriptions
-    global names
-    global quest_tabulate
-
-    del numbers
-    del descriptions
-    del names
-    del quest_tabulate
 
 
 class sidequest():
@@ -101,11 +90,11 @@ class sidequest():
             self.execute_recovery()
 
     def execute_delivery(self):
-        print("%s from %d needs you to deliver a package to someone.\n"
+        print("%s from %s needs you to deliver a package to someone.\n"
               "Do this simple quest, and you'll get a modest reward.\n"
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
-        print("However, you have to remember that the roads between the provinces are dangerous,\n"
-              "and that you'll encounter loads of enemies...\n")
+        print("However, you have to remember that the roads between the\n"
+              "provinces are dangerous, and that you'll encounter loads of enemies...\n")
         input("Press enter to continue...")
 
         curr = dungeon.Dungeon("A Random Road", self.dungeon_length, "looter")
@@ -114,12 +103,12 @@ class sidequest():
         reward = randrange(15,26)
         globals.this_player.money += reward
         print("%s is extremely thankful for delivering the message.\n"
-              "You have been given %d for your efforts.\n" % (self.quest_giver, str(reward)))
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
 
         input("Press enter to return home...")
 
     def execute_kidnap(self):
-        print("%s, a citizen of %s, has been kidnapped by bandits!\n"
+        print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
               "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.quest_giver))
         input("Press enter to continue...")
 
@@ -129,7 +118,7 @@ class sidequest():
         reward = randrange(15,26)
         globals.this_player.money += reward
         print("%s's family is extremely thankful to you for saving %s.\n"
-              "You have been given %s for your efforts.\n" % (self.quest_giver, self.quest_giver, str(reward)))
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, self.quest_giver, str(reward)))
 
         input("Press enter to return home...")
 
@@ -147,14 +136,14 @@ class sidequest():
         reward = randrange(15,26)
         globals.this_player.money += reward
         print("The bandits will cause no more trouble for %s after your rampage.\n"
-              "You have been given %s for your efforts.\n" % (self.quest_giver, str(reward)))
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
 
         input("Press enter to return home...")
 
     def execute_gang(self):
-        print("The imperial police have asked for your help in assualting a gang's hideout.\n"
-              "The gang is nororious for unimaginable crimes, and it is up to you to stop\n"
-              "their eveil ways.")
+        print("The imperial police have asked for your help in assualting a gang's hideout.\n\n"
+              "The gang is notorious for unimaginable crimes, and it is up to you to stop\n"
+              "their evil ways.\n")
         input("Press enter to continue...")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "mobster")
@@ -163,12 +152,12 @@ class sidequest():
         reward = randrange(15,26)
         globals.this_player.money += reward
         print("The gang won't terrorize any one else now that you've destroyed them.\n"
-              "You have been given %s for your efforts.\n" % (str(reward)))
+              "You have been given $%s for your efforts.\n" % (str(reward)))
 
         input("Press enter to return home...")
 
     def execute_recovery(self):
-        print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n"
+        print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n\n"
               "Your job is simple. You break into the bandits' hideout, destroy the bandits,\n"
               "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))
         input("Press enter to continue...")
@@ -178,8 +167,8 @@ class sidequest():
 
         reward = randrange(20,30)
         globals.this_player.money += reward
-        print("%s will be forever thankful to you for retrieving her family's heirloom.\n"
-              "You have been given %s for your efforts.\n" % (self.quest_giver, str(reward)))
+        print("%s will be forever thankful to you for retrieving their family's heirloom.\n"
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
 
         input("Press enter to return home...")
 
