@@ -65,6 +65,9 @@ class battle():
             print("You dealt %s damage to the enemy!" % str(p_damage))
             self.enemy.health -= p_damage
 
+        if self.enemy.health <= 0:
+            return
+
         if globals.this_player.assistant is True:
             prob = randrange(0,100)
             if prob in range(0,10):
