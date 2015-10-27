@@ -3,17 +3,25 @@ import sys
 import globals
 
 def exit_program():
-    globals.clear_screen()
-    print("The program has ended. Thank you for playing.")
-    print('\n')
+    print("The program has ended. Thank you for playing.\n")
     sys.exit()
 
 def prompt_for_save():
     globals.clear_screen()
     inp = input("Would you like to save the game? (y/n) ")
+    accepted_answers = ['y','n']
+    while inp not in accepted_answers:
+        inp = input("You have entered an invalid option. Please try again:")
     if inp is 'y':
         save_game()
+        globals.clear_screen()
+        print("Save data has been written to a file named 'save.data' in the"
+              "game's directory. If such a file already existed, it has been"
+              "overwritten.\n")
+        return
     else:
+        globals.clear_screen()
+        print("The game was not saved.\n")
         return
 
 def save_game():
