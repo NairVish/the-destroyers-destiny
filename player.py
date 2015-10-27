@@ -7,7 +7,7 @@ from random import randrange
 
 class Player():
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
-                 init_attack=2.0,init_defense=3.5, init_main_quest_stage=0, init_money=100,init_assistant=False,
+                 init_attack=2.0,init_defense=3.5, init_main_quest_stage=0, init_money=0,init_assistant=False,
                  init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
         self.name = init_name
         self.home = init_province
@@ -33,8 +33,10 @@ class Player():
         return self.name
 
     def level_up(self):
-        diff = self.target_xp - self.xp
-        self.xp = diff
+        if self.xp > self.target_xp:
+            self.xp = self.xp - self.target_xp
+        else:
+            self.xp = 0
         self.target_xp += 5
 
         self.attack += 1

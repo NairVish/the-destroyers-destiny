@@ -54,7 +54,6 @@ def process_home():
                     globals.clear_screen()
                     continue
                 sidequest.quest_board()
-                sidequest.purge_quest_board()
                 sidequest.setup_quest_board()
             except globals.GameOver():
                 globals.clear_screen()
