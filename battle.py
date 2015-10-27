@@ -114,3 +114,7 @@ class Battle():
               "\t2. Use health item (lose turn).\n"
               "\t3. Switch weapon (will not lose turn).\n"
               "\t4. Show your stats (will not lose turn).\n")
+
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

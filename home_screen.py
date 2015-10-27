@@ -88,3 +88,7 @@ def print_shop_selector():
         inp = input("You have entered an invalid option. Please try again: ")
 
     return inp
+
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

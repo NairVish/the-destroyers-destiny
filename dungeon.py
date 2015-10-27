@@ -204,3 +204,7 @@ class Dungeon():
             if globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] != 0:
                 globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] - 1
             input("(Press enter to continue...)")
+
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

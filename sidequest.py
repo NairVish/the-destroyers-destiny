@@ -172,11 +172,6 @@ class Sidequest():
 
         input("Press enter to return home...")
 
-# globals.init_globals()
-# setup_quest_board()
-# quest_board()
-
-
-# globals.init_globals()
-# curr = sidequest("scare", "The Ratway", "Vishnu", "Whiterun")
-# curr.execute_quest()
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

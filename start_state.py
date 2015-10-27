@@ -99,3 +99,7 @@ def startSequence():
     globals.init_globals()
     print_intro()
     load_player()
+
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

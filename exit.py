@@ -48,3 +48,7 @@ def save_game():
 def exit_sequence():
     prompt_for_save()
     exit_program()
+
+if __name__ == "__main__":
+    print("To play this game, run 'start_here.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")
