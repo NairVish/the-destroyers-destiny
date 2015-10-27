@@ -15,8 +15,8 @@ def prompt_for_save():
     if inp is 'y':
         save_game()
         globals.clear_screen()
-        print("Save data has been written to a file named 'save.data' in the"
-              "game's directory. If such a file already existed, it has been"
+        print("Save data has been written to a file named 'save.data' in the "
+              "game's directory. If such a file already existed, it has been "
               "overwritten.\n")
         return
     else:

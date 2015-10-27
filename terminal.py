@@ -56,11 +56,11 @@ def stage1():
             globals.clear_screen()
             print("Missile 1 Status\n"
                   "* Overall: OK!\n"
-                  "* Guidance systems: OK!\n"
+                  "* Guidance systems: Ready!\n"
                   "* Hexonium status: Dormant. Ready for ultimate reactions.\n\n"
                   "Missile 2 Status\n"
                   "* Overall: OK!\n"
-                  "* Guidance systems: OK!\n"
+                  "* Guidance systems: Ready!\n"
                   "* Hexonium status: Dormant. Ready for ultimate reactions.\n")
             input("Press enter to continue...")
             inp = print_menu()
@@ -102,7 +102,7 @@ def stage3():
             print(
                 "Merlona: If I remember correctly, it has the word 'Destroy' in it as the second part of the password. " \
                 "I believe the first part of the password is who we're trying to destroy. Lowercase too.\n")
-            input("Press enter to continue...")
+            input("(Press enter to continue...)")
             word = print_menu()
             continue
         else:
@@ -144,8 +144,8 @@ def text_interlude():
     print(
         "You and your assistant look at the other screens in the room that are tracking the missiles. It is five agonizing minutes before the missiles reach the Valst'r's home system. You realize that the Imperial Commander wasn't joking when he was talking about the warp drive.\n")
     print("On the radars, you notice other objects trying to head toward the missiles, but the missiles evade these objects with ease.\n")
-    print("The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from your radars.\n")
-    print("You look back at the main screen.\n")
+    print("The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from the radars.\n")
+    print("You look back at the main screen...\n")
     input("(Press enter to continue...)")
 
 
@@ -170,3 +170,4 @@ def stage4():
           "EXIT SUCCESS.\n")
 
     input("Press enter to exit...")
+    globals.clear_screen()

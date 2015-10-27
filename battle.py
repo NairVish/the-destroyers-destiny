@@ -84,7 +84,7 @@ class Battle():
         self.show_options()
         inp = input("Choose an option: ")
 
-        while inp is not '1':
+        while inp != '1':
             try:
                 inp = int(inp)
             except ValueError:
@@ -113,4 +113,4 @@ class Battle():
               "\t1. Attack!\n"
               "\t2. Use health item (lose turn).\n"
               "\t3. Switch weapon (will not lose turn).\n"
-              "\t4. Show your stats (will not lose turn).")
+              "\t4. Show your stats (will not lose turn).\n")

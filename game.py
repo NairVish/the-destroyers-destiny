@@ -26,6 +26,7 @@ def game_loop():
             globals.this_player.main_quest_stage += 1
         elif curr.startswith('m'):
             if player_stage == 91:
+                print(globals.dialogue[player_stage] + '\n')
                 exit_bool = home_screen.process_home()
                 if exit_bool is True:
                     return
@@ -125,7 +126,7 @@ def game_loop():
                     curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr", main_quest=True)
                     curr.traverse_dungeon()
                 elif player_stage > 70 and player_stage < 80:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr", main_quest=True)
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=3, enemy_type="valstr", main_quest=True)
                     curr.traverse_dungeon()
             except globals.GameOver():
                 globals.clear_screen()
@@ -137,6 +138,8 @@ def game_loop():
                 globals.this_player.main_quest_stage = game_over_reversion_target
             else:
                 globals.this_player.main_quest_stage += 1
-        elif curr is "term":
+        elif curr.startswith("term"):
+            print(globals.dialogue[player_stage] + '\n')
+            input("(Press enter to proceed...)")
             terminal.terminal()
             globals.this_player.main_quest_stage += 1

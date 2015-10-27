@@ -1,7 +1,7 @@
 "It is the year 2215. You are what they call an Unknown, part of the lower class in your home city. Unknowns have no way of going up the social ladder because they are not trusted enough to carry out the most lucrative bounty jobs. Only the Knowns, the upper class, can carry out bounty quests and can help people.",c,0
 "It's ironic. Don't you agree? You have to perform these jobs to get anywhere in the world, but to do them, you have to be someone in this world. A Known.",p,0
 "So you go about your business.",m,0
-"As you go about your normal business (or lack thereof), you start to hear rumors of communications with extraterrestrial races. Some are saying it's with a race called the Valst'r. You've never heard of them. People you have talked to have never heard of them. So, you continue with your life. Funnily enough, there aren't any mentions in the media about this...",m_1,0
+"As you go about your normal business (or lack thereof), you start to hear rumors of communications with extraterrestrial races. Some are saying it's with a race called the Valst'r. Others are saying that these aliens are coming to destroy Nira. You've never heard of them. People you have talked to have never heard of them. So, you continue with your life. Funnily enough, there aren't any mentions in the media about this...",m_1,0
 "You go to sleep for another night. You've been having nightmares for a while now and haven't been able to sleep well. Tonight, you're having strange dreams of your home being bombed...",p,0
 "The next morning you hear a small rumbling in the distance. These rumblings grow louder and louder and eventually turn into explosions. You rush outside to see what on Nira's going on. You observe these (frankly weird-looking) creatures, and you realize that your dreams were foreshadowing this all along...and that the rumors were all true...",c,0
 "There really are aliens coming to destroy your home planet, Nira.",p,0
@@ -9,14 +9,14 @@
 "You go to check on him. With his dying breath, he tells you to take one of the weapons he's carrying, because you're going to need it to protect yourself.",p,0
 "You find three generic weapons on his body, but carrying all three is going to slow you down unnecessarily. Which one do you choose?",sw,0
 "You also get some health potions.",p,0
-"You start off and fight your way through the city.",d,0
+"You start off and fight your way through the city.",d,12
 "Eventually, you reach the city center and see that (what seems to be) the leader of these alien forces is about to execute the governor of the province!",c_interrupt,0
 "You could choose to fight him (you have a weapon anyway), or you could stand back and let someone else do it.",c,0
 "What do you decide?",rn,0
-"Challenge the leader!",r,16
-"Stay back.",r,17
+"Challenge the leader!",r,17
+"Stay back.",r,18
 "You decide to challenge the leader to a fight.",b,19
-"One of the generals of the Imperial Forces steps in, but he is killed. Since you are the only capable fighter around, you are forced to fight the leader; however, he was weakened in his fight with the general.",b,19
+"One of the generals of the Imperial Forces steps in, but he is killed. Since you are the only capable fighter around, you are forced to fight the leader.",b,19
 "The aliens retreat with their leader dead.",p,0
 "As a sign of gratitude, the governor promotes you to a Known. He also gives you a great amount of gold. In the days after, you hear that the aliens who invaded are called the Valst'r.",p,0
 "<Player Note: You can now access bounty quests! Use these to get some money and level up. It is also recommended to eventually upgrade your weapon.>",m,0
@@ -73,20 +73,20 @@
 "I mean, it *sounds* easy, but I understand.",r,73
 "Merlona: I understand too.",p,0
 "Oh, and one more thing. The missile launch system is going to ask for a password to actually launch the missiles. The password is:",c,0
-"valstrDestroy",d,0
+"valstrDestroy",d,76
 "You reach the central room and encounter the Commander-in-Chief of the Valst'r forces...once again",c_interrupt,0
 "Leader: So, you've finally reached me...",c,0
 "Let's get to the point here. (unsheathes weapons)",p,0
 "Prepare to die!",b,0
 "Merlona: So, he's dead?",rn,0
-"Looks like it.",r,0
+"Looks like it.",r,82
 "Phew...that's a relief.",rn,0
-"Quick! There's no time. We have to launch the missiles before they send reinforcements here.",r,0
-"Right, let's go.",p,0
+"Quick! There's no time. We have to launch the missiles before they send reinforcements here.",r,84
+"Right, let's go.",p,85
 "The two of you enter the missile control room. It's full of screens and buttons of various sorts. But one screen in particular stands out to you. You press the button next to it and are greeted with a terminal prompt.",term,0
-"You imagine the two Hexonium missiles detonating, sending out explosions so powerful that anything and everything on the surface and underground are wiped out in the blink of an eye. But, at the moment, a wave of relief washes over you. You've just saved yourself...but you've also just saved the entirety of Nira from total enslaving and destruction.",c,0
+"You imagine the two Hexonium missiles detonating, sending out explosions so powerful that anything and everything on the surface and underground are wiped out in the blink of an eye. But, at the moment, a wave of relief washes over you. You've not only just saved yourself...but you've also just saved the entirety of Nira from total enslaving and destruction.",c,0
 "You hear your assistant letting out a huge sigh of relief, and you know everything will be alright.",p,0
-"In the following days, you and Merlona are considered international heroes. The two of you are given many awards, titles, gadgets, and other stuff that you eventually lose track of everything.",c,0
+"In the following days, you and Merlona are considered international heroes. The two of you are given many awards, titles, gadgets, and other stuff. You go to so many events and get so many things that you eventually lose track of everything.",c,0
 "Soon, everything goes back to normal.",p,0
 "At home, you are at peace because the Valst'r are no more and you, as the Destroyer, have fulfilled your destiny.",p,0
-"Congratulations, you have finished the main questline and have saved the world from utter destruction! Feel free to continue playing the side quests.\nI hope you enjoyed playing this game!",m,0
+"<Player Note: Congratulations, you have finished the main questline and have saved the world from utter destruction! Feel free to continue playing the side quests. I hope you enjoyed playing this game!>",m,0

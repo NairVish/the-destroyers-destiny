@@ -8,7 +8,7 @@ This module prints tabular data in a rather nice way.
 I am not assuming that any user who plays this game has this Python package installed on their computer.
 Hence, I am including it in the main project directory.
 
-All credit for this module goes to Sergey Astanin.
+All credit for this module goes to the module's creator, Sergey Astanin.
 The module was downloaded from PyPI (the Python Package Index) and can be found
 at the following URL: https://pypi.python.org/pypi/tabulate.
 '''
