@@ -63,11 +63,11 @@
 "Uhh...",r,64
 "Wait, how do you know where these guys are?",r,65
 "I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
-"We have been engaging in 'diplomacy' talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
+"You see, we have been engaging in 'diplomacy' talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
 "And how do you expect these missiles to get there in time? If I'm correct, then the nearest *star* is light-years away.",r,67
 "Ah, you underestimate us there. Surely, you've heard that nothing can go past the speed of light. Well, that's rubbish! We've created something called a 'warp drive.' Basically, we've found a way to configure the energy-density field around these missiles such that...",rn,0
-"OK! OK! What on Nirn do you want us to do?",r,69
-"It's simple you and your assistant here are going to launch these missiles.",rn,0
+"OK! OK! What on Nira do you want us to do?",r,69
+"It's simple. You and your assistant here are going to launch these missiles.",rn,0
 "Uhh...Why can't you just do it yourself?",r,71
 "That's exactly why we need you! The Valst'r have blocked the road leading to the missile launch site and have killed all of the employees there. You have to get there before they manage to dismantle the missiles, and then you have to launch them. That's all you two have to do. Sounds easy, right?",rn,0
 "I mean, it *sounds* easy, but I understand.",r,73
