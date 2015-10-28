@@ -1,3 +1,13 @@
+"""
+Handles the sidequest mechanic of the game.
+There are five types of sidequests in the game:
+    * delivery: Delivering a message for someone.
+    * kidnap: A search and rescue mission.
+    * scare: Intimidating a group of bandits.
+    * gang: Destroy a gang in their hideout.
+    * recovery: Recover an item that was stolen by bandits.
+"""
+
 __author__ = 'vishnunair'
 
 import globals
@@ -7,6 +17,11 @@ from random import randrange, choice
 from time import sleep
 
 def setup_quest_board():
+    """
+    Sets up quest board by randomly selecting three types of quests (may be the same)
+    and adding their descriptions, quest giver, and giver's city to nested lists
+    that will eventually be passed to tabulate.
+    """
     global numbers
     global curr_types
     global descriptions
@@ -40,6 +55,10 @@ def setup_quest_board():
 
 
 def quest_board():
+    """
+    Prints out the quest board itself and handles all input from the quest screen.
+    Also, initiates and executes the sidequest.
+    """
     print("QUEST BOARD")
     print("Welcome to the quest board!\n")
     print(tabulate.tabulate(quest_tabulate, headers=["No.", "Type", "Description", "Job Giver", "Home City"]))
@@ -57,6 +76,9 @@ def quest_board():
 
 
 class Sidequest():
+    """
+    The Sidequest class handles all information about and executes the desired sidequest.
+    """
     types = ['delivery', 'kidnap', 'scare', 'gang', 'recovery']
     quest_dict = {'delivery': "Deliver a message for someone.",
                   'kidnap': "Search and rescue mission.",
@@ -65,17 +87,23 @@ class Sidequest():
                   'recovery': "Recover a lost/stolen item."}
 
     def __init__(self, type, dungeon_name, giver, origin_city):
+        """
+        :param type: The type of sidequest.
+        :param dungeon_name: The name of the dungeon associated with the sidequest.
+        :param giver: The name of the quest giver.
+        :param origin_city: The name of the quest giver's city.
+        Initializes the sidequest.
+        """
         self.type = type
         self.dungeon_name = dungeon_name
         self.quest_giver = giver
         self.giver_city = origin_city
         self.dungeon_length = randrange(4, 8)
-        self.enemy_type = self.determine_enemy()
-
-    def determine_enemy(self):
-        return choice(globals.side_enemy_types)
 
     def execute_quest(self):
+        """
+        Initiates execution of the sidequest depending on the quest type.
+        """
         globals.clear_screen()
         sleep(0.1)
         if self.type is 'delivery':
@@ -90,6 +118,9 @@ class Sidequest():
             self.execute_recovery()
 
     def execute_delivery(self):
+        """
+        Executes the delivery sidequest.
+        """
         print("%s from %s needs you to deliver a package to someone.\n"
               "Do this simple quest, and you'll get a modest reward.\n"
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
@@ -108,6 +139,9 @@ class Sidequest():
         input("Press enter to return home...")
 
     def execute_kidnap(self):
+        """
+        Executes the search and rescue sidequest.
+        """
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
               "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.quest_giver))
         input("Press enter to continue...")
@@ -124,6 +158,9 @@ class Sidequest():
 
 
     def execute_scare(self):
+        """
+        Executes the intimidation sidequest.
+        """
         print("%s hired a group of bandits to sabotage their competitors in the business.\n"
               "However, the bandits have stepped out of line and have stopped listening to %s.\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
@@ -141,6 +178,9 @@ class Sidequest():
         input("Press enter to return home...")
 
     def execute_gang(self):
+        """
+        Executes the gang assault sidequest.
+        """
         print("The imperial police have asked for your help in assualting a gang's hideout.\n\n"
               "The gang is notorious for unimaginable crimes, and it is up to you to stop\n"
               "their evil ways.\n")
@@ -157,6 +197,9 @@ class Sidequest():
         input("Press enter to return home...")
 
     def execute_recovery(self):
+        """
+        Executes the item recovery sidequest.
+        """
         print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n\n"
               "Your job is simple. You break into the bandits' hideout, destroy the bandits,\n"
               "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))

@@ -1,10 +1,22 @@
-__author__ = 'vishnunair'
+"""
+Handles the mechanic for the shops.
+There are three shops in the game:
+    * 'The Crazy Weapons Specialist' (weapons)
+    * 'The Oddly Unique Alchemist' (potions)
+    * 'The Really Rich Guy that Buys Everything' (selling anything in inventory)
+"""
+
+__author__ = 'Vishnu Nair'
 
 import globals
 from tabulate import tabulate
 
 
 def weapon_shop():
+    """
+    Handles all actions associated with the weapon shop: 'The Crazy Weapons Specialist.'
+    Prints out all weapons available and handles actual insertion into inventory as well as deduction of money.
+    """
     print("The Crazy Weapons Specialist\n".upper())
     print("Your current money: $%s\n" % globals.this_player.money)
     print("Welcome to The Crazy Weapons Specialist. What would you like to buy?")
@@ -33,6 +45,10 @@ def weapon_shop():
 
 
 def potion_shop():
+    """
+    Handles all actions associated with the potion shop: 'The Oddly Unique Alchemist.'
+    Prints out all potions available and handles actual insertion into inventory as well as deduction of money.
+    """
     print("The Oddly Unique Alchemist\n".upper())
     print("Your current money: $%s\n" % globals.this_player.money)
     print("Welcome to The Oddly Unique Alchemist. What would you like to buy?")
@@ -63,6 +79,12 @@ def potion_shop():
 
 
 def selling():
+    """
+    Handles all actions associated with selling to 'The Really Rich Guy that Buys Everything.'
+    Prints out entire inventory as well as associated prices.
+    Also, handles removal from inventory and adding of money.
+    This function also prevents the currently equipped weapon from being sold.
+    """
     print("The Really Rich Guy that Buys Everything\n".upper())
     print("Your current money: $%s\n" % globals.this_player.money)
 

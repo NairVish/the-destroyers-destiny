@@ -276,7 +276,7 @@ class Player:
             input("Press enter to continue...")
             globals.clear_screen()
 
-class Weapon():
+class Weapon:
     """
     The Weapon class handles the player's weapon.
     """
