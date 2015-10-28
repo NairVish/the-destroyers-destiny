@@ -50,7 +50,7 @@ class Player():
 
     def print_stats(self):
         globals.clear_screen()
-        print("STATISTICS FOR PLAYER %s" % self.name)
+        print("STATISTICS FOR %s" % self.name)
         print("Level: %s" % self.level)
         print("Current XP: %s" % self.xp)
         print("XP Needed for Level Up: %s" % self.target_xp)

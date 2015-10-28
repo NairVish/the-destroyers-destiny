@@ -9,9 +9,10 @@ def print_intro():
     """ Print the intro screen. """
     globals.clear_screen()
     intro_text = (
-        "THIS IS SOME INTRO TEXT.\n"
-        "I HAVE NO IDEA WHAT I'M GOING TO PUT HERE.\n"
-        "SO I'M PUTTING SOME PLACEHOLDER TEXT HERE.\n"
+        "TITLE OF THE GAME GOES HERE\n"
+        "\tCSC 11300 Project 1\n"
+        "\tBy: Vishnu Nair\n\n"
+        "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
     print(intro_text)
     time.sleep(1)
@@ -22,15 +23,15 @@ def show_start_menu():  # The startup menu
     Prints the main startup menu and and requests user input of either starting New Game, continuing (if save is found),
     or quitting.
     """
-    print('Main Menu')
+    print('Main Menu'.upper())
     print('\t1. Start a new game.')
     accepted_answers = ['1','q']
     save = find_save()
     if save is not None:
         print('\t2. Continue from existing save.')
         accepted_answers = ['1','2','q']
-    print('\tq. Quit')
-    answer = input('Choose your desired option. ')
+    print('\tq. Quit.')
+    answer = input('Choose your desired option: ')
     while answer not in accepted_answers:
         answer = input('You have entered an invalid option. Please try again: ')
     globals.clear_screen()

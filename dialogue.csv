@@ -28,25 +28,25 @@
 "Merlona: OK. The two of us can either attack straight through the front *or* sneak in through the back. It's your call.",rn,0
 "Let's charge through the front. (Shorter)",r,30
 "Let's sneak in through the back. (Longer)",r,31
-"Through the front? Get ready to do a lot of fighting...",d_fight,32
-"Through the back? Remember to be quiet as we do this...",d_sneak,32
-"You eventually reach the center, where you are confronted by the Commander-in-Chief of the Valst'r forces.",c_interrupt,0
-"You don't quite know his name, but you notice that he is a rather bulky individual.",p,0
+"Merlona: Through the front? Get ready to do a lot of fighting...",d_fight,32
+"Merlona: Through the back? Remember to be quiet as we do this...",d_sneak,32
+"You eventually reach the center, where you are confronted by the Commander-in-Chief of the Valst'r forces. You were told that his name is Astar'r.",c_interrupt,0
+"You notice right off the bat that he is a rather bulky individual.",p,0
 "An exchange takes place. Surprisingly, the Valst'r also speak English.",p,0
-"So, the destroyer arrives...",rn,0
+"Astar'r: So, the destroyer arrives...",rn,0
 "Wait, who?",r,37
-"You don't know? Hmph, I never expected the Destroyer to be so...uninformed.",rn,0
+"Astar'r: You don't know? Hmph, I never expected the Destroyer to be so...uninformed.",rn,0
 "Spit it out, already!",r,40
 "(remain silent)",r,41
-"Impatient too? Interesting...I'll tell you.",p,42
-"You're admitting it? Eh, I'll still tell you.",p,42
+"Astar'r: Impatient too? Interesting...I'll tell you.",p,42
+"Astar'r: You're admitting it? Eh, I'll still tell you.",p,42
 "You see, the Valst'r have this legend of sorts. Actually, they have many legends, but this one is special.",c,0
 "Long story short, it tells of a Destroyer, who will eventually end the Valst'r race.",c,0
 "However, our court mages were able to track down the Destroyer's aura to this planet, Nira!",rn,0
 "You don't mean...",r,46
-"Yes, we came here to destroy you and your entire race!",c,0
+"Astar'r: Yes, we came here to destroy you and your entire race!",c,0
 "But since you don't seem too imposing. I'll leave my assistant here to destroy you.",p,0
-"(He teleports off.)",b,0
+"[He teleports off.]",b,0
 "After the battle, the rest of the army slaughters the Valst'r at the base. You have wiped out the Valst'r army camp! All seems to be well for the time being. You and Merlona are dismissed from duties with high praise.",c,0
 "On your way back home, Merlona asks you something...",p,0
 "Merlona: I was meaning to ask you something. You see, the Valstr's first attack completely destroyed my home.",c,0
@@ -55,34 +55,34 @@
 "Oh! Thank you! Thank you! Thank you! I promise you won't regret it.",p,0
 "<Player Note: Merlona has moved in with you! She can now accompany you on your sidequests and will make small, random amounts of money every day.>",m,0
 "After a couple of days of rest, you and your assistant are invited to the Imperial Palace. If you're being invited to the palace, then this must be important...",c,0
-"The two of you are being briefed by the Commander of the Imperial forces. The plan?",p,0
-"The Commander: After much thought and deliberation, we have come to this decision:",c,0
+"The two of you are being briefed by the Commander of the Imperial forces. His name is Volun. The plan?",p,0
+"Volun: After much thought and deliberation, we have come to this decision:",c,0
 "We are going to launch two missiles loaded with Hexonium. As you may or may not know, the fission and fusion reactions of Hexonium are extremely powerful. So powerful, in fact, that they are thousands to millions of times more powerful than the atomic bombs that were created a couple of hundred years ago.",c,0
 "Which means... (He looks at you intently.)",p,0
-"That we can destroy the Valst'r home planet hundreds of times over and wipe them from the face of the universe.",rn,0
+"Volun: That we can destroy the Valst'r home planet hundreds of times over and wipe them from the face of the universe!",rn,0
 "Uhh...",r,64
 "Wait, how do you know where these guys are?",r,65
-"I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
+"Volun: I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
 "You see, we have been engaging in 'diplomacy' talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
 "And how do you expect these missiles to get there in time? If I'm correct, then the nearest *star* is light-years away.",r,67
-"Ah, you underestimate us there. Surely, you've heard that nothing can go past the speed of light. Well, that's rubbish! We've created something called a 'warp drive.' Basically, we've found a way to configure the energy-density field around these missiles such that...",rn,0
+"Volun: Ah, you underestimate us there. Surely, you've heard that nothing can go past the speed of light. Well, that's rubbish! We've created something called a 'warp drive.' Basically, we've found a way to configure the energy-density field around these missiles such that...",rn,0
 "OK! OK! What on Nira do you want us to do?",r,69
-"It's simple. You and your assistant here are going to launch these missiles.",rn,0
+"Volun: It's simple. You and your assistant here are going to launch these missiles.",rn,0
 "Uhh...Why can't you just do it yourself?",r,71
-"That's exactly why we need you! The Valst'r have blocked the road leading to the missile launch site and have killed all of the employees there. You have to get there before they manage to dismantle the missiles, and then you have to launch them. That's all you two have to do. Sounds easy, right?",rn,0
+"Volun: That's exactly why we need you! The Valst'r have blocked the road leading to the missile launch site and have killed all of the employees there. You have to get there before they manage to dismantle the missiles, and then you have to launch them. That's all you two have to do. Sounds easy, right?",rn,0
 "I mean, it *sounds* easy, but I understand.",r,73
 "Merlona: I understand too.",p,0
-"Oh, and one more thing. The missile launch system is going to ask for a password to actually launch the missiles. The password is:",c,0
+"Volun: Oh, and one more thing. The missile launch system is going to ask for a password to actually launch the missiles. The password is:",c,0
 "valstrDestroy",d,76
-"You reach the central room and encounter the Commander-in-Chief of the Valst'r forces...once again",c_interrupt,0
-"Leader: So, you've finally reached me...",c,0
+"You reach the central room and encounter Astar'r...once again",c_interrupt,0
+"Astar'r: So, you've finally reached me...",c,0
 "Let's get to the point here. (unsheathes weapons)",p,0
-"Prepare to die!",b,0
+"Astar'r: Prepare to die!",b,0
 "Merlona: So, he's dead?",rn,0
 "Looks like it.",r,82
-"Phew...that's a relief.",rn,0
+"Merlona: Phew...that's a relief.",rn,0
 "Quick! There's no time. We have to launch the missiles before they send reinforcements here.",r,84
-"Right, let's go.",p,85
+"Merlona: Right, let's go.",p,85
 "The two of you enter the missile control room. It's full of screens and buttons of various sorts. But one screen in particular stands out to you. You press the button next to it and are greeted with a terminal prompt.",term,0
 "You imagine the two Hexonium missiles detonating, sending out explosions so powerful that anything and everything on the surface and underground are wiped out in the blink of an eye. But, at the moment, a wave of relief washes over you. You've not only just saved yourself...but you've also just saved the entirety of Nira from total enslaving and destruction.",c,0
 "You hear your assistant letting out a huge sigh of relief, and you know everything will be alright.",p,0
