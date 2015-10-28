@@ -124,7 +124,7 @@ class Sidequest():
 
 
     def execute_scare(self):
-        print("%s hired a group of bandits to sabotage his competitors in the business.\n"
+        print("%s hired a group of bandits to sabotage their competitors in the business.\n"
               "However, the bandits have stepped out of line and have stopped listening to %s.\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
               % (self.quest_giver, self.quest_giver, self.quest_giver))

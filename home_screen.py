@@ -3,10 +3,12 @@ __author__ = 'vishnunair'
 import globals
 from globals import clear_screen
 import shop
-import exit
 import sidequest
 
 def print_home_screen():
+    """
+    Prints home screen and accepts and returns player input.
+    """
     print("HOME SCREEN\n")
 
     print("Day %s" % globals.this_player.day)
@@ -29,6 +31,10 @@ def print_home_screen():
     return inp
 
 def process_home():
+    """
+    Processes home screen input. Returns True is player decides to exit, False if player just decides to sleep
+    until the next day.
+    """
     sidequest.setup_quest_board()
     while True:
         inp = print_home_screen()
@@ -75,6 +81,9 @@ def process_home():
         clear_screen()
 
 def print_shop_selector():
+    """
+    Prints shop selection screen and returns user input.
+    """
     print("SHOPS\n")
 
     print("\t1. The Oddly Unique Alchemist")

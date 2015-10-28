@@ -6,22 +6,25 @@ import random
 
 
 def init_globals():
-    with open("people.txt", 'r') as people_fIle:
+    """
+    Initializes all necessary global variables.
+    """
+    with open("people.txt", 'r') as people_fIle:    # people names for quest board
         all_names = people_fIle.readlines()
         global people_names
         people_names = [name.strip() for name in all_names]
 
-    with open("caves_hideaways.txt", 'r') as cave_file:
+    with open("caves_hideaways.txt", 'r') as cave_file: # dungeon names for side quests
         all_caves = cave_file.readlines()
         global cave_names
         cave_names = [cave.rstrip('\n') for cave in all_caves]
 
-    with open("provinces.txt", 'r') as province_file:
+    with open("provinces.txt", 'r') as province_file:   # province names
         all_provinces = province_file.readlines()
         global province_names
         province_names = [province.strip() for province in all_provinces]
 
-    global potion_names
+    global potion_names     # all potion data
     potion_names = []
     global potion_powers
     potion_powers = []
@@ -29,7 +32,7 @@ def init_globals():
     potion_type = []
     global potion_cost
     potion_cost = []
-    global tabular_potions
+    global tabular_potions  # potion data for 'tabulate' function
     tabular_potions = []
     # amount_of_potions = 6
     potions = csv.reader(open("potions.csv", 'r'))
@@ -48,7 +51,7 @@ def init_globals():
         tabular_potions.append(tmp)
         num += 1
 
-    global weapon_names
+    global weapon_names     # all weapon data
     weapon_names = []
     global weapon_powers
     weapon_powers = []
@@ -71,7 +74,7 @@ def init_globals():
         tabular_weapons.append(tmp)
         num += 1
 
-    global loot_names
+    global loot_names   # all loot data
     loot_names = []
     global rare_loot_names
     rare_loot_names = []
@@ -90,7 +93,7 @@ def init_globals():
         rare_loot_names.append(row[0])
         rare_loot_values.append(row[1])
 
-    global main_quest_enemies
+    global main_quest_enemies   # all necessary main quest data
     global main_quest_bosses
     global main_quest_dungeons
     with open("main_enemies.txt", 'r') as main_enemy_fIle:
@@ -103,7 +106,7 @@ def init_globals():
         all_dungeons = main_dungeon_fIle.readlines()
         main_quest_dungeons = [dungeon.rstrip('\n') for dungeon in all_dungeons]
 
-    global side_enemy_types
+    global side_enemy_types     # all necessary side quest data
     global side_quest_enemies
     side_enemy_types = ["bandit", "looter", "mobster"]
     side_quest_enemies = []
@@ -114,7 +117,7 @@ def init_globals():
             group = group.split(', ')
             side_quest_enemies.append(group)
 
-    global dialogue
+    global dialogue             # all dialogue data
     global dialogue_type
     global dialogue_jump_targets
     dialogue = []
@@ -128,16 +131,30 @@ def init_globals():
 
 
 def select_province():
+    """
+    Selects and returns a random province from the list of provinces.
+    """
     return random.choice(province_names)
 
 
 def declare_new_player(name):
+    """
+    :param name: The player's name.
+    Initializes and declares a new player (if there is no save data or the user chooses not to load save data) using
+    only the two pieces of data required by the player's __init__ function. The player is declared as a global
+    variable.
+    """
     global this_player
     province = select_province()
     this_player = player.Player(name, province)
 
 
 def declare_existing_player(saved_stats, inventory):
+    """
+    :param saved_stats: All save data from the 'save.data' file, converted into a list.
+    :param inventory: All inventory data from the last part of the 'save.data' file, converted into a list.
+    Initializes and declares a player using existing save data. The player is declared as a global variable.
+    """
     global this_player
     if saved_stats[11] == "None":
         weapon = None
@@ -150,10 +167,17 @@ def declare_existing_player(saved_stats, inventory):
 
 
 def clear_screen():
+    """
+    Clears the screen using the shell's clear command. If on Windows, 'cls' is passed to the shell, else 'clear'
+    is passed.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 class GameOver(Exception):
+    """
+    An empty game over exception.
+    """
     pass
 
 if __name__ == "__main__":

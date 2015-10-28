@@ -1,10 +1,22 @@
 __author__ = 'vishnunair'
-import battle
-import globals
 from random import randrange, choice
 
-class Cell():
+import battle
+import globals
+
+
+class Cell:
+    """
+    The Cell class holds all the information about the current cell in a dungeon.
+    """
     def __init__(self, name, num_cell, enemy_type, final=False):
+        """
+        :param name: The name of the dungeon (used in some cases to determine the cell's enemy).
+        :param num_cell: The cell number (in the dungeon).
+        :param enemy_type: The type of the enemy (for enemy selector).
+        :param final: Boolean value that says whether or not we are in the dungeon's final cell.
+        Initializes the current cell's attributes. If this is the final cell, we go directly to the enemy selector.
+        """
         self.number = num_cell
         self.name = name
         self.enemy_type = enemy_type
@@ -16,21 +28,36 @@ class Cell():
             self.determineProperty()
 
     def determineProperty(self):
+        """
+        Determines whether the player will face an enemy, find loot, or encounter nothing in a cell.
+        """
         result = randrange(0,100)
-        if result in range(0,10):
+        if result in range(0,10):               # 10% chance for nothing.
             self.enemy = None
             self.loot = None
-        elif result in range(20,40):
+        elif result in range(20,40):            # 20% chance for loot.
             self.enemy = None
             self.loot = self.loot_selector()
-        else:
+        else:                                   # 70# chance for enemy.
             self.enemy = self.enemy_selector()
             self.loot = None
 
     def loot_selector(self):
-        return choice(globals.loot_names)
+        """
+        Returns a random piece of loot. There is a 5% chance of getting rare loot.
+        """
+        result = randrange(0,100)
+        if result in range(0,5):
+            return choice(globals.rare_loot_names)
+        else:
+            return choice(globals.loot_names)
 
     def enemy_selector(self):
+        """
+        Returns the name of the enemy. If the enemy type is "valstr" and final is True, matches the index of the
+        dungeon's name in 'main_quest dungeons' with a boss name in 'main_quest_bosses.' If final is not True, chooses
+        a random enemy from a list of enemies of that type. If final is just True, returns a specific boss name.
+        """
         if self.final is True and self.enemy_type is "valstr":
             boss_index = globals.main_quest_dungeons.index(self.name)
             return globals.main_quest_bosses[boss_index]
@@ -52,8 +79,18 @@ class Cell():
                 return choice(globals.side_quest_enemies[2])
 
 
-class Dungeon():
+class Dungeon:
+    """
+    The Dungeon class holds all the information about the current dungeon.
+    """
     def __init__(self, init_name, init_length, enemy_type, main_quest=False):
+        """
+        :param init_name: The name of the dungeon.
+        :param init_length: The length of the dungeon.
+        :param enemy_type: The type of enemies in the dungeon.
+        :param main_quest: Whether or not this dungeon is part of the main quest.
+        Inirializes a new dungron and it's attributes. Also initializes the first cell.
+        """
         globals.clear_screen()
         self.name = init_name
         self.total_cells = init_length
@@ -63,9 +100,16 @@ class Dungeon():
         self.main_quest_flag = main_quest
 
     def __repr__(self):
+        """
+        Printing 'self' or a dungeon object outputs the dungeon's name.
+        """
         return self.name
 
     def advance(self):
+        """
+        Advances the player through the dungeon and calls the cell class's constructor (also with the final flag if
+        final is True). If we are done with the dungeon, the None type is returned.
+        """
         self.current_cell_num += 1
 
         del self.cell
@@ -78,6 +122,10 @@ class Dungeon():
             return None
 
     def execute_cell_action(self):
+        """
+        Executes the appropriate cell action depending on the attributes of the current cell. Then, shows the
+        dungeon menu once the action has been taken.
+        """
         if self.cell.enemy is not None and self.cell.loot is None:
             if self.cell.final is True:
                 this_battle = battle.Battle(self.cell.enemy, "boss")
@@ -106,11 +154,20 @@ class Dungeon():
         self.show_menu()
 
     def show_status(self):
+        """
+        Prints the dungeon's current status: the name of the dungeon as well as the current cell number.
+        """
         print(self.__repr__().upper())
         print("You are currently in cell %s of %d.\n" % (self.current_cell_num, self.total_cells))
 
     def show_menu(self):
+        """
+        Accepts and processes input from the dungeon menu.
+        """
         def print_menu():
+            """
+            Prints out the dungeon menu and returns the player's input to the parent function.
+            """
             print("\ta. Advance.")
             print("\t1. Show current stats.")
             print("\t2. Use a potion.")
@@ -146,6 +203,9 @@ class Dungeon():
             globals.clear_screen()
 
     def traverse_dungeon(self):
+        """
+        The loop that controls the player's progression through a dungeon.
+        """
         while self.current_cell_num <= self.total_cells:
             if self.cell is None:
                 return
@@ -157,6 +217,11 @@ class Dungeon():
             self.cell = self.advance()
 
     def monitor_main_quest(self):
+        """
+        Only executed if the main quest flag for the dungeon is True. Controls main quest stage advancement, dialogue
+        output, response handling, and response-to-stage jumps inside a dungeon. Works similarly to the main game loop
+        in game.py.
+        """
         if self.cell.final is True:
             globals.clear_screen()
             while globals.dialogue_type[globals.this_player.main_quest_stage] is not 'b':
