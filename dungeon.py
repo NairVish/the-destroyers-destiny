@@ -3,9 +3,7 @@ Contains definitions for the Cell and Dungeon classes.
 Handles all activities related to the dungeon mechanic.
 """
 
-
 __author__ = 'Vishnu Nair'
-
 
 from random import randrange, choice
 

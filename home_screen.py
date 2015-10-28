@@ -2,9 +2,7 @@
 Handles all activities related to the home screen.
 """
 
-
 __author__ = 'Vishnu Nair'
-
 
 import globals
 import shop

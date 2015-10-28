@@ -3,9 +3,7 @@ Contains definitions for the enemy and battle classes.
 Handles all activities related to the battle mechanic.
 """
 
-
 __author__ = 'Vishnu Nair'
-
 
 from random import randrange
 

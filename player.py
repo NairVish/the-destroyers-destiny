@@ -1,14 +1,42 @@
-__author__ = 'vishnunair'
+"""
+Contains definitions for the Player and Weapon classes.
+Handles all functions that deal with the player itself.
+"""
+
+__author__ = 'Vishnu Nair'
+
+from random import randrange
 
 import globals
 from tabulate import tabulate
-from random import randrange
 
 
-class Player():
+class Player:
+    """
+    The Player class hold all attributes and handles all modification and constant activities for the player.
+    """
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
                  init_attack=2.0,init_defense=3.5, init_main_quest_stage=0, init_money=0,init_assistant=False,
                  init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
+        """
+        NOTE: Defaults are in parentheses.
+        :param init_name: The name of the player.
+        :param init_province: The player's home province.
+        :param init_level: The player's starting level for the session (1 for a new player).
+        :param init_xp: The player's current XP progress toward the next level (0 for a new player).
+        :param init_target_xp: The target XP for the player to advance to the next level (10 for a new player).
+        :param init_health: The player's maximum health level (20 for a new player).
+        :param init_attack: The player's attack stat (2.0 for a new player).
+        :param init_defense: The player's defense stat(3.5 for a new player).
+        :param init_main_quest_stage: The player's starting main quest stage for the session (0 for a new player).
+        :param init_money: The player's available money (0 for a new player).
+        :param init_assistant: Whether or not the player has an assistant right now (False for a new player).
+        :param init_weapon: The player's current weapon represented by a Weapon object (None type for a new player).
+        :param init_day: The player's current day (1 for a new player).
+        :param init_sidequest: Whether or not the player can access sidequests (False for a new player).
+        :param init_inventory: A list that represents the player's current inventory (Empty list for a new player).
+        Initializes the attributes of the player.
+        """
         self.name = init_name
         self.home = init_province
         self.level = init_level
@@ -30,9 +58,22 @@ class Player():
         self.inventory = init_inventory
 
     def __repr__(self):
+        """
+        If the Player object itself is printed out, the player's name is printed out.
+        """
         return self.name
 
     def level_up(self):
+        """
+        Handles the mechanic to level up the player.
+        If the current XP is above the target XP, the difference is added toward the next level.
+        At level up:
+            * Target XP is increased by 5.
+            * Attack is increased by 1.
+            * Defense is increased by 1.
+            * Total health is increased by 5.
+            * Level is increased by 1.
+        """
         if self.xp > self.target_xp:
             self.xp = self.xp - self.target_xp
         else:
@@ -49,6 +90,9 @@ class Player():
         print("You are now at level %s.\n" % self.level)
 
     def print_stats(self):
+        """
+        Prints out the player's stats.
+        """
         globals.clear_screen()
         print("STATISTICS FOR %s" % self.name)
         print("Level: %s" % self.level)
@@ -69,12 +113,25 @@ class Player():
         globals.clear_screen()
 
     def toggle_assistant_flag(self):
+        """
+        Toggles the assistant flag.
+        """
         self.assistant = not self.assistant
 
     def toggle_sidequest_flag(self):
+        """
+        Toggles the sidequest flag.
+        """
         self.sidequests = not self.sidequests
 
     def use_potion(self, enhancement=False):
+        """
+        :param enhancement:
+            * True if we are in a situation where taking a health potion would be unnecessary (i.e. when we are not in battle).
+            * False if we are in a situation where taking a health potion would be beneficial (i.e. when in battle).
+        Prints out a table of all potions available to use.
+        Also processes input from these tables and handles potion effects.
+        """
         tabular_potion_inv = []
         number_of_potions = 0
         potion_dict = {}
@@ -141,8 +198,11 @@ class Player():
 
         globals.clear_screen()
 
-
     def equip_weapon(self):
+        """
+        Prints out a table that shows all the available weapons that the player can equip.
+        Also processes user input here and handles actual weapon change.
+        """
         tabular_weapon_inv = []
         number_of_weapons = 0
         for item in self.inventory:
@@ -187,6 +247,9 @@ class Player():
 
 
     def see_inventory(self):
+        """
+        Prints out player's inventory.
+        """
         print("YOUR INVENTORY\n")
 
         if len(self.inventory) is 0:
@@ -199,6 +262,10 @@ class Player():
         input("Press enter to return home...")
 
     def sleep(self):
+        """
+        Handles player sleep option.
+        Also awards a random amount of money ($5-$15) as part of the assistant mechanic.
+        """
         self.day += 1
         globals.clear_screen()
 
@@ -210,11 +277,22 @@ class Player():
             globals.clear_screen()
 
 class Weapon():
+    """
+    The Weapon class handles the player's weapon.
+    """
     def __init__(self, weapon_name):
+        """
+        :param weapon_name: The name of the weapon.
+        Sets current weapon's attributes.
+        Sets power by looking for weapon name in globals.weapon_names, grabbing corresponding index, and looking for index in globals.weapon_powers.
+        """
         self.name = weapon_name
         self.power = globals.weapon_powers[globals.weapon_names.index(weapon_name)]
 
     def __repr__(self):
+        """
+        If Weapon object is printed out, weapon's name is printed out.
+        """
         return self.name
 
 if __name__ == "__main__":
