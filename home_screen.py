@@ -1,9 +1,15 @@
-__author__ = 'vishnunair'
+"""
+Handles all activities related to the home screen.
+"""
+
+
+__author__ = 'Vishnu Nair'
+
 
 import globals
-from globals import clear_screen
 import shop
 import sidequest
+
 
 def print_home_screen():
     """
@@ -29,6 +35,7 @@ def print_home_screen():
     while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
     return inp
+
 
 def process_home():
     """
@@ -78,7 +85,8 @@ def process_home():
             globals.this_player.use_potion(enhancement=True)
         elif inp is '8':
             return True
-        clear_screen()
+        globals.clear_screen()
+
 
 def print_shop_selector():
     """

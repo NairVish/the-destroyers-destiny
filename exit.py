@@ -1,4 +1,11 @@
-__author__ = 'vishnunair'
+"""
+Handles the game's exit sequence, including saving the game.
+"""
+
+
+__author__ = 'Vishnu Nair'
+
+
 import sys
 import globals
 

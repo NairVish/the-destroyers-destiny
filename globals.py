@@ -1,4 +1,11 @@
-__author__ = 'vishnunair'
+"""
+Contains all variables and functions that will be referenced by almost every other module in the game.
+"""
+
+
+__author__ = 'Vishnu Nair'
+
+
 import csv
 import player
 import os

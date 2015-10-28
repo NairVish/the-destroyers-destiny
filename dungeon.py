@@ -1,4 +1,12 @@
-__author__ = 'vishnunair'
+"""
+Contains definitions for the Cell and Dungeon classes.
+Handles all activities related to the dungeon mechanic.
+"""
+
+
+__author__ = 'Vishnu Nair'
+
+
 from random import randrange, choice
 
 import battle
@@ -89,7 +97,7 @@ class Dungeon:
         :param init_length: The length of the dungeon.
         :param enemy_type: The type of enemies in the dungeon.
         :param main_quest: Whether or not this dungeon is part of the main quest.
-        Inirializes a new dungron and it's attributes. Also initializes the first cell.
+        Initializes a new dungron and its attributes. Also initializes the first cell.
         """
         globals.clear_screen()
         self.name = init_name

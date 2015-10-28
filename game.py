@@ -1,4 +1,12 @@
-__author__ = 'vishnunair'
+"""
+The game's main file.
+Executes the game sequence and the main game loop.
+"""
+
+
+__author__ = 'Vishnu Nair'
+
+
 import start_state
 import exit
 import globals
