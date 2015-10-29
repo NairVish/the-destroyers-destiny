@@ -146,7 +146,7 @@ def game_loop():
                                            main_quest=True)
                     curr.traverse_dungeon()
                 elif player_stage > 70 and player_stage < 80:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=3, enemy_type="valstr",
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr",
                                            main_quest=True)
                     curr.traverse_dungeon()
             except globals.GameOver():

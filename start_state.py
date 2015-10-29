@@ -15,7 +15,7 @@ def print_intro():
     """
     globals.clear_screen()
     intro_text = (
-        "TITLE OF THE GAME GOES HERE\n"
+        "THE DESTROYER'S DESTINY\n"
         "\tCSC 11300 Project 1\n"
         "\tBy: Vishnu Nair\n\n"
         "(C) 2015 Vishnu Nair. All rights reserved.\n"
