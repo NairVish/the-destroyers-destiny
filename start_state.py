@@ -1,4 +1,8 @@
-__author__ = 'vishnunair'
+"""
+Handles the start sequence for the game.
+"""
+
+__author__ = 'Vishnu Nair'
 
 import os
 import time
@@ -6,7 +10,9 @@ import globals
 from exit import exit_program
 
 def print_intro():
-    """ Print the intro screen. """
+    """
+    Prints the intro screen.
+    """
     globals.clear_screen()
     intro_text = (
         "TITLE OF THE GAME GOES HERE\n"
@@ -20,7 +26,7 @@ def print_intro():
 
 def show_start_menu():  # The startup menu
     """
-    Prints the main startup menu and and requests user input of either starting New Game, continuing (if save is found),
+    Prints the main startup menu and requests user input of either starting New Game, continuing (if save is found),
     or quitting.
     """
     print('Main Menu'.upper())
@@ -44,9 +50,9 @@ def show_start_menu():  # The startup menu
 
 def find_file(name, path):
     """
-    :param name: Name of file
-    :param path: Directory to look in
-    Looks for a specific file in a specific directory. Returns path if found; otherwise returns None.
+    :param name: Name of file.
+    :param path: Directory to look in.
+    Looks for a specific file in a specific directory. Returns path if found; otherwise returns nothing.
     """
     for root, dirs, files in os.walk(path):
         if name in files:
@@ -66,10 +72,10 @@ def find_save():
 
 def load_player():
     """
-    Requests save file from user's input at startup menu.
-    If there is no save file OR user specifically requests new game, asks for character name and declares new player
+    Requests save file as per user's input at startup menu.
+    If there is no save file OR user specifically requests a new game, asks for character name and declares new player
     as a global instance.
-    If there is a save file AND user requests continuing from save, extract data and inventory (if there are items)
+    If there is a save file AND user requests continuing from save, extracts data and inventory (if there are items)
     from save and declares new global player instance using existing data.
     """
     save = show_start_menu()

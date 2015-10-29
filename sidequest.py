@@ -8,7 +8,7 @@ There are five types of sidequests in the game:
     * recovery: Recover an item that was stolen by bandits.
 """
 
-__author__ = 'vishnunair'
+__author__ = 'Vishnu Nair'
 
 import globals
 import tabulate

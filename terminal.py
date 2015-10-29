@@ -1,10 +1,19 @@
-__author__ = 'vishnunair'
+"""
+Handles and contains all definitions for the terminal sequence of the main quest.
+"""
+
+__author__ = 'Vishnu Nair'
+
 import getpass
 from time import sleep
+
 import globals
 
 
 def terminal():
+    """
+    Executes the terminal sequence.
+    """
     stage1()
     stage2()
     stage3()
@@ -13,14 +22,23 @@ def terminal():
 
 
 def receive_input():
+    """
+    Receives input from a shell-style prompt.
+    """
     return input("root@MissileLaunch main$ ")
 
 
 def receive_input_2():
+    """
+    Receives input from an option prompt.
+    """
     return input(">> ")
 
 
 def stage1():
+    """
+    Executes stage 1 of the terminal sequence.
+    """
     def print_menu():
         globals.clear_screen()
         print("WELCOME TO THE MISSILE COMMAND MENU!\n"
@@ -70,6 +88,9 @@ def stage1():
 
 
 def stage2():
+    """
+    Executes stage 2 of the terminal sequence.
+    """
     def print_menu():
         globals.clear_screen()
         print("Select any one of the following already-configured celestial entities:\n"
@@ -88,6 +109,9 @@ def stage2():
 
 
 def stage3():
+    """
+    Executes stage 3 of the terminal sequence.
+    """
     def print_menu():
         globals.clear_screen()
         print("Please type in the launch password to finalize the procedure.\n"
@@ -140,6 +164,9 @@ def stage3():
 
 
 def text_interlude():
+    """
+    Prints the text interlude found after stage 3 and before stage 4.
+    """
     globals.clear_screen()
     print(
         "You and your assistant look at the other screens in the room that are tracking the missiles. It is five agonizing minutes before the missiles reach the Valst'r's home system. You realize that the Imperial Commander wasn't joking when he was talking about the warp drive.\n")
@@ -150,6 +177,9 @@ def text_interlude():
 
 
 def stage4():
+    """
+    Executes stage 4 of the terminal sequence.
+    """
     globals.clear_screen()
     print("Missiles currently en route to destination...",end="")
     sleep(1)
