@@ -14,11 +14,6 @@ def init_globals():
     """
     Initializes all necessary global variables.
     """
-    with open("people.txt", 'r') as people_fIle:    # people names for quest board
-        all_names = people_fIle.readlines()
-        global people_names
-        people_names = [name.strip() for name in all_names]
-
     with open("caves_hideaways.txt", 'r') as cave_file: # dungeon names for side quests
         all_caves = cave_file.readlines()
         global cave_names
@@ -28,6 +23,15 @@ def init_globals():
         all_provinces = province_file.readlines()
         global province_names
         province_names = [province.strip() for province in all_provinces]
+
+    global people_names
+    global people_genders
+    people_names = []
+    people_genders = []
+    people = csv.reader(open("people.csv", 'r'))
+    for row in people:
+        people_names.append(row[0])
+        people_genders.append(row[1])
 
     global potion_names     # all potion data
     potion_names = []

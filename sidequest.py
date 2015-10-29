@@ -71,7 +71,8 @@ def quest_board():
         return
 
     inp = int(inp)
-    curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp], home_cities[inp])
+    curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp],
+                     globals.people_genders[globals.people_names.index(names[inp])], home_cities[inp])
     curr.execute_quest()
 
 
@@ -86,19 +87,35 @@ class Sidequest():
                   'gang': "Assault a gang's hideout.",
                   'recovery': "Recover a lost/stolen item."}
 
-    def __init__(self, type, dungeon_name, giver, origin_city):
+    def __init__(self, type, dungeon_name, giver, giver_gender, origin_city):
         """
         :param type: The type of sidequest.
         :param dungeon_name: The name of the dungeon associated with the sidequest.
         :param giver: The name of the quest giver.
+        :param giver_gender: The gender of the quest giver.
         :param origin_city: The name of the quest giver's city.
         Initializes the sidequest.
         """
         self.type = type
         self.dungeon_name = dungeon_name
         self.quest_giver = giver
+        self.giver_gender = giver_gender
         self.giver_city = origin_city
         self.dungeon_length = randrange(4, 8)
+        self.determine_pronouns()
+
+    def determine_pronouns(self):
+        """
+        Determines the pronouns that will be used in the sidequest intro and outro text.
+        """
+        if self.giver_gender is 'm':
+            self.subject_pronoun = "He"
+            self.object_pronoun = "him"
+            self.possessive_pronoun = "his"
+        else:
+            self.subject_pronoun = "She"
+            self.object_pronoun = "her"
+            self.possessive_pronoun = "her"
 
     def execute_quest(self):
         """
@@ -143,7 +160,7 @@ class Sidequest():
         Executes the search and rescue sidequest.
         """
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
-              "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.quest_giver))
+              "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.object_pronoun))
         input("Press enter to continue...")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
@@ -152,7 +169,7 @@ class Sidequest():
         reward = randrange(15,26)
         globals.this_player.money += reward
         print("%s's family is extremely thankful to you for saving %s.\n"
-              "You have been given $%s for your efforts.\n" % (self.quest_giver, self.quest_giver, str(reward)))
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, self.object_pronoun, str(reward)))
 
         input("Press enter to return home...")
 
@@ -161,10 +178,10 @@ class Sidequest():
         """
         Executes the intimidation sidequest.
         """
-        print("%s hired a group of bandits to sabotage their competitors in the business.\n"
+        print("%s hired a group of bandits to sabotage %s competitors in the business.\n"
               "However, the bandits have stepped out of line and have stopped listening to %s.\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
-              % (self.quest_giver, self.quest_giver, self.quest_giver))
+              % (self.quest_giver, self.object_pronoun, self.object_pronoun, self.quest_giver))
         input("Press enter to continue...")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
@@ -210,8 +227,8 @@ class Sidequest():
 
         reward = randrange(20,30)
         globals.this_player.money += reward
-        print("%s will be forever thankful to you for retrieving their family's heirloom.\n"
-              "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
+        print("%s will be forever thankful to you for retrieving %s family's heirloom.\n"
+              "You have been given $%s for your efforts.\n" % (self.quest_giver, self.possessive_pronoun, str(reward)))
 
         input("Press enter to return home...")
 
