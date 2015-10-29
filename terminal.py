@@ -23,14 +23,14 @@ def terminal():
 
 def receive_input():
     """
-    Receives input from a shell-style prompt.
+    Receives and returns input from a shell-style prompt.
     """
     return input("root@MissileLaunch main$ ")
 
 
 def receive_input_2():
     """
-    Receives input from an option prompt.
+    Receives and returns input from an option prompt.
     """
     return input(">> ")
 

@@ -21,7 +21,7 @@ def print_intro():
         "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
     print(intro_text)
-    time.sleep(1)
+    time.sleep(2.5)
     globals.clear_screen()
 
 def show_start_menu():  # The startup menu
