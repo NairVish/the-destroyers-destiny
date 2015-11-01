@@ -131,8 +131,8 @@ def game_loop():
                     globals.this_player.main_quest_stage]
             try:
                 if player_stage < 15:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0], init_length=10,
-                                           enemy_type="valstr", main_quest=True)
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0] % globals.this_player.home,
+                                           init_length=10, enemy_type="valstr", main_quest=True)
                     curr.traverse_dungeon()
                     globals.this_player.toggle_sidequest_flag()
                 elif curr.endswith('sneak'):

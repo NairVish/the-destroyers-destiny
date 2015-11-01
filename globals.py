@@ -106,7 +106,7 @@ def init_globals():
     global main_quest_bosses
     global main_quest_dungeons
     main_quest_bosses = ["Valst'r Lieutenant General", "Valst'r General", "Valst'r Commander-in-Chief"]
-    main_quest_dungeons = ["The Battle for Home", "Valst'r Base Camp", "The Road to the Imperial Launch SIte"]
+    main_quest_dungeons = ["The Battle for %s", "Valst'r Base Camp", "The Road to the Imperial Launch SIte"]
     with open("main_enemies.txt", 'r') as main_enemy_fIle:
         all_enemies = main_enemy_fIle.readlines()
         main_quest_enemies = [enemy.rstrip('\n') for enemy in all_enemies]
