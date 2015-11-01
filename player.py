@@ -15,8 +15,9 @@ class Player:
     """
     The Player class hold all attributes and handles all modification and constant activities for the player.
     """
+
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
-                 init_attack=2.0,init_defense=3.5, init_main_quest_stage=0, init_money=0,init_assistant=False,
+                 init_attack=2.0, init_defense=3.5, init_main_quest_stage=0, init_money=0, init_assistant=False,
                  init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
         """
         NOTE: Defaults are in parentheses.
@@ -189,7 +190,7 @@ class Player:
                 for index in range(0, 4):
                     tabular_potion_inv[inp][index] = "USED!"
                 globals.clear_screen()
-                print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) +'\n')
+                print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
                 inp = input(
                     "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
@@ -245,7 +246,6 @@ class Player:
 
         globals.clear_screen()
 
-
     def see_inventory(self):
         """
         Prints out player's inventory.
@@ -270,16 +270,18 @@ class Player:
         globals.clear_screen()
 
         if globals.this_player.assistant is True:
-            money = randrange(5,15)
+            money = randrange(5, 15)
             print("Assistant Alert: Merlona made $%s today." % money)
             globals.this_player.money += money
             input("Press enter to continue...")
             globals.clear_screen()
 
+
 class Weapon:
     """
     The Weapon class handles the player's weapon.
     """
+
     def __init__(self, weapon_name):
         """
         :param weapon_name: The name of the weapon.
@@ -294,6 +296,7 @@ class Weapon:
         If Weapon object is printed out, weapon's name is printed out.
         """
         return self.name
+
 
 if __name__ == "__main__":
     print("To play this game, run 'start_here.py.'.\n"
