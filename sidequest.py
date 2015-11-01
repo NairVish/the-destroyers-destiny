@@ -181,7 +181,7 @@ class Sidequest():
         print("%s hired a group of bandits to sabotage %s competitors in the business.\n"
               "However, the bandits have stepped out of line and have stopped listening to %s.\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
-              % (self.quest_giver, self.object_pronoun, self.object_pronoun, self.quest_giver))
+              % (self.quest_giver, self.possessive_pronoun, self.object_pronoun, self.quest_giver))
         input("Press enter to continue...")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")

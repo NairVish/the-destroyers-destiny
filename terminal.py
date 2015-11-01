@@ -165,7 +165,7 @@ def stage3():
 
 def text_interlude():
     """
-    Prints the text interlude found after stage 3 and before stage 4.
+    Prints the text interlude occurring between stages 3 and 4.
     """
     globals.clear_screen()
     print(
