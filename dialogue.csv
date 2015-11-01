@@ -23,7 +23,7 @@
 "You have been invited to the provincial governor's palace. Apparently, the empire is forming an army to storm a Valst'r camp not too far. Considering how you did a few days before, the empire is more than willing to bring you along for the ride.",p,0
 "You are eventually brought into a briefing for the assault and are assigned an assistant. Her name is Merlona. She's of a different breed of human. After humans began expanding beyond Earth a hundred years ago, they had to adapt to conditions that were significantly different than those on Earth. Advances in biological research allowed humans to develop the traits necessary to survive these conditions. Then, due to whatever problems (war, famine, etc.), people began to migrate between planets, making each one very diverse.",c,0
 "Merlona knows all about the Valst'r camp. She has spent days studying intelligence reports as well as reports on the layout of the camp.",p,0
-"It's finally time to assault the base. You and your assistant are with the fifth wave of the assualt on the base.",p,0
+"It's finally time to assault the base. You and your assistant are with the fifth wave of the assault on the base.",p,0
 "You reach the entrance to the base and are under heavy fire.",p,0
 "Merlona: OK. The two of us can either attack straight through the front *or* sneak in through the back. It's your call.",rn,0
 "Let's charge through the front. (Shorter)",r,30
@@ -49,7 +49,7 @@
 "[He teleports off.]",b,0
 "After the battle, the rest of the army slaughters the Valst'r at the base. You have wiped out the Valst'r army camp! All seems to be well for the time being. You and Merlona are dismissed from duties with high praise.",c,0
 "On your way back home, Merlona asks you something...",p,0
-"Merlona: I was meaning to ask you something. You see, the Valstr's first attack completely destroyed my home.",c,0
+"Merlona: I was meaning to ask you something. You see, the Valst'r's first attack completely destroyed my home.",c,0
 "I was wondering if I could stay at your place for a while. I promise I won't bother you.",rn,0
 "Sure! You can stay with me! I don't mind. (Honestly speaking, it's the least you could do for her help...)",r,54
 "Oh! Thank you! Thank you! Thank you! I promise you won't regret it.",p,0
