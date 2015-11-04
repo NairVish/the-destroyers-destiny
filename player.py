@@ -105,7 +105,7 @@ class Player:
         print("Total Defense: %s" % self.defense)
         print("Current Money: $%s" % self.money)
         print("Current Weapon: %s" % self.current_weapon)
-        print("Current inventory: ")
+        print("Current Inventory: ")
         for item in self.inventory:
             print('\t' + item)
         if len(self.inventory) == 0:
@@ -141,7 +141,7 @@ class Player:
             if item not in globals.potion_names:
                 continue
             if enhancement is True:
-                if globals.potion_type[globals.potion_names.index(item)] is "health":
+                if globals.potion_type[globals.potion_names.index(item)] == "health":
                     continue
             potion_power = globals.potion_powers[globals.potion_names.index(item)]
             potion_type = globals.potion_type[globals.potion_names.index(item)]

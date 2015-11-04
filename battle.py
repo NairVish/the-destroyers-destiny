@@ -93,8 +93,8 @@ class Battle:
         Prints the battle's current status.
         """
         print("BATTLE WITH %s" % self.enemy.enemy_name.upper())
-        print("Your health: %s/%s" % (globals.this_player.current_health, self.p_max_health))
-        print("Enemy health: %s/%s" % (self.enemy.health, self.enemy.max_health))
+        print("Your health: %.1f/%s" % (globals.this_player.current_health, self.p_max_health))
+        print("Enemy health: %.1f/%s" % (self.enemy.health, self.enemy.max_health))
 
     def execute_move(self):
         """
@@ -108,7 +108,7 @@ class Battle:
             print("You lost your turn because you used a potion!")
         else:
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
-            print("You dealt %s damage to the enemy!" % str(p_damage))
+            print("You dealt %.1f damage to the enemy!" % p_damage)
             self.enemy.health -= p_damage
 
         if globals.this_player.assistant is True:
@@ -116,13 +116,13 @@ class Battle:
             if prob in range(0,10):
                 a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5))/4
                 self.enemy.health -= a_damage
-                print("Merlona dealt %s damage to the enemy!" % a_damage)
+                print("Merlona dealt %.1f damage to the enemy!" % a_damage)
                 
         if self.enemy.health <= 0:
             return
 
         e_damage = self.enemy.attack
-        print("The enemy dealt %s damage to you!\n" % e_damage)
+        print("The enemy dealt %.1f damage to you!\n" % e_damage)
         globals.this_player.current_health -= e_damage
 
 
@@ -153,6 +153,9 @@ class Battle:
                     globals.this_player.equip_weapon()
                 elif inp is 4:
                     globals.this_player.print_stats()
+                else:
+                    inp = input("You have entered an invalid option. Please enter a valid option: ")
+                    continue
                 self.show_status()
                 self.show_options()
                 inp = input("Choose an option: ")

@@ -65,7 +65,11 @@ class Cell:
         a random enemy from a list of enemies of that type. If final is just True, returns a specific boss name.
         """
         if self.final is True and self.enemy_type is "valstr":
-            boss_index = globals.main_quest_dungeons.index(self.name)
+            d_name = self.name[0:10]
+            for dungeon in globals.main_quest_dungeons:
+                if dungeon.startswith(d_name):
+                    boss_index = globals.main_quest_dungeons.index(dungeon)
+                    break
             return globals.main_quest_bosses[boss_index]
         elif self.enemy_type is "valstr":
             return choice(globals.main_quest_enemies)
@@ -195,6 +199,9 @@ class Dungeon:
                 if inp not in range(1,4):
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
                     continue
+                if inp is 'a':
+                    globals.clear_screen()
+                    break
                 if inp is 1:
                     globals.clear_screen()
                     globals.this_player.print_stats()
