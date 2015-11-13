@@ -154,22 +154,27 @@ def declare_new_player(name):
     this_player = player.Player(name, province)
 
 
-def declare_existing_player(saved_stats, inventory):
+def declare_existing_player(save_data):
     """
-    :param saved_stats: All save data from the 'save.data' file, converted into a list.
-    :param inventory: All inventory data from the last part of the 'save.data' file, converted into a list.
+    :param save_data: Data from the save file in the form of a dictionary.
     Initializes and declares a player using existing save data. The player is declared as a global variable.
     """
     global this_player
-    if saved_stats[11] == "None":
-        weapon = None
-    else:
-        weapon = saved_stats[11]
-    this_player = player.Player(saved_stats[0], saved_stats[1], int(saved_stats[2]), int(saved_stats[3]),
-                                int(saved_stats[4]), int(saved_stats[5]), float(saved_stats[6]), float(saved_stats[7]),
-                                int(saved_stats[8]), float(saved_stats[9]),(saved_stats[10] == "True"), weapon,
-                                int(saved_stats[12]), (saved_stats[13] == "True"), inventory)
-
+    this_player = player.Player(init_name=save_data['name'],
+                                init_province=save_data['home'],
+                                init_level=save_data['level'],
+                                init_xp=save_data['xp'],
+                                init_target_xp=save_data['target_xp'],
+                                init_health=save_data['health'],
+                                init_attack=save_data['attack'],
+                                init_defense=save_data['defense'],
+                                init_main_quest_stage=save_data['main_quest_stage'],
+                                init_money=save_data['money'],
+                                init_assistant= save_data['assistant'],
+                                init_weapon= save_data['weapon'],
+                                init_day=save_data['day'],
+                                init_sidequest=save_data['sidequests'],
+                                init_inventory=save_data['inventory'])
 
 def clear_screen():
     """

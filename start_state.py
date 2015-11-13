@@ -7,6 +7,7 @@ __author__ = 'Vishnu Nair'
 import os
 import time
 import globals
+import json
 from exit import exit_program
 
 def print_intro():
@@ -64,11 +65,11 @@ def find_save():
     If not found, returns None.
     If found, returns opened file.
     """
-    result = find_file('save.data', os.getcwd())
+    result = find_file('save.json', os.getcwd())
     if result is None:
         return None
     else:
-        return open('save.data','r')
+        return open('save.json','r')
 
 def load_player():
     """
@@ -84,16 +85,10 @@ def load_player():
         name = input('Please enter a name for your character: ')
         globals.declare_new_player(name)
     else:
-        saved_stats = [line.rstrip('\n') for line in save.readlines()]
-        try:
-            inventory = [item for item in saved_stats[14:(len(saved_stats))]]
-        except IndexError:
-            inventory = []
-        else:
-            pass
+        save_data = json.load(save)
         print("Loading existing save...")
-        print("Loading save data for %s..." % saved_stats[0])
-        globals.declare_existing_player(saved_stats, inventory)
+        print("Loading save data for %s..." % save_data['name'])
+        globals.declare_existing_player(save_data)
         save.close()
     print("\nThe game was successfully loaded!")
     input("(Press enter to continue...)")

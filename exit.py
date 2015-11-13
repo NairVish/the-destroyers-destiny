@@ -6,6 +6,7 @@ __author__ = 'Vishnu Nair'
 
 import sys
 import globals
+import json
 
 def exit_program():
     """
@@ -27,7 +28,7 @@ def prompt_for_save():
     if inp is 'y':
         save_game()
         globals.clear_screen()
-        print("Save data has been written to a file named 'save.data' in the "
+        print("Save data has been written to a file named 'save.json' in the "
               "game's directory. If such a file already existed, it has been "
               "overwritten.\n")
         return
@@ -39,27 +40,29 @@ def prompt_for_save():
 
 def save_game():
     """
-    Saves the game by writing the player's attributes to a file called "save.data" in the game directory.
+    Saves the game by writing the player's attributes to a file called "save.json" in the game directory.
     """
-    with open("save.data",'w') as save:
+    player = globals.this_player
+    save_data = {}
+    save_data['name'] = player.name
+    save_data['home'] = player.home
+    save_data['level'] = player.level
+    save_data['xp'] = player.xp
+    save_data['target_xp'] = player.target_xp
+    save_data['health'] = player.current_health
+    save_data['attack'] = player.attack
+    save_data['defense'] = player.defense
+    save_data['main_quest_stage'] = player.main_quest_stage
+    save_data['money'] = player.money
+    save_data['assistant'] = player.assistant
+    save_data['weapon'] = str(player.current_weapon)
+    save_data['day'] = player.day
+    save_data['sidequests'] = player.sidequests
+    save_data['inventory'] = player.inventory
+
+    with open("save.json",'w') as save:
         save.truncate()
-        player = globals.this_player
-        save.writelines(player.name + '\n') # 0
-        save.writelines(player.home + '\n') # 1
-        save.writelines(str(player.level) + '\n') # 2
-        save.writelines(str(player.xp) + '\n') # 3
-        save.writelines(str(player.target_xp) + '\n') # 4
-        save.writelines(str(player.total_health) + '\n') # 6
-        save.writelines(str(player.attack) + '\n') # 7
-        save.writelines(str(player.defense) + '\n') # 8
-        save.writelines(str(player.main_quest_stage) + '\n') # 9
-        save.writelines(str(player.money) + '\n') # 10
-        save.writelines(str(player.assistant) + '\n') # 11
-        save.writelines(str(player.current_weapon) + '\n') # 12
-        save.writelines(str(player.day) + '\n') # 13
-        save.writelines(str(player.sidequests) + '\n') # 14
-        for item in player.inventory:
-            save.writelines(item + '\n')
+        json.dump(save_data, save)
 
 def exit_sequence():
     """
