@@ -8,6 +8,8 @@ __author__ = 'Vishnu Nair'
 from random import randrange
 
 import globals
+import date
+from random import choice, randrange
 from tabulate import tabulate
 
 
@@ -18,7 +20,7 @@ class Player:
 
     def __init__(self, init_name, init_province, init_level=1, init_xp=0, init_target_xp=10, init_health=20,
                  init_attack=2.0, init_defense=3.5, init_main_quest_stage=0, init_money=0, init_assistant=False,
-                 init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[]):
+                 init_weapon=None, init_day=1, init_sidequest=False, init_inventory=[], init_date=[]):
         """
         NOTE: Defaults are in parentheses.
         :param init_name: The name of the player.
@@ -36,6 +38,7 @@ class Player:
         :param init_day: The player's current day (1 for a new player).
         :param init_sidequest: Whether or not the player can access sidequests (False for a new player).
         :param init_inventory: A list that represents the player's current inventory (Empty list for a new player).
+        :param init_date: The current date (Randomly picked day of the week, month, and day with year 2215 for new player).
         Initializes the attributes of the player.
         """
         self.name = init_name
@@ -57,6 +60,14 @@ class Player:
         self.day = init_day
         self.sidequests = init_sidequest
         self.inventory = init_inventory
+        if len(init_date) == 0:
+            init_day_of_week = choice(date.days_of_the_week)
+            init_month = choice(date.months)
+            this_init_day = randrange(1, date.days_in_each_month[init_month] + 1)
+            init_year = 2215
+            self.date = [init_day_of_week, this_init_day, init_month, init_year]
+        else:
+            self.date = init_date
 
     def __repr__(self):
         """

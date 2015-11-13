@@ -8,6 +8,7 @@ import csv
 import player
 import os
 import random
+import date
 
 
 def init_globals():
@@ -134,6 +135,8 @@ def init_globals():
         dialogue_type.append(row[1])
         dialogue_jump_targets.append(int(row[2]))
 
+    date.init_dates()
+
 
 def select_province():
     """
@@ -174,7 +177,8 @@ def declare_existing_player(save_data):
                                 init_weapon= save_data['weapon'],
                                 init_day=save_data['day'],
                                 init_sidequest=save_data['sidequests'],
-                                init_inventory=save_data['inventory'])
+                                init_inventory=save_data['inventory'],
+                                init_date=save_data['date'])
 
 def clear_screen():
     """
