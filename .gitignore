@@ -1,0 +1,5 @@
+TestSaves/
+__pycache__/
+.idea/
+*.json
+*.data
