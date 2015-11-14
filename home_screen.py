@@ -17,8 +17,8 @@ def print_home_screen():
     print("HOME SCREEN\n")
 
     print("%s, Level %d" % (globals.this_player, globals.this_player.level))
-    print("Home Province: %s\n" % globals.this_player.home)
-    print("Date: %s" % date.string_date())
+    print("Home Province: %s" % globals.this_player.home)
+    print("Date: %s\n" % date.string_date(globals.this_player.date))
 
     print("\t1. Sleep until tomorrow.")
     print("\t2. Go to a shop in the city.")

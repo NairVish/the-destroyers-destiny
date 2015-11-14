@@ -178,7 +178,8 @@ def declare_existing_player(save_data):
                                 init_day=save_data['day'],
                                 init_sidequest=save_data['sidequests'],
                                 init_inventory=save_data['inventory'],
-                                init_date=save_data['date'])
+                                init_date=save_data['date'],
+                                start_date=save_data['start_date'])
 
 def clear_screen():
     """

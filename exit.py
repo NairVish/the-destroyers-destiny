@@ -60,6 +60,7 @@ def save_game():
     save_data['sidequests'] = player.sidequests
     save_data['inventory'] = player.inventory
     save_data['date'] = player.date
+    save_data['start_date'] = player.start_date
 
     with open("save.json",'w') as save:
         save.truncate()
