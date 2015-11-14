@@ -29,6 +29,7 @@ def print_intro():
     time.sleep(2.5)
     globals.clear_screen()
 
+
 def show_start_menu():  # The startup menu
     """
     Prints the main startup menu and requests user input of either starting New Game, continuing (if save is found),
@@ -53,15 +54,6 @@ def show_start_menu():  # The startup menu
     else:
         return save
 
-def find_file(name, path):
-    """
-    :param name: Name of file.
-    :param path: Directory to look in.
-    Looks for a specific file in a specific directory. Returns path if found; otherwise returns nothing.
-    """
-    for root, dirs, files in os.walk(path):
-        if name in files:
-            return os.path.join(root, name)
 
 def find_save():
     """
@@ -69,11 +61,15 @@ def find_save():
     If not found, returns None.
     If found, returns opened file.
     """
-    result = find_file('save.json', os.getcwd())
-    if result is None:
+    result = False
+    if 'save.json' in os.listdir(os.getcwd()):
+        result = True
+
+    if result is False:
         return None
     else:
         return open('save.json','r')
+
 
 def load_player():
     """
@@ -97,6 +93,7 @@ def load_player():
     print(Fore.GREEN + "\nThe game was successfully loaded!")
     input("(Press enter to continue...)")
     globals.clear_screen()
+
 
 def startSequence():
     """

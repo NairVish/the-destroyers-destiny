@@ -56,7 +56,7 @@ class Player:
         self.main_quest_stage = init_main_quest_stage
         self.money = init_money
         self.assistant = init_assistant
-        if init_weapon is None:
+        if init_weapon is None or init_weapon == 'None':
             self.current_weapon = None
         else:
             self.current_weapon = Weapon(init_weapon)
