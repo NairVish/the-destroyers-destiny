@@ -10,7 +10,9 @@ __author__ = 'Vishnu Nair'
 
 import globals
 from tabulate import tabulate
+from colorama import Fore, init
 
+init(autoreset=True)
 
 def weapon_shop():
     """
@@ -39,7 +41,7 @@ def weapon_shop():
                 continue
             globals.this_player.inventory.append(globals.weapon_names[inp])
             globals.this_player.money -= cost
-            print("<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.weapon_names[inp], globals.this_player.money))
+            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.weapon_names[inp], globals.this_player.money))
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
@@ -72,7 +74,7 @@ def potion_shop():
                 continue
             globals.this_player.inventory.append(globals.potion_names[inp])
             globals.this_player.money -= cost
-            print("<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.potion_names[inp], globals.this_player.money))
+            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%s left.>" % (globals.potion_names[inp], globals.this_player.money))
             inp = input(
                 "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
@@ -90,7 +92,7 @@ def selling():
 
     if not globals.this_player.inventory:
         print("The Rich Guy: You have nothing to sell me. Why on Nira are you here?")
-        print("<Alert: You have nothing in your inventory. Come back when you have something to sell.>\n")
+        print(Fore.RED + "<Alert: You have nothing in your inventory. Come back when you have something to sell.>\n")
         input("Press enter to return home...")
         return
 
@@ -132,7 +134,7 @@ def selling():
                 continue
             if globals.this_player.current_weapon is not None:
                 if tabular_data[inp][1] == globals.this_player.current_weapon.name:
-                    inp = input("You can't sell your currently equipped weapon! Please enter another option: ")
+                    inp = input(Fore.RED + "You can't sell your currently equipped weapon! Please enter another option: ")
                     continue
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]

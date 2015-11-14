@@ -10,6 +10,10 @@ import globals
 import json
 from exit import exit_program
 
+from colorama import Fore, init
+
+init(autoreset=True)
+
 def print_intro():
     """
     Prints the intro screen.
@@ -90,7 +94,7 @@ def load_player():
         print("Loading save data for %s..." % save_data['name'])
         globals.declare_existing_player(save_data)
         save.close()
-    print("\nThe game was successfully loaded!")
+    print(Fore.GREEN + "\nThe game was successfully loaded!")
     input("(Press enter to continue...)")
     globals.clear_screen()
 

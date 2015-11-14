@@ -6,9 +6,11 @@ Handles all activities related to the battle mechanic.
 __author__ = 'Vishnu Nair'
 
 from random import randrange
+from colorama import Fore, init
 
 import globals
 
+init(autoreset=True)
 
 class Enemy:
     """
@@ -75,12 +77,12 @@ class Battle:
             self.execute_move()
         globals.clear_screen()
         if globals.this_player.current_health <= 0:
-            print("You have no health remaining!"
+            print(Fore.RED + "You have no health remaining!"
                   "You have whited out.")
             raise globals.GameOver()
         else:
             globals.this_player.current_health = globals.this_player.total_health
-            print("You have defeated your enemy and have gained %s XP!" % self.possible_xp)
+            print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!" % self.possible_xp)
             globals.this_player.xp += self.possible_xp
             if globals.this_player.xp > globals.this_player.target_xp:
                 globals.this_player.level_up()
@@ -105,10 +107,10 @@ class Battle:
         skip = self.show_menu()
         globals.clear_screen()
         if skip is True:
-            print("You lost your turn because you used a potion!")
+            print(Fore.RED + "You lost your turn because you used a potion!")
         else:
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
-            print("You dealt %.1f damage to the enemy!" % p_damage)
+            print(Fore.GREEN + "You dealt %.1f damage to the enemy!" % p_damage)
             self.enemy.health -= p_damage
 
         if globals.this_player.assistant is True:
@@ -116,13 +118,12 @@ class Battle:
             if prob in range(0,10):
                 a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5))/4
                 self.enemy.health -= a_damage
-                print("Merlona dealt %.1f damage to the enemy!" % a_damage)
-                
+                print(Fore.GREEN + "Merlona dealt %.1f damage to the enemy!" % a_damage)
         if self.enemy.health <= 0:
             return
 
         e_damage = self.enemy.attack
-        print("The enemy dealt %.1f damage to you!\n" % e_damage)
+        print(Fore.RED + "The enemy dealt %.1f damage to you!\n" % e_damage)
         globals.this_player.current_health -= e_damage
 
 

@@ -9,6 +9,9 @@ import shop
 import sidequest
 import date
 
+from colorama import Fore, init
+
+init(autoreset=True)
 
 def print_home_screen():
     """
@@ -60,7 +63,7 @@ def process_home():
         elif inp is '3':
             try:
                 if globals.this_player.sidequests is False:
-                    print("You are an Unknown.\n"
+                    print(Fore.RED + "You are an Unknown.\n"
                           "Unknowns are not allowed to view or participate in quests on the quest board.\n"
                           "You must return home.\n")
                     input("Press enter to continue...")
@@ -70,7 +73,7 @@ def process_home():
                 sidequest.setup_quest_board()
             except globals.GameOver():
                 globals.clear_screen()
-                print("<Player Note: Your current health has reached zero!>\n")
+                print(Fore.RED + "<Alert: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
                       "It's right before you went into that fateful encounter.\n")

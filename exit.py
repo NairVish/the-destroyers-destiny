@@ -7,6 +7,9 @@ __author__ = 'Vishnu Nair'
 import sys
 import globals
 import json
+from colorama import Fore, init
+
+init(autoreset=True)
 
 def exit_program():
     """
@@ -28,13 +31,13 @@ def prompt_for_save():
     if inp is 'y':
         save_game()
         globals.clear_screen()
-        print("Save data has been written to a file named 'save.json' in the "
+        print(Fore.GREEN + "Save data has been written to a file named 'save.json' in the "
               "game's directory. If such a file already existed, it has been "
               "overwritten.\n")
         return
     else:
         globals.clear_screen()
-        print("The game was not saved.\n")
+        print(Fore.RED + "The game was not saved.\n")
         return
 
 
