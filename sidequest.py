@@ -7,6 +7,7 @@ There are five types of sidequests in the game:
     * gang: Destroy a gang in their hideout.
     * recovery: Recover an item that was stolen by bandits.
 """
+import date
 
 __author__ = 'Vishnu Nair'
 
@@ -74,6 +75,7 @@ def quest_board():
     curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp],
                      globals.people_genders[globals.people_names.index(names[inp])], home_cities[inp])
     curr.execute_quest()
+    date.advance_date()
 
 
 class Sidequest():

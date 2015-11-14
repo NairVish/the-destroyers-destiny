@@ -7,6 +7,7 @@ __author__ = 'Vishnu Nair'
 import globals
 import shop
 import sidequest
+import date
 
 
 def print_home_screen():
@@ -15,9 +16,9 @@ def print_home_screen():
     """
     print("HOME SCREEN\n")
 
-    print("Day %s" % globals.this_player.day)
     print("%s, Level %d" % (globals.this_player, globals.this_player.level))
     print("Home Province: %s\n" % globals.this_player.home)
+    print("Date: %s" % date.string_date())
 
     print("\t1. Sleep until tomorrow.")
     print("\t2. Go to a shop in the city.")

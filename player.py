@@ -278,6 +278,7 @@ class Player:
         Also awards a random amount of money ($5-$15) as part of the assistant mechanic.
         """
         self.day += 1
+        date.advance_date()
         globals.clear_screen()
 
         if globals.this_player.assistant is True:
