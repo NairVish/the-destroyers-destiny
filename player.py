@@ -178,6 +178,7 @@ class Player:
         if number_of_potions is 0:
             print("You have no potions in your inventory that you can use right now.\n")
             input("Press enter to return...")
+            globals.clear_screen()
             return
         print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
 
