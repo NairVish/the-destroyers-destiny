@@ -76,11 +76,11 @@ def init_dates():
     }
 
 
-def string_date():
-    day_of_week = globals.this_player.date[0]
-    day = globals.this_player.date[1]
-    month = globals.this_player.date[2]
-    year = globals.this_player.date[3]
+def string_date(date_list):
+    day_of_week = date_list[0]
+    day = date_list[1]
+    month = date_list[2]
+    year = date_list[3]
 
     string_day = day_in_strings[day]
 
