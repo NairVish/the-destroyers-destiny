@@ -13,7 +13,9 @@ import home_screen
 import player
 import dungeon
 from tabulate import tabulate
+from colorama import Fore, init
 
+init(autoreset=True)
 
 def game_sequence():
     """
@@ -151,7 +153,7 @@ def game_loop():
                     curr.traverse_dungeon()
             except globals.GameOver():
                 globals.clear_screen()
-                print("<Player Note: Your current health has reached zero!>\n")
+                print(Fore.RED + "<Player Note: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
                       "It's right before you went into that fateful encounter.\n")

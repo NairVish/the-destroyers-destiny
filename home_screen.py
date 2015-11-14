@@ -24,7 +24,7 @@ def print_home_screen():
     print("Home Province: %s" % globals.this_player.home)
     print("Date: %s\n" % date.string_date(globals.this_player.date))
 
-    print("\t1. Sleep until tomorrow.")
+    print("\t1. Do nothing and sleep until tomorrow.")
     print("\t2. Go to a shop in the city.")
     print("\t3. Check for side jobs.")
     print("\t4. See detailed statistics.")
@@ -42,7 +42,7 @@ def print_home_screen():
 
 def process_home():
     """
-    Processes home screen input. Returns True is player decides to exit, False if player just decides to sleep
+    Processes home screen input. Returns True if player decides to exit, False if player just decides to sleep
     until the next day.
     """
     sidequest.setup_quest_board()
