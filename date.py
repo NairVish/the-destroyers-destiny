@@ -89,6 +89,7 @@ def string_date(date_list):
 
 def advance_date():
     globals.this_player.date[1] += 1
+    globals.this_player.date_num_days += 1
 
     new_day_index = days_of_the_week.index(globals.this_player.date[0]) + 1
     if new_day_index > 6:

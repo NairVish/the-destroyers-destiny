@@ -16,6 +16,7 @@ def print_home_screen():
     """
     print("HOME SCREEN\n")
 
+    print("Day %s" % str(globals.this_player.date_num_days+1))
     print("%s, Level %d" % (globals.this_player, globals.this_player.level))
     print("Home Province: %s" % globals.this_player.home)
     print("Date: %s\n" % date.string_date(globals.this_player.date))
