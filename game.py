@@ -12,7 +12,6 @@ import terminal
 import home_screen
 import player
 import dungeon
-import sys
 from tabulate import tabulate
 from colorama import Fore, init
 
@@ -27,9 +26,7 @@ def game_sequence():
         game_loop()
         exit.exit_sequence()
     except KeyboardInterrupt:
-        globals.clear_screen()
-        print(Fore.RED + "You have left the program. Thank you for playing.\n")
-        sys.exit()
+        exit.force_exit_program()
 
 
 def game_loop():
@@ -161,9 +158,7 @@ def game_loop():
                                            main_quest=True)
                     curr.traverse_dungeon()
             except KeyboardInterrupt:
-                globals.clear_screen()
-                print("You have left the program. Thank you for playing.")
-                sys.exit()
+                exit.force_exit_program()
             except:
                 print(Fore.RED + "<Alert: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"

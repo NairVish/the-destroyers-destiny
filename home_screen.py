@@ -8,7 +8,7 @@ import globals
 import shop
 import sidequest
 import date
-import sys
+import exit
 
 from colorama import Fore, init
 
@@ -73,9 +73,7 @@ def process_home():
                 sidequest.quest_board()
                 sidequest.setup_quest_board()
             except KeyboardInterrupt:
-                globals.clear_screen()
-                print(Fore.RED + "You have left the program. Thank you for playing.\n")
-                sys.exit()
+                exit.force_exit_program()
             except:
                 globals.clear_screen()
                 print(Fore.RED + "<Alert: Your current health has reached zero!>\n")

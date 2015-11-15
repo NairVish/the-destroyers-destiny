@@ -11,11 +11,21 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def exit_program():
     """
     Exits the program using sys.exit() and prints a message notifying the user.
     """
     print("The program has ended. Thank you for playing.\n")
+    sys.exit()
+
+
+def force_exit_program():
+    """
+    Exits the program when the KeyboardInterrupt exception is raised (i.e. when Ctrl-C is pressed).
+    """
+    globals.clear_screen()
+    print(Fore.RED + "You have left the program. Thank you for playing.\n")
     sys.exit()
 
 
