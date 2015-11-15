@@ -12,6 +12,7 @@ import terminal
 import home_screen
 import player
 import dungeon
+import sys
 from tabulate import tabulate
 from colorama import Fore, init
 
@@ -21,9 +22,14 @@ def game_sequence():
     """
     Executes the game sequence from start to finish.
     """
-    start_state.startSequence()
-    game_loop()
-    exit.exit_sequence()
+    try:
+        start_state.startSequence()
+        game_loop()
+        exit.exit_sequence()
+    except KeyboardInterrupt:
+        globals.clear_screen()
+        print(Fore.RED + "You have left the program. Thank you for playing.\n")
+        sys.exit()
 
 
 def game_loop():
@@ -33,6 +39,7 @@ def game_loop():
     data from dialogue.csv until we return from the home screen. We return when True is returned from the home screen.
     """
     alert_day = None
+    game_over_reversion_target = None
 
     while True:  # until we hit a return statement
 
@@ -58,9 +65,11 @@ def game_loop():
                     return
                 else:
                     globals.this_player.sleep()
+                    game_over_reversion_target = globals.this_player.main_quest_stage
                     globals.this_player.main_quest_stage += 1
             elif alert_day is not None:
                 if globals.this_player.day == alert_day:
+                    game_over_reversion_target = globals.this_player.main_quest_stage
                     globals.this_player.main_quest_stage += 1
                     alert_day = None
                 else:
@@ -127,7 +136,7 @@ def game_loop():
         elif curr.startswith('d'):  # 'd': initiate main quest dungeon; NOTE: sidequest dungeons are handled by the home screen
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
-            game_over_reversion_target = globals.this_player.main_quest_stage
+            # game_over_reversion_target = globals.this_player.main_quest_stage
             if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
                 globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
                     globals.this_player.main_quest_stage]
@@ -151,13 +160,17 @@ def game_loop():
                     curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr",
                                            main_quest=True)
                     curr.traverse_dungeon()
-            except globals.GameOver():
+            except KeyboardInterrupt:
                 globals.clear_screen()
-                print(Fore.RED + "<Player Note: Your current health has reached zero!>\n")
+                print("You have left the program. Thank you for playing.")
+                sys.exit()
+            except:
+                print(Fore.RED + "<Alert: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
                       "It's right before you went into that fateful encounter.\n")
                 input("Press enter to continue...")
+                globals.clear_screen()
                 globals.this_player.main_quest_stage = game_over_reversion_target
             else:
                 globals.this_player.main_quest_stage += 1
@@ -166,7 +179,6 @@ def game_loop():
             input("(Press enter to proceed...)")
             terminal.terminal()
             globals.this_player.main_quest_stage += 1
-
 
 if __name__ == "__main__":
     print("To play this game, run 'start_here.py.'.\n"

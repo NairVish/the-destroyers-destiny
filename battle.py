@@ -25,7 +25,7 @@ class Enemy:
         self.enemy_name = enemy_name
         self.enemy_type = enemy_type
         self.level = self.determine_enemy_level()
-        self.attack = self.level+1
+        self.attack = self.level
         self.defense = self.attack+1
         self.health = self.determine_health()
         self.max_health = self.health
@@ -77,7 +77,7 @@ class Battle:
             self.execute_move()
         globals.clear_screen()
         if globals.this_player.current_health <= 0:
-            print(Fore.RED + "You have no health remaining!"
+            print(Fore.RED + "You have no health remaining! "
                   "You have whited out.")
             raise globals.GameOver()
         else:
