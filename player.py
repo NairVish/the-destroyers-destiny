@@ -70,11 +70,10 @@ class Player:
             init_year = 2215
             self.date = [init_day_of_week, this_init_day, init_month, init_year]
             self.start_date = self.date[:]
-            self.date_num_days = init_date_num_days
         else:
             self.date = init_date
             self.start_date = start_date
-            self.date_num_days = init_date_num_days
+        self.date_num_days = init_date_num_days
 
     def __repr__(self):
         """
