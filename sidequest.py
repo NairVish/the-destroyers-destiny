@@ -125,16 +125,19 @@ class Sidequest():
         """
         globals.clear_screen()
         sleep(0.1)
-        if self.type is 'delivery':
-            self.execute_delivery()
-        elif self.type is 'kidnap':
-            self.execute_kidnap()
-        elif self.type is 'scare':
-            self.execute_scare()
-        elif self.type is 'gang':
-            self.execute_gang()
-        elif self.type is 'recovery':
-            self.execute_recovery()
+        try:
+            if self.type is 'delivery':
+                self.execute_delivery()
+            elif self.type is 'kidnap':
+                self.execute_kidnap()
+            elif self.type is 'scare':
+                self.execute_scare()
+            elif self.type is 'gang':
+                self.execute_gang()
+            elif self.type is 'recovery':
+                self.execute_recovery()
+        except globals.GameOver:
+            raise globals.GameOver
 
     def execute_delivery(self):
         """
