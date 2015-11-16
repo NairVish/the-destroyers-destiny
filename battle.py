@@ -66,6 +66,7 @@ class Battle:
         self.possible_xp = int(self.enemy.level) + 3
         # NOTE: player health is globals.this_player.current_health
         self.p_max_health = globals.this_player.total_health
+        self.power_attack_used = False
 
     def do_battle(self):
         """
@@ -110,7 +111,12 @@ class Battle:
             print(Fore.RED + "You lost your turn because you used a potion!")
         else:
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
-            print(Fore.GREEN + "You dealt %.1f damage to the enemy!" % p_damage)
+            if skip is None:
+                self.power_attack_used = True
+                p_damage = p_damage * 1.25
+                print(Fore.GREEN + "You dealt %.1f damage in a power attack to the enemy!" % p_damage)
+            else:
+                print(Fore.GREEN + "You dealt %.1f damage to the enemy!" % p_damage)
             self.enemy.health -= p_damage
 
         if globals.this_player.assistant is True:
@@ -130,7 +136,7 @@ class Battle:
     def show_menu(self):
         """
         Accepts and executes the player's desired action on the main battle screen. Returns True if the player uses a potion
-        (from their inventory). Returns False in all other situations.
+        (from their inventory). Returns False in a regular attack. Returns None if doing a power attack.
         """
         self.show_options()
         inp = input("Choose an option: ")
@@ -143,16 +149,22 @@ class Battle:
                 continue
             else:
                 if inp is 2:
+                    if self.power_attack_used is False:
+                        return None
+                    else:
+                        inp = input("You cannot perform another power attack. Choose another option: ")
+                        continue
+                elif inp is 3:
                     globals.clear_screen()
                     old_length = len(globals.this_player.inventory)
                     globals.this_player.use_potion()
                     new_length = len(globals.this_player.inventory)
                     if old_length != new_length:
                         return True
-                elif inp is 3:
+                elif inp is 4:
                     globals.clear_screen()
                     globals.this_player.equip_weapon()
-                elif inp is 4:
+                elif inp is 5:
                     globals.this_player.print_stats()
                 else:
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
@@ -168,9 +180,10 @@ class Battle:
         """
         print("Battle Menu:\n"
               "\t1. Attack!\n"
-              "\t2. Use health item (lose turn).\n"
-              "\t3. Switch weapon (will not lose turn).\n"
-              "\t4. Show your stats (will not lose turn).\n")
+              "\t2. Power Attack! (performs 25% more damage, once per battle)\n"
+              "\t3. Use health item (lose turn).\n"
+              "\t4. Switch weapon (will not lose turn).\n"
+              "\t5. Show your stats (will not lose turn).\n")
 
 if __name__ == "__main__":
     print("To play this game, run 'start_here.py.'.\n"
