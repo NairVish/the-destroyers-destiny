@@ -7,6 +7,7 @@ __author__ = 'Vishnu Nair'
 import sys
 import globals
 import json
+import os
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -22,11 +23,13 @@ def exit_program():
 
 def force_exit_program():
     """
-    Exits the program when the KeyboardInterrupt exception is raised (i.e. when Ctrl-C is pressed).
+    Force exits the program when the KeyboardInterrupt exception is raised (i.e. when Ctrl-C is pressed).
     """
     globals.clear_screen()
     print(Fore.RED + "You have left the program. Thank you for playing.\n")
-    sys.exit()
+    os._exit(0)
+    # apparently, sys.exit() only raises a SystemExit exception. To end the program, os._exit() provides a sledgehammer approach,
+    # appropriate for this use.
 
 
 def prompt_for_save():

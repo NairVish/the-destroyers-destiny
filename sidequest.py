@@ -14,6 +14,7 @@ __author__ = 'Vishnu Nair'
 import globals
 import tabulate
 import dungeon
+import exit
 from random import randrange, choice
 from time import sleep
 
@@ -74,7 +75,12 @@ def quest_board():
     inp = int(inp)
     curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp],
                      globals.people_genders[globals.people_names.index(names[inp])], home_cities[inp])
-    curr.execute_quest()
+    try:
+        curr.execute_quest()
+    except KeyboardInterrupt:
+        exit.force_exit_program()
+    except:
+        raise globals.GameOver()
     date.advance_date()
 
 
@@ -125,19 +131,16 @@ class Sidequest():
         """
         globals.clear_screen()
         sleep(0.1)
-        try:
-            if self.type is 'delivery':
-                self.execute_delivery()
-            elif self.type is 'kidnap':
-                self.execute_kidnap()
-            elif self.type is 'scare':
-                self.execute_scare()
-            elif self.type is 'gang':
-                self.execute_gang()
-            elif self.type is 'recovery':
-                self.execute_recovery()
-        except globals.GameOver:
-            raise globals.GameOver
+        if self.type is 'delivery':
+            self.execute_delivery()
+        elif self.type is 'kidnap':
+            self.execute_kidnap()
+        elif self.type is 'scare':
+            self.execute_scare()
+        elif self.type is 'gang':
+            self.execute_gang()
+        elif self.type is 'recovery':
+            self.execute_recovery()
 
     def execute_delivery(self):
         """

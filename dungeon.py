@@ -143,7 +143,7 @@ class Dungeon:
                 this_battle = battle.Battle(self.cell.enemy)
             try:
                 this_battle.do_battle()
-            except globals.GameOver():
+            except globals.GameOver:
                 raise globals.GameOver()
             self.show_status()
         elif self.cell.loot is not None and self.cell.enemy is None:
