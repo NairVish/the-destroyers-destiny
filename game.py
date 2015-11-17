@@ -164,6 +164,10 @@ def game_loop():
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"
                       "It's right before you went into that fateful encounter.\n")
+                print("<Note: Your game's state has been reverted. Any loot collected and XP gained\n"
+                      "will carry over. However, you must go through the respective story sequence and"
+                      "dungeon again. Upgrade your weapon, buy some more potions, or gain some more"
+                      "XP through sidequests before doing so.>\n")
                 input("Press enter to continue...")
                 globals.clear_screen()
                 globals.this_player.main_quest_stage = game_over_reversion_target
