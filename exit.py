@@ -24,12 +24,16 @@ def exit_program():
 def force_exit_program():
     """
     Force exits the program when the KeyboardInterrupt exception is raised (i.e. when Ctrl-C is pressed).
+
+    Note: In many cases where a KeyboardInterrupt occurs, sys.exit() does not work because it simply raises a
+    SystemExit exception in the thread/module where it is called. Since we are usually several modules deep during
+    program execution, sys.exit() often does not work as intended. In these cases, it is more appropriate to call
+    os._exit() because it provides a more sledgehammer-like approach to leaving the program. (The parameter '0' in
+    os._exit() represents the exit code.)
     """
     globals.clear_screen()
     print(Fore.RED + "You have left the program. Thank you for playing.\n")
     os._exit(0)
-    # apparently, sys.exit() only raises a SystemExit exception. To end the program, os._exit() provides a sledgehammer approach,
-    # appropriate for this use.
 
 
 def prompt_for_save():
