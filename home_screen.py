@@ -70,6 +70,7 @@ class Home:
                 elif shop_input is '3':
                     shop.selling()
             elif inp is '3':
+                date_advanced = False
                 try:
                     if globals.this_player.sidequests is False:
                         print(Fore.RED + "You are an Unknown.\n"
@@ -78,7 +79,7 @@ class Home:
                         input("Press enter to continue...")
                         globals.clear_screen()
                         continue
-                    sidequest.quest_board()
+                    date_advanced = sidequest.quest_board()
                     sidequest.setup_quest_board()
                 except KeyboardInterrupt:
                     exit.force_exit_program()
@@ -91,6 +92,9 @@ class Home:
                     print("<Note: All loot collected and XP gained will carry over. However, you have\n"
                           "lost the reward for this sidequest.>\n")
                     input("Press enter to continue...")
+                if date_advanced is True:
+                    self.weather = weather.determine_weather(globals.this_player.date)
+                    self.weather_string = weather.string_weather(self.weather)
             elif inp is '4':
                 globals.this_player.print_stats()
             elif inp is '5':

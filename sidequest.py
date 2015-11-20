@@ -70,7 +70,7 @@ def quest_board():
         inp = input("You have entered an invalid option. Please try again: ")
 
     if inp is 'q':
-        return
+        return False
 
     inp = int(inp)
     curr = Sidequest(curr_types[inp], choice(globals.cave_names), names[inp],
@@ -82,6 +82,7 @@ def quest_board():
     except:
         raise globals.GameOver()
     date.advance_date()
+    return True
 
 
 class Sidequest():

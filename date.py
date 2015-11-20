@@ -1,4 +1,5 @@
 import globals
+from random import randrange
 
 
 def init_dates():
@@ -88,7 +89,7 @@ def string_date(date_list):
     whole_date_string = "%s, %s of %s, %s" % (day_of_week, string_day, month, year)
     return whole_date_string
 
-def advance_date():
+def advance_date(standalone=True):
     globals.this_player.date[1] += 1
     globals.this_player.date_num_days += 1
 
@@ -106,3 +107,11 @@ def advance_date():
         new_month_index = months.index(globals.this_player.date[2]) + 1
         globals.this_player.date[2] = months[new_month_index]
         globals.this_player.date[1] = 1
+
+    if standalone is True and globals.this_player.assistant is True:
+        globals.clear_screen()
+        money = randrange(1, 4)
+        print("Assistant Alert: Merlona made $%s today." % money)
+        globals.this_player.money += money
+        input("Press enter to continue...")
+        globals.clear_screen()
