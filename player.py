@@ -36,7 +36,7 @@ class Player:
         :param init_money: The player's available money (0 for a new player).
         :param init_assistant: Whether or not the player has an assistant right now (False for a new player).
         :param init_weapon: The player's current weapon represented by a Weapon object (None type for a new player).
-        :param init_day: The player's current day [solely used for main quest stage tracking] (1 for a new player).
+        :param init_day: The player's current day [used solely for main quest stage tracking] (1 for a new player).
         :param init_sidequest: Whether or not the player can access sidequests (False for a new player).
         :param init_inventory: A list that represents the player's current inventory (Empty list for a new player).
         :param init_date: The current date (Randomly picked day of the week, month, and day with year 2215 for new player).

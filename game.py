@@ -49,7 +49,8 @@ def game_loop():
         elif curr.startswith('m'):  # 'm': show home screen
             if player_stage == 91:
                 print(globals.dialogue[player_stage] + '\n')
-                exit_bool = home_screen.process_home()
+                home_scr = home_screen.Home()
+                exit_bool = home_scr.process_home()
                 if exit_bool is True:
                     return
                 else:
@@ -57,7 +58,8 @@ def game_loop():
             elif alert_day is None:
                 print(globals.dialogue[player_stage] + '\n')
                 alert_day = globals.this_player.day + 2
-                exit_bool = home_screen.process_home()
+                home_scr = home_screen.Home()
+                exit_bool = home_scr.process_home()
                 if exit_bool is True:
                     return
                 else:
