@@ -9,6 +9,7 @@ import player
 import os
 import random
 import date
+import weather
 
 
 def init_globals():
@@ -136,6 +137,7 @@ def init_globals():
         dialogue_jump_targets.append(int(row[2]))
 
     date.init_dates()
+    weather.init_weather()
 
 
 def select_province():
