@@ -1,9 +1,10 @@
 import globals
 import shop
+import center_square
 from weather import string_weather
 from date import string_date
 
-# City has multiple zones: market, (games),
+
 def init_outdoors():
     import csv
     with open("outdoor_statements.csv") as f:
@@ -31,7 +32,7 @@ class Outdoors:
 
     def opening_statement(self):
         cond = self.weather['condition']
-        self.header("Home")
+        self.header("%s's Home" % globals.this_player.name)
         print(statements_conditions[cond] + '\n')
         input("(Press enter to continue...)")
         globals.clear_screen()
@@ -44,7 +45,7 @@ class Outdoors:
                   "\t3. Home\n")
             return input("Where do you want to go? ")
 
-        loc = "Outside Home"
+        loc = "Outside %s's Home" % globals.this_player.name
         while True:
             self.header(loc)
             inp = print_menu()
@@ -93,4 +94,34 @@ class Outdoors:
             self.header(loc)
 
     def center(self):
-        pass
+        def print_menu():
+            print("Locations:\n"
+                  "\t1. The Battle Practice Area\n"
+                  "\t2. The Battle Arena\n"
+                  "\t3. The Casino\n"
+                  "\t4. Go back home.\n")
+            return input("Where do you want to go? ")
+
+        loc = "Center Square"
+        self.header(loc)
+        print("After some walking, you eventually reach Center Square: The heart of %s. Three attractions here "
+              "stand out to you.\n" % globals.this_player.home)
+        while True:
+            inp = print_menu()
+            accepted_answers = ['1', '2', '3', '4']
+            while inp not in accepted_answers:
+                inp = input("You have entered an invalid option. Please try again: ")
+
+            globals.clear_screen()
+            if inp is '1':
+                center_square.battle_practice()
+            elif inp is '2':
+                center_square.battle_arena()
+            elif inp is '3':
+                self.header("The Casino")
+                center_square.roulette()
+            elif inp is '4':
+                return
+
+            globals.clear_screen()
+            self.header(loc)
