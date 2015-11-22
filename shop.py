@@ -96,6 +96,7 @@ def selling():
         input("Press enter to return home...")
         return
 
+    print("I'm an insanely rich guy that likes to buy stuff. What would you like to sell to me?\n")
     tabular_data = []
     inventory_dict = {}
     items_to_remove = []
@@ -136,6 +137,7 @@ def selling():
                 if tabular_data[inp][1] == globals.this_player.current_weapon.name:
                     inp = input(Fore.RED + "You can't sell your currently equipped weapon! Please enter another option: ")
                     continue
+            globals.clear_screen()
             item_to_remove = globals.this_player.inventory[inp]
             item_value = inventory_dict[globals.this_player.inventory[inp]]
             print("%s sold for $%s!" % (item_to_remove, item_value))

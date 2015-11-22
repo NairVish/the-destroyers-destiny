@@ -38,7 +38,7 @@ class Outdoors:
 
     def initial(self):
         def print_menu():
-            print("\nLocations\n"
+            print("Locations:\n"
                   "\t1. The Market\n"
                   "\t2. Center Square\n"
                   "\t3. Home\n")
@@ -62,7 +62,7 @@ class Outdoors:
 
     def market(self):
         def print_menu():
-            print("\nLocations\n"
+            print("Locations:\n"
                   "\t1. The Crazy Weapons Specialist\n"
                   "\t2. The Oddly Unique Alchemist\n"
                   "\t3. The Really Rich Guy that Buys Everything\n"
@@ -72,7 +72,7 @@ class Outdoors:
         loc = "The Market"
         self.header(loc)
         print("Just as you reach the market, you hear vendors practically begging for your business. You "
-              "eventually set your sights on three businesses...")
+              "eventually set your sights on three businesses...\n")
         while True:
             inp = print_menu()
             accepted_answers = ['1', '2', '3', '4']
