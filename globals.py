@@ -10,6 +10,7 @@ import os
 import random
 import date
 import weather
+import outside
 
 
 def init_globals():
@@ -138,6 +139,7 @@ def init_globals():
 
     date.init_dates()
     weather.init_weather()
+    outside.init_outdoors()
 
 
 def select_province():

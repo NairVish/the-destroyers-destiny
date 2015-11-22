@@ -10,6 +10,7 @@ import sidequest
 import date
 import exit
 import weather
+import outside
 
 from colorama import Fore, init
 
@@ -34,7 +35,7 @@ class Home:
         print("Current Weather: %s\n" % self.weather_string)
 
         print("\t1. Do nothing and sleep until tomorrow.")
-        print("\t2. Go to a shop in the city.")
+        print("\t2. Go outside.")
         print("\t3. Check for side jobs.")
         print("\t4. See detailed statistics.")
         print("\t5. See your inventory.")
@@ -61,14 +62,8 @@ class Home:
             if inp is '1':
                 return False
             elif inp is '2':
-                shop_input = self.print_shop_selector()
-                globals.clear_screen()
-                if shop_input is '1':
-                    shop.potion_shop()
-                elif shop_input is '2':
-                    shop.weapon_shop()
-                elif shop_input is '3':
-                    shop.selling()
+                out = outside.Outdoors(self.weather)
+                out.traverse()
             elif inp is '3':
                 date_advanced = False
                 try:

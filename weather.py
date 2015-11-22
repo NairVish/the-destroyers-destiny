@@ -7,9 +7,9 @@ def init_weather():
         'Sunny',
         'Rainy and Windy',
         'Rainy',
-        'Windy',
+        'Sunny and Windy',
         'Cloudy',
-        'Cloudy and WIndy',
+        'Cloudy and Windy',
         'Foggy and Cloudy'
     ]
 
@@ -22,9 +22,9 @@ def init_weather():
     global season_specific_conditions
     season_specific_conditions = {
         'winter' : ['Blizzard', 'Light Snow'],
-        'spring' : ['Breezy'],
-        'summer' : ['Breezy', 'Hazy'],
-        'fall' : ['Breezy']
+        'spring' : ['Sunny and Breezy'],
+        'summer' : ['Sunny and Breezy', 'Hazy'],
+        'fall' : ['Sunny and Breezy']
     }
 
     global temp_ranges
