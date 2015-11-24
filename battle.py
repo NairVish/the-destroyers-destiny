@@ -7,7 +7,7 @@ __author__ = 'Vishnu Nair'
 
 from random import randrange
 from colorama import Fore, init
-
+import math
 import globals
 
 init(autoreset=True)
@@ -16,12 +16,21 @@ class Enemy:
     """
     The Enemy class holds all the data for the enemy in a battle.
     """
-    def __init__(self, enemy_name, enemy_type):
+    def __init__(self, enemy_name, enemy_type=None):
         """
         :param enemy_name: The enemy's name.
         :param enemy_type: The enemy type (bandit, looter, mobster, valstr).
         Initializes the enemy and its attributes.
         """
+        if enemy_name == "An Innocent Dummy":
+            self.enemy_name = enemy_name
+            self.enemy_type = "dummy"
+            self.level = 0
+            self.attack = 0
+            self.defense = 0
+            self.health = math.inf
+            self.max_health = math.inf
+            return
         self.enemy_name = enemy_name
         self.enemy_type = enemy_type
         self.level = self.determine_enemy_level()
@@ -55,18 +64,30 @@ class Battle:
     """
     The Battle class holds all data for and executes the battle mechanic.
     """
-    def __init__(self, enemy_name, type="reg"):
+    def __init__(self, enemy_name=None, type="reg", custom_parameters=None):
         """
         :param enemy_name: The name of the enemy (for the enemy's __init__ function).
-        :param type: The type of the enemy ((for the enemy's __init__ function).
+        :param type: The type of the enemy (for the enemy's __init__ function).
+        :param custom_parameters: An array of custom battle parameters.
         Initialized a battle with an enemy. Also, determines possible XP gained from the battle as well
         as the player's max health.
         """
+        if custom_parameters is not None:
+            if custom_parameters == 'dummy':
+                self.enemy = Enemy(enemy_name="An Innocent Dummy")
+                self.possible_xp = 0
+                self.p_max_health = globals.this_player.total_health
+                self.power_attack_used = False
+                self.custom_param = custom_parameters
+            elif custom_parameters == 'arena':
+                pass
+            return
         self.enemy = Enemy(enemy_name, type)
         self.possible_xp = int(self.enemy.level) + 3
         # NOTE: player health is globals.this_player.current_health
         self.p_max_health = globals.this_player.total_health
         self.power_attack_used = False
+        self.custom_param = None
 
     def do_battle(self):
         """
@@ -75,7 +96,9 @@ class Battle:
         """
         while globals.this_player.current_health > 0 and self.enemy.health > 0:
             self.show_status()
-            self.execute_move()
+            this = self.execute_move()
+            if this == "dummy_exit":
+                break
         globals.clear_screen()
         if globals.this_player.current_health <= 0:
             print(Fore.RED + "You have no health remaining! "
@@ -83,7 +106,10 @@ class Battle:
             raise globals.GameOver()
         else:
             globals.this_player.current_health = globals.this_player.total_health
-            print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!" % self.possible_xp)
+            if self.custom_param == "dummy":
+                print(Fore.GREEN + "Through battle practice, you gained %.1f XP!\n" % self.possible_xp)
+            else:
+                print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!" % self.possible_xp)
             globals.this_player.xp += self.possible_xp
             if globals.this_player.xp > globals.this_player.target_xp:
                 globals.this_player.level_up()
@@ -107,7 +133,9 @@ class Battle:
         """
         skip = self.show_menu()
         globals.clear_screen()
-        if skip is True:
+        if skip == "dummy_exit":
+            return "dummy_exit"
+        elif skip is True:
             print(Fore.RED + "You lost your turn because you used a potion!")
         else:
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
@@ -118,6 +146,8 @@ class Battle:
             else:
                 print(Fore.GREEN + "You dealt %.1f damage to the enemy!" % p_damage)
             self.enemy.health -= p_damage
+            if self.custom_param == "dummy":
+                self.possible_xp += 0.1
 
         if globals.this_player.assistant is True:
             prob = randrange(0,100)
@@ -166,6 +196,8 @@ class Battle:
                     globals.this_player.equip_weapon()
                 elif inp is 5:
                     globals.this_player.print_stats()
+                elif inp is 6 and self.custom_param == "dummy":
+                    return "dummy_exit"
                 else:
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
                     continue
@@ -183,7 +215,11 @@ class Battle:
               "\t2. Power Attack! (performs 25% more damage, once per battle)\n"
               "\t3. Use health item (lose turn).\n"
               "\t4. Switch weapon (will not lose turn).\n"
-              "\t5. Show your stats (will not lose turn).\n")
+              "\t5. Show your stats (will not lose turn).")
+        if self.custom_param == "dummy":
+            print("\t6. Leave Battle Practice\n")
+        else:
+            print("\n")
 
 if __name__ == "__main__":
     print("To play this game, run 'start_here.py.'.\n"

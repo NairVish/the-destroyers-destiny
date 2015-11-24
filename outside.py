@@ -114,6 +114,7 @@ class Outdoors:
 
             globals.clear_screen()
             if inp is '1':
+                self.header("The Battle Practice Area")
                 center_square.battle_practice()
             elif inp is '2':
                 center_square.battle_arena()

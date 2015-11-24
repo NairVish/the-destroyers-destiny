@@ -1,5 +1,6 @@
 import globals
 import tkinter
+import battle
 from time import sleep
 from random import choice
 from colorama import Fore
@@ -10,11 +11,18 @@ def battle_arena():
 
 
 def battle_practice():
-    pass
-
+    print("You decide to go to the Battle Practice Area. You could always get stronger, and practice makes perfect, "
+          "right?\n")
+    print("Alas, the only way to train here is to whack on a dummy until you get bored. Seriously. These dummys "
+          "don't even award a lot of XP. Might as well go and fight a bunch of aliens...\n")
+    print("But you're here, so you ultimately decide to fulfill your destiny and "
+          "whack on a dummy until you get bored.\n")
+    input("(Press enter to start whacking...)")
+    globals.clear_screen()
+    curr = battle.Battle(custom_parameters="dummy")
+    curr.do_battle()
 
 def roulette():
-    globals.clear_screen()
 
     class RouletteExit(Exception):
         pass
@@ -73,16 +81,16 @@ def roulette():
     def choose_bet():
         print("Bet Types:\n"
               "\t1. Straight Up (bet on a single number, 35:1)\n"
-              "\t2. Split Bet (bet on two adjoining numbers, 17:1)\n"
+              "\t2. Split Bet (bet on two adjacent numbers, 17:1)\n"
               "\t3. Street Bet (bet on one of the 12 rows, 11:1)\n"
-              "\t4. Double Street (bet on two adjoining rows, 5:1)\n"
+              "\t4. Double Street (bet on two adjacent rows, 5:1)\n"
               "\t5. Basket (bet on the top pocket of the board, 6:1)\n"
               "\t6. Halves (bet on 1-18 or 18-36, 1:1)\n"
               "\t7. All Reds (bet on all reds, 1:1)\n"
               "\t8. All Blacks (bet on all blacks, 1:1)\n"
               "\t9. All Odds (bet on all odds, 1:1)\n"
               "\t10. All Evens (bet on all evens, 1:1)\n"
-              "\t11. Dozens Bet (bet on consecutive dozen, 2:1)\n"
+              "\t11. Dozens Bet (bet on a consecutive dozen, 2:1)\n"
               "\t12. Columns Bet (bet on one of the three vertical columns, 2:1)\n")
         inp = input("Enter the number of the bet you would like to make, else enter 'q' to leave: ")
         accepted_answers = [str(x) for x in range(0,13)]
@@ -103,7 +111,7 @@ def roulette():
         print("Maximum Bet: $%s\n" % max_bet)
 
     def get_wager():
-        wager = input("Please enter your wager: ")
+        wager = input("Please enter your wager: $")
         while True:
             try:
                 wager = int(wager)
@@ -378,11 +386,11 @@ def roulette():
         inp = int(inp)
         your_choice = roulette_board_rows[inp][:]
         if inp != 1 and inp != 12:
-            print("Next possible choices:"
+            print("Next possible choices:\n"
                   "\tRow %s: %s\n"
                   "\tRow %s: %s\n" % (str(inp-1), roulette_board_rows[inp-1],
                                       str(inp+1), roulette_board_rows[inp+1]))
-            accepted_answers = [inp-1, inp+1]
+            accepted_answers = [str(inp-1), str(inp+1)]
             inp2 = input("Please enter your second option: ")
             while inp2 not in accepted_answers:
                 inp2 = input("Please enter a valid option: ")
