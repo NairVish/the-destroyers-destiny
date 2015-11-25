@@ -1,6 +1,7 @@
 import globals
 import tkinter
 import battle
+import exit
 from time import sleep
 from random import choice
 from colorama import Fore
@@ -15,12 +16,12 @@ def battle_practice():
           "right?\n")
     print("Alas, the only way to train here is to whack on a dummy until you get bored. Seriously. These dummys "
           "don't even award a lot of XP. Might as well go and fight a bunch of aliens...\n")
-    print("But you're here, so you ultimately decide to fulfill your destiny and "
-          "whack on a dummy until you get bored.\n")
+    print("But you're here, so you ultimately decide to fulfill your destiny and whack on a dummy until you get bored.\n")
     input("(Press enter to start whacking...)")
     globals.clear_screen()
     curr = battle.Battle(custom_parameters="dummy")
     curr.do_battle()
+
 
 def roulette():
 
@@ -168,11 +169,20 @@ def roulette():
                 globals.clear_screen()
                 layout_ref.destroy()
                 return
-            else:
-                bet = determine_function(choice)
-                winnings = bet()
-                net_winnings += winnings
+            except KeyboardInterrupt:
                 globals.clear_screen()
+                layout_ref.destroy()
+                exit.force_exit_program()
+            else:
+                try:
+                    bet = determine_function(choice)
+                    winnings = bet()
+                    net_winnings += winnings
+                    globals.clear_screen()
+                except KeyboardInterrupt:
+                    globals.clear_screen()
+                    layout_ref.destroy()
+                    exit.force_exit_program()
 
     # Bet functions
     def straight_up():
