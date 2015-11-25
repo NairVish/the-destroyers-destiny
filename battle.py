@@ -34,8 +34,8 @@ class Enemy:
         self.enemy_name = enemy_name
         self.enemy_type = enemy_type
         self.level = self.determine_enemy_level()
-        self.attack = self.level
-        self.defense = self.attack+1
+        self.attack = self.determine_attack_level()
+        self.defense = self.determine_defense_level()
         self.health = self.determine_health()
         self.max_health = self.health
 
@@ -48,6 +48,18 @@ class Enemy:
             return globals.this_player.level-0.5
         elif self.enemy_type is "boss":
             return globals.this_player.level
+
+    def determine_attack_level(self):
+        if self.enemy_type is "reg":
+            return globals.this_player.attack*0.5
+        elif self.enemy_type is "boss":
+            return globals.this_player.attack*0.95
+
+    def determine_defense_level(self):
+        if self.enemy_type is "reg":
+            return globals.this_player.defense*0.5
+        elif self.enemy_type is "boss":
+            return globals.this_player.defense*0.95
 
     def determine_health(self):
         """
@@ -68,7 +80,7 @@ class Battle:
         """
         :param enemy_name: The name of the enemy (for the enemy's __init__ function).
         :param type: The type of the enemy (for the enemy's __init__ function).
-        :param custom_parameters: An array of custom battle parameters.
+        :param custom_parameters: A string that denotes a custom battle parameter.
         Initialized a battle with an enemy. Also, determines possible XP gained from the battle as well
         as the player's max health.
         """
@@ -158,7 +170,10 @@ class Battle:
         if self.enemy.health <= 0:
             return
 
-        e_damage = self.enemy.attack
+        if self.enemy.enemy_type == "boss":
+            e_damage = self.enemy.attack - (globals.this_player.defense/3)
+        else:
+            e_damage = self.enemy.attack
         print(Fore.RED + "The enemy dealt %.1f damage to you!\n" % e_damage)
         globals.this_player.current_health -= e_damage
 
