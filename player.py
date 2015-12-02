@@ -114,7 +114,7 @@ class Player:
         globals.clear_screen()
         print("STATISTICS FOR %s" % self.name)
         print("Level: %s" % self.level)
-        print("Current XP: %s" % self.xp)
+        print("Current XP: %.1f" % self.xp)
         print("XP Needed for Level Up: %s" % self.target_xp)
         print("Current Health: %s" % self.current_health)
         print("Total Health: %s" % self.total_health)

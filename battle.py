@@ -119,7 +119,7 @@ class Battle:
         else:
             globals.this_player.current_health = globals.this_player.total_health
             if self.custom_param == "dummy":
-                print(Fore.GREEN + "Through battle practice, you gained %.1f XP!\n" % self.possible_xp)
+                print(Fore.GREEN + "Through battle practice, you gained %.1f XP!" % self.possible_xp)
             else:
                 print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!" % self.possible_xp)
             globals.this_player.xp += self.possible_xp

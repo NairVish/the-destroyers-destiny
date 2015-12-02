@@ -117,6 +117,7 @@ class Outdoors:
                 self.header("The Battle Practice Area")
                 center_square.battle_practice()
             elif inp is '2':
+                self.header("The Battle Arena")
                 center_square.battle_arena()
             elif inp is '3':
                 self.header("The Casino")

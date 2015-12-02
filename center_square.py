@@ -2,13 +2,59 @@ import globals
 import tkinter
 import battle
 import exit
+import random
 from time import sleep
 from random import choice
 from colorama import Fore
 
 
 def battle_arena():
-    pass
+    # We have to create 8 players, one of whom is the player.
+    # We then pair up these guys and make them face off. Only here, the player and someone face off, and everyone
+    #   else "wins" via random choice.
+    # We continue on and on until we reach the final, where the final two battle it out.
+    # If the player loses, the 'Elimination' exception is raised, and rest of the tournament is simulated.
+
+    class Elimination(Exception):
+        pass
+
+    def opening():
+        print("Ahh, the Battle Arena.\n")
+        print("That place where the best warriors in all of the Imperial Provinces gather together and try to beat "
+              "each other up.\n")
+        print("Sometimes, to death.\n")
+        print("In front of a live audience.\n")
+        print("The mere thought of getting beaten up badly in public is enough to send you running out of there, but "
+              "you decide otherwise. You're perfectly capable. Why not do this?\n")
+        print("So, you go forth and hope for the best.\n")
+        input("(Press enter to go forth...)")
+        globals.clear_screen()
+        inp = input("Are you sure you want to enter the Battle Arena? (y/n) ")
+        accepted_answers = ['y','n']
+        while inp not in accepted_answers:
+            inp = input("You have entered an invalid option. Please try again: ")
+        globals.clear_screen()
+        return inp
+
+    def determine_matches(tourney_enemies):
+        pass
+
+    under_construction = True
+    if under_construction:
+        print("The Battle Arena is still currently under construction. Come back at another time.\n")
+        input("(Press enter to return to Center Square...)")
+        return
+
+    answer = opening()
+    if answer == 'n':
+        print("On second thought, you'd rather save your energy for some other endeavor. Accordingly, you run out "
+              "of the arena as fast as you can.\n")
+        input("(Press enter to return to Center Square...)")
+        return
+
+    tourney_enemies = random.sample(globals.arena_enemy_names, 7)
+    this_player = globals.this_player.name
+    tourney_enemies.insert(0, this_player)
 
 
 def battle_practice():
@@ -704,7 +750,7 @@ def roulette():
     else:
         game_type = "European Roulette"
 
-    # Set min and max bets
+    # Set min and max bets to arbitrary numbers.
     min_bet = 3
     max_bet = 15
     net_winnings = 0
@@ -726,7 +772,7 @@ def roulette():
     second_dozen = ['13','14','15','16','17','18','19','20','21','22','23','24']
     third_dozen = ['25','26','27','28','29','30','31','32','33','34','35','36']
 
-    # initialize layout reference GUI
+    # initialize layout reference GUI.
     layout_ref = tkinter.Tk()
     title = "%s: Board Layout" % game_type
     layout_ref.wm_title(title)
@@ -743,7 +789,7 @@ def roulette():
     if net_winnings < 0:
         print("Counting all of the rounds you played today, you ended up losing a total of $%s.\n" % abs(net_winnings))
     elif net_winnings == 0:
-        print("Counting all of the rounds you played, you ended up neither gaining nor losing!\n")
+        print("Counting all of the rounds you played, you ended up neither gaining nor losing money!\n")
     else:
         print("Counting all of the rounds you played today, you ended up gaining a total of $%s.\n" % abs(net_winnings))
     input("(Press enter to return to Center Square...)")
