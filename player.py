@@ -104,7 +104,7 @@ class Player:
         self.current_health = self.total_health
 
         self.level += 1
-        print("\nLEVEL UP!")
+        print("LEVEL UP!")
         print("You are now at level %s.\n" % self.level)
 
     def print_stats(self):

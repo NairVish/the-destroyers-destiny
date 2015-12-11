@@ -182,7 +182,7 @@ class Dungeon:
             print("\t1. Show current stats.")
             print("\t2. Use a potion.")
             print("\t3. Switch weapon.\n")
-            return input("\nChoose an option: ")
+            return input("Choose an option: ")
 
         inp = print_menu()
         

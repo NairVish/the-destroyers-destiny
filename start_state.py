@@ -42,7 +42,7 @@ def show_start_menu():  # The startup menu
     if save is not None:
         print('\t2. Continue from existing save.')
         accepted_answers = ['1','2','q']
-    print('\tq. Quit.')
+    print('\tq. Quit.\n')
     answer = input('Choose your desired option: ')
     while answer not in accepted_answers:
         answer = input('You have entered an invalid option. Please try again: ')

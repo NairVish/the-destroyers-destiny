@@ -5,25 +5,23 @@ import exit
 import random
 from time import sleep
 from random import choice
-from colorama import Fore
+from colorama import Fore, init
 
+init(autoreset=True)
 
 def battle_arena():
     # We have to create 8 players, one of whom is the player.
     # We then pair up these guys and make them face off. Only here, the player and someone face off, and everyone
     #   else "wins" via random choice.
     # We continue on and on until we reach the final, where the final two battle it out.
-    # If the player loses, the 'Elimination' exception is raised, and rest of the tournament is simulated.
-
-    class Elimination(Exception):
-        pass
+    # If the player loses, the 'PlayerElimination' exception is raised, and rest of the tournament is simulated.
 
     def opening():
         print("Ahh, the Battle Arena.\n")
-        print("That place where the best warriors in all of the Imperial Provinces gather together and try to beat "
-              "each other up.\n")
-        print("Sometimes, to death.\n")
-        print("In front of a live audience.\n")
+        print("That place where the best warriors in all of Nira gather together and try to beat "
+              "each other up...\n")
+        print("Sometimes to death...\n")
+        print("In front of a live audience...\n")
         print("The mere thought of getting beaten up badly in public is enough to send you running out of there, but "
               "you decide otherwise. You're perfectly capable. Why not do this?\n")
         print("So, you go forth and hope for the best.\n")
@@ -36,26 +34,142 @@ def battle_arena():
         globals.clear_screen()
         return inp
 
-    def determine_matches(tourney_enemies):
-        pass
+    def display_round_matches(participants):
+        # Match 0 : 0,1
+        # Match 1 : 2,3
+        # Match 2 : 4,5
+        # Match 3 : 6,7
+        num_matches = int(len(participants)/2)
+        if curr_round == max_round:
+            print("FINAL ROUND")
+        else:
+            print("ROUND %s" % curr_round)
 
-    under_construction = True
-    if under_construction:
-        print("The Battle Arena is still currently under construction. Come back at another time.\n")
-        input("(Press enter to return to Center Square...)")
-        return
+        if num_matches > 1:
+            print("The matches for this round are as follows:\n")
+        else:
+            print("The final match is as follows:\n")
+
+        for num in range(num_matches):
+            print("Match %s" % str(num+1))
+            print("%s vs. %s\n" % (participants[2*num], participants[2*num+1]))
+
+        if this_player in participants and curr_round == max_round:
+            print("You will be battling against %s in the final match.\n" % participants[1])
+        elif this_player in participants:
+            print("You will be battling against %s in Match 1.\n" % participants[1])
+        else:
+            print("You were eliminated from the tournament and will not be participating in further rounds.\n")
+
+        input("(Press enter to start the round...)")
+        globals.clear_screen()
+
+    def battle_intro(player_battle_participants):
+        print("Like always, the announcer goes up to the ring to introduce the challengers.\n")
+        input("(Press enter to continue...)")
+        globals.clear_screen()
+        if curr_round == max_round:
+            print("Announcer: And now for the final round!\n")
+            input("(Press enter to continue...)")
+            globals.clear_screen()
+            print("On the left side, an up and coming fighter hailing from your hometown of %s, please welcome %s!\n" %
+                (globals.this_player.home, this_player))
+        else:
+            print("Announcer: On the left side, hailing from your hometown of %s, please welcome %s!\n" %
+                (globals.this_player.home, this_player))
+        input("(Press enter to continue...)")
+        globals.clear_screen()
+        print("And, on the right side, please welcome one of the strongest fighters in all of Nira, %s!\n" %
+              player_battle_participants[1])
+        input("(Press enter to continue...)")
+        globals.clear_screen()
+        if curr_round == max_round:
+            print("Let the final battle begin!\n")
+        else:
+            print("Let the battle begin!\n")
+        input("(Press enter to continue...)")
+        globals.clear_screen()
+
+    def execute_round():
+        nonlocal tourney_participants
+
+        def yield_matches(num_matches, participants):
+            for match in range(num_matches):
+                yield match+1, participants[2*match], participants[2*match+1]
+
+        def show_round_results():
+            globals.clear_screen()
+            print("ROUND RESULTS\n")
+            for match_num, part1, part2 in yield_matches(num_matches, tourney_participants):
+                print("Match %s" % match_num)
+                if part1 not in eliminated:
+                    print("%s defeated %s.\n" % (part1, part2))
+                else:
+                    print("%s defeated %s.\n" % (part2, part1))
+            input("(Press enter to proceed...)")
+            globals.clear_screen()
+
+        eliminated = []
+        if this_player in tourney_participants:
+            curr = battle.Battle(enemy_name=this_battle_participants[1], type="boss")
+            try:
+                curr.do_battle()
+            except globals.GameOver:
+                globals.clear_screen()
+                eliminated.append(this_player)
+                print(Fore.RED + "You have lost the battle and have been eliminated from the tournament!\n")
+                input("(Press enter to continue...)")
+            else:
+                eliminated.append(this_battle_participants[1])
+            start = 1
+        else:
+            start = 2
+
+        num_matches = int(len(tourney_participants) / 2)
+        for match in range(start, num_matches):
+            curr_match = [tourney_participants[2*match], tourney_participants[2*match+1]]
+            winner = random.choice(curr_match)
+            for participant in curr_match:
+                if participant != winner:
+                    eliminated.append(participant)
+
+        show_round_results()
+
+        tourney_participants = [participant for participant in tourney_participants if participant not in eliminated]
 
     answer = opening()
     if answer == 'n':
         print("On second thought, you'd rather save your energy for some other endeavor. Accordingly, you run out "
               "of the arena as fast as you can.\n")
         input("(Press enter to return to Center Square...)")
+        globals.clear_screen()
         return
 
-    tourney_enemies = random.sample(globals.arena_enemy_names, 7)
+    tourney_participants = random.sample(globals.arena_enemy_names, 7)
+    random.shuffle(tourney_participants)
     this_player = globals.this_player.name
-    tourney_enemies.insert(0, this_player)
+    tourney_participants.insert(0, this_player)
 
+    curr_round = 0
+    max_round = 3
+    while len(tourney_participants) > 1:
+        curr_round += 1
+        display_round_matches(tourney_participants)
+        if this_player in tourney_participants:
+            this_battle_participants = [tourney_participants[0], tourney_participants[1]]
+            battle_intro(this_battle_participants)
+        execute_round()
+
+    globals.clear_screen()
+    if tourney_participants[0] == this_player:
+        print("You have won the tournament! Congratulations!\n")
+        print("As your prize, you have been awarded $25!\n")
+        globals.this_player.money += 25
+    else:
+        print("%s went on to win the tournament.\n" % tourney_participants[0])
+        print("Better luck next time.\n")
+
+    input("(Press enter to return to Center Square...)")
 
 def battle_practice():
     print("You decide to go to the Battle Practice Area. You could always get stronger, and practice makes perfect, "
@@ -121,7 +235,7 @@ def roulette():
     def main_header():
         print("ROULETTE")
         print("Game Type: %s" % game_type)
-        print("Your money: $%s" % globals.this_player.money)
+        print("Your money: $%.2f" % float(globals.this_player.money))
         print("Minimum Bet: $%s" % min_bet)
         print("Maximum Bet: $%s\n" % max_bet)
 
@@ -153,7 +267,7 @@ def roulette():
     def bet_header(bet_type, payoff):
         print("ROULETTE: %s" % bet_type)
         print("Payoff: %s:1" % str(payoff))
-        print("Your money: $%s" % globals.this_player.money)
+        print("Your money: $%.2f" % float(globals.this_player.money))
         print("Minimum Bet: $%s" % min_bet)
         print("Maximum Bet: $%s\n" % max_bet)
 
@@ -161,17 +275,17 @@ def roulette():
         wager = input("Please enter your wager: $")
         while True:
             try:
-                wager = int(wager)
+                wager = float(wager)
             except ValueError:
-                wager = input("You have entered an invalid amount. Please try again: ")
+                wager = input("You have entered an invalid amount. Please try again: $")
                 continue
             else:
                 if wager > globals.this_player.money:
-                    wager = input("You do not have enough money. Please enter a new wager: ")
+                    wager = input("You do not have enough money. Please enter a new wager: $")
                     continue
                 if wager < min_bet or wager > max_bet:
                     wager = input("Your wager must be within the bounds of the house's minimum and maximum bets.\n"
-                                  "Please try again: ")
+                                  "Please try again: $")
                     continue
                 break
         return wager
@@ -249,16 +363,14 @@ def roulette():
         print(result + '!\n')
         if your_choice != result:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Amazing! You won! How on Nira did you do that?!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def split_bet():
         bet_type = "Split Bet"
@@ -377,16 +489,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def street_bet():
         bet_type = "Street Bet"
@@ -413,16 +523,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def double_street():
         bet_type = "Double Street"
@@ -434,7 +542,7 @@ def roulette():
         earning -= wager
         inp = input("Please select the first row of numbers you would like to bet on.\n"
                     "Here, a 'row' is a row of three consecutive numbers on the roulette board.\n"
-                    "For example, row 1 would be [1,2,3] and so on.\n"
+                    "For example, row 1 would be [1,2,3] and so on.\n\n"
                     "Row number: ")
         accepted_answers = [str(x) for x in range (1,13)]
         while inp not in accepted_answers:
@@ -470,16 +578,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def basket():
         bet_type = "Basket"
@@ -501,16 +607,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def halves():
         bet_type = "Halves"
@@ -538,17 +642,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
-
+        input("(Press enter to continue...)")
+        return earning
 
     def bet_color_red():
         bet_type = "All Reds"
@@ -566,16 +667,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("(Press enter to continue...)")
+        return earning
 
     def bet_color_black():
         bet_type = "All Blacks"
@@ -593,17 +692,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
-
+        input("Press enter to continue...")
+        return earning
 
     def bet_odd():
         bet_type = "All Odds"
@@ -621,16 +717,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("Press enter to continue...")
+        return earning
 
     def bet_even():
         bet_type = "All Evens"
@@ -648,16 +742,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("Press enter to continue...")
+        return earning
 
     def dozens():
         bet_type = "Dozens"
@@ -688,16 +780,14 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("Press enter to continue...")
+        return earning
 
     def column():
         bet_type = "Columns"
@@ -732,20 +822,18 @@ def roulette():
         print(result + '!\n')
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
-            input("Press enter to continue...")
-            return earning
         else:
             print("Awesome! You won!")
             winnings = wager * payoff
             print("You won $%s!" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
-            input("Press enter to continue...")
-            return earning
+        input("Press enter to continue...")
+        return earning
     # END bet functions
 
-    type = opening()
-    if type == '1':
+    this_type = opening()
+    if this_type == '1':
         game_type = "American Roulette"
     else:
         game_type = "European Roulette"
@@ -757,7 +845,7 @@ def roulette():
 
     roulette_choices = [str(x) for x in range(0,37)]
     # American Roulette has an extra number.
-    if type == '1':
+    if this_type == '1':
         roulette_choices.append('00')
 
     # Set up roulette board row and column list representations as well as various groups.
@@ -782,7 +870,7 @@ def roulette():
     new_image = layout_image.subsample(2, 2)
     canvas = tkinter.Canvas()
     canvas.create_image(0, 0, anchor='nw', image=new_image)
-    canvas.pack(fill='both',expand='yes')
+    canvas.pack(fill='both', expand='yes')
     layout_ref.after(0, game_loop)
     layout_ref.mainloop()
 

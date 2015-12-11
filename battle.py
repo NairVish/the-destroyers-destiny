@@ -119,9 +119,9 @@ class Battle:
         else:
             globals.this_player.current_health = globals.this_player.total_health
             if self.custom_param == "dummy":
-                print(Fore.GREEN + "Through battle practice, you gained %.1f XP!" % self.possible_xp)
+                print(Fore.GREEN + "Through battle practice, you gained %.1f XP!\n" % self.possible_xp)
             else:
-                print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!" % self.possible_xp)
+                print(Fore.GREEN + "You have defeated your enemy and have gained %s XP!\n" % self.possible_xp)
             globals.this_player.xp += self.possible_xp
             if globals.this_player.xp > globals.this_player.target_xp:
                 globals.this_player.level_up()
@@ -135,7 +135,7 @@ class Battle:
         """
         print("BATTLE WITH %s" % self.enemy.enemy_name.upper())
         print("Your health: %.1f/%s" % (globals.this_player.current_health, self.p_max_health))
-        print("Enemy health: %.1f/%s" % (self.enemy.health, self.enemy.max_health))
+        print("Enemy health: %.1f/%s\n" % (self.enemy.health, self.enemy.max_health))
 
     def execute_move(self):
         """
@@ -230,9 +230,9 @@ class Battle:
               "\t2. Power Attack! (performs 25% more damage, once per battle)\n"
               "\t3. Use health item (lose turn).\n"
               "\t4. Switch weapon (will not lose turn).\n"
-              "\t5. Show your stats (will not lose turn).")
+              "\t5. Show your stats (will not lose turn).", end='')
         if self.custom_param == "dummy":
-            print("\t6. Leave Battle Practice\n")
+            print("\n\t6. Leave Battle Practice\n")
         else:
             print("\n")
 

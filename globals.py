@@ -27,7 +27,7 @@ def init_globals():
         global province_names
         province_names = [province.strip() for province in all_provinces]
 
-    with open("arena_enemies.txt", 'r') as arena_enemies_file: # enemy names for arena
+    with open("arena_enemies.txt", 'r') as arena_enemies_file: # enemy names for battle arena
         all_arena_enemies = arena_enemies_file.readlines()
         global arena_enemy_names
         arena_enemy_names = [arena_enemy.rstrip('\n') for arena_enemy in all_arena_enemies]
