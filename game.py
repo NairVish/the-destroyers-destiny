@@ -73,7 +73,8 @@ def game_loop():
                     alert_day = None
                 else:
                     print(globals.dialogue[player_stage] + '\n')
-                    exit_bool = home_screen.process_home()
+                    home_scr = home_screen.Home()
+                    exit_bool = home_scr.process_home()
                     if exit_bool is True:
                         return
                     else:
