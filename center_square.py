@@ -1,3 +1,9 @@
+"""
+Handles all minigames/activities in Center Square in the player's home city.
+"""
+
+__author__ = "Vishnu Nair"
+
 import globals
 import tkinter
 import battle
@@ -9,14 +15,19 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def battle_arena():
-    # We have to create 8 players, one of whom is the player.
-    # We then pair up these guys and make them face off. Only here, the player and someone face off, and everyone
-    #   else "wins" via random choice.
-    # We continue on and on until we reach the final, where the final two battle it out.
-    # If the player loses, the 'PlayerElimination' exception is raised, and rest of the tournament is simulated.
+    """
+    Function for an eight-player, single-elimination battle tournament that the player can participate in.
+    Each of the player's battles is a boss fight and is fought in real-time. The program randomly chooses the
+    winners of the remaining fights. If the player is eliminated, the rest of the tournament is simulated.
+    Eliminated participants are removed from the list of tournament participants.
+    """
 
     def opening():
+        """
+        The intro sequence to the battle arena.
+        """
         print("Ahh, the Battle Arena.\n")
         print("That place where the best warriors in all of Nira gather together and try to beat "
               "each other up...\n")
@@ -28,17 +39,20 @@ def battle_arena():
         input("(Press enter to go forth...)")
         globals.clear_screen()
         inp = input("Are you sure you want to enter the Battle Arena? (y/n) ")
-        accepted_answers = ['y','n']
+        accepted_answers = ['y', 'n']
         while inp not in accepted_answers:
             inp = input("You have entered an invalid option. Please try again: ")
         globals.clear_screen()
         return inp
 
     def display_round_matches(participants):
-        # Match 0 : 0,1
-        # Match 1 : 2,3
-        # Match 2 : 4,5
-        # Match 3 : 6,7
+        """
+        Displays the matches in each round before the round begins.
+        :param participants: A list of participants in the round.
+            * In this list, match n-1's participants are in positions 2*n and 2*n+1. So, match 1's participants are
+            in positions 0 and 1.
+            * If the player is still in the tournament, he/she is always in position 0.
+        """
         num_matches = int(len(participants)/2)
         if curr_round == max_round:
             print("FINAL ROUND")
@@ -65,6 +79,10 @@ def battle_arena():
         globals.clear_screen()
 
     def battle_intro(player_battle_participants):
+        """
+        The intro to the player's battle. NOT executed if the player has been eliminated.
+        :param player_battle_participants: The participants in the player's battle.
+        """
         print("Like always, the announcer goes up to the ring to introduce the challengers.\n")
         input("(Press enter to continue...)")
         globals.clear_screen()
@@ -91,13 +109,24 @@ def battle_arena():
         globals.clear_screen()
 
     def execute_round():
+        """
+        Executes the current round.
+        """
         nonlocal tourney_participants
 
         def yield_matches(num_matches, participants):
+            """
+            Generator function that yields the matches in each round.
+            :param num_matches: The number of matches in each round.
+            :param participants: A list of the round's participants.
+            """
             for match in range(num_matches):
                 yield match+1, participants[2*match], participants[2*match+1]
 
         def show_round_results():
+            """
+            Shows the results of the round after the conclusion of each round.
+            """
             globals.clear_screen()
             print("ROUND RESULTS\n")
             for match_num, part1, part2 in yield_matches(num_matches, tourney_participants):
@@ -134,9 +163,9 @@ def battle_arena():
                     eliminated.append(participant)
 
         show_round_results()
-
         tourney_participants = [participant for participant in tourney_participants if participant not in eliminated]
 
+    # Give the player a second choice at proceeding
     answer = opening()
     if answer == 'n':
         print("On second thought, you'd rather save your energy for some other endeavor. Accordingly, you run out "
@@ -145,11 +174,13 @@ def battle_arena():
         globals.clear_screen()
         return
 
+    # Establish tournament participants
     tourney_participants = random.sample(globals.arena_enemy_names, 7)
     random.shuffle(tourney_participants)
     this_player = globals.this_player.name
     tourney_participants.insert(0, this_player)
 
+    # Keep simulating the tournament until we have only one participant left
     curr_round = 0
     max_round = 3
     while len(tourney_participants) > 1:
@@ -160,6 +191,7 @@ def battle_arena():
             battle_intro(this_battle_participants)
         execute_round()
 
+    # Award player $25 for winning, else nothing
     globals.clear_screen()
     if tourney_participants[0] == this_player:
         print("You have won the tournament! Congratulations!\n")
@@ -172,6 +204,11 @@ def battle_arena():
     input("(Press enter to return to Center Square...)")
 
 def battle_practice():
+    """
+    Function to initiate the battle practice mechanic. The mechanic itself is handled by the battle class, which is
+    notified of the dummy battle using the "dummy" custom parameter. Player faces off against a dummy with infinite
+    health. Each hit on the dummy nets the player 0.1 XP. XP is awarded when the player leaves battle practice.
+    """
     print("You decide to go to the Battle Practice Area. You could always get stronger, and practice makes perfect, "
           "right?\n")
     print("Alas, the only way to train here is to whack on a dummy until you get bored. Seriously. These dummys "
@@ -184,11 +221,20 @@ def battle_practice():
 
 
 def roulette():
+    """
+    Function for the roulette minigame.
+    """
 
     class RouletteExit(Exception):
+        """
+        An empty exception to indicate that the player has elected to leave the minigame.
+        """
         pass
 
     def opening():
+        """
+        The intro sequence to the roulette minigame.
+        """
         print("You enter the bustling casino. It seems that, no matter what happens, people will continue throwing "
               "their money away on these games. Might as well throw your money away too.\n")
         print("You're particularly fond of roulette. So, you head over to the roulette table and hope that you "
@@ -209,6 +255,9 @@ def roulette():
         return inp
 
     def init_roulette_board():
+        """
+        Returns list representations of the various groups of numbers on the roulette board.
+        """
         board_rows = []
         board_columns = []
         if game_type == "American Roulette":
@@ -230,9 +279,21 @@ def roulette():
         board_columns.append(['1','4','7','10','13','16','19','22','25','28','31','34'])
         board_columns.append(['2','5','8','11','14','17','20','23','26','29','32','35'])
         board_columns.append(['3','6','9','12','15','18','21','24','27','30','33','36'])
-        return board_rows, board_columns
+        reds = ['1','3','5','7','9','12','14','16','18','21','23','25','27','28','30','32','34','36']
+        blacks = ['2','4','6','8','10','11','13','15','17','19','20','22','24','26','29','31','33','35']
+        evens = ['2','4','6','8','10','12','14','16','18','20','22','24','26','28','30','32','34','36']
+        odds = ['1','3','5','7','9','11','13','15','17','19','21','23','25','27','29','31','33','35']
+        first_half = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18']
+        second_half = ['19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36']
+        first_dozen = ['1','2','3','4','5','6','7','8','9','10','11','12']
+        second_dozen = ['13','14','15','16','17','18','19','20','21','22','23','24']
+        third_dozen = ['25','26','27','28','29','30','31','32','33','34','35','36']
+        return board_rows, board_columns, reds, blacks, evens, odds, first_half, second_half, first_dozen, second_dozen, third_dozen
 
     def main_header():
+        """
+        The header shown on the main roulette menu.
+        """
         print("ROULETTE")
         print("Game Type: %s" % game_type)
         print("Your money: $%.2f" % float(globals.this_player.money))
@@ -240,6 +301,9 @@ def roulette():
         print("Maximum Bet: $%s\n" % max_bet)
 
     def choose_bet():
+        """
+        Prints the list of available bets and returns the player's desired choice.
+        """
         print("Bet Types:\n"
               "\t1. Straight Up (bet on a single number, 35:1)\n"
               "\t2. Split Bet (bet on two adjacent numbers, 17:1)\n"
@@ -265,6 +329,11 @@ def roulette():
             return inp
 
     def bet_header(bet_type, payoff):
+        """
+        The header shown on the bet screen.
+        :param bet_type: The name of the bet being played.
+        :param payoff: The payoff of this bet.
+        """
         print("ROULETTE: %s" % bet_type)
         print("Payoff: %s:1" % str(payoff))
         print("Your money: $%.2f" % float(globals.this_player.money))
@@ -272,6 +341,9 @@ def roulette():
         print("Maximum Bet: $%s\n" % max_bet)
 
     def get_wager():
+        """
+        Receives and validates the player's wager.
+        """
         wager = input("Please enter your wager: $")
         while True:
             try:
@@ -291,6 +363,10 @@ def roulette():
         return wager
 
     def determine_function(choice):
+        """
+        Determines the bet function to be executed considering the player's choice.
+        :param choice: The player's choice.
+        """
         if choice == '1':
             return straight_up
         elif choice == '2':
@@ -317,6 +393,12 @@ def roulette():
             return column
 
     def game_loop():
+        """
+        The main roulette loop. We leave when the RouletteExit or KeyboardInterrupt exception is raised.
+
+        NOTE: Tkinter interferes with the main game loop's handling of the KeyboardInterrupt exception. As a result,
+        we have to handle the exception directly in the roulette game loop.
+        """
         nonlocal net_winnings
 
         while True:
@@ -344,8 +426,12 @@ def roulette():
                     layout_ref.destroy()
                     exit.force_exit_program()
 
-    # Bet functions
+    # Bet functions. All bet functions return the player's net winnings.
     def straight_up():
+        """
+        Bet where the player bets on exactly one number on the roulette board.
+        Payoff - 35:1
+        """
         bet_type = "Straight Up"
         payoff = 35
         earning = 0
@@ -373,6 +459,10 @@ def roulette():
         return earning
 
     def split_bet():
+        """
+        Bet where the player bets on two numbers that are adjacent to each other on the roulette board.
+        Payoff - 17:1
+        """
         bet_type = "Split Bet"
         payoff = 17
         earning = 0
@@ -499,6 +589,10 @@ def roulette():
         return earning
 
     def street_bet():
+        """
+        Bet where the player bets on a row of three numbers on the roulette board.
+        Payoff - 11:1
+        """
         bet_type = "Street Bet"
         payoff = 11
         earning = 0
@@ -533,6 +627,10 @@ def roulette():
         return earning
 
     def double_street():
+        """
+        Bet where the player bets on two rows of three numbers, that are adjacent to each other on the roulette board.
+        Payoff - 5:1
+        """
         bet_type = "Double Street"
         payoff = 5
         earning = 0
@@ -588,6 +686,11 @@ def roulette():
         return earning
 
     def basket():
+        """
+        Bet where the player bets on the top pocket of numbers on the roulette board:
+        [0,1,2,3] (and 00 if playing American Roulette). Commonly considered the worst bet in roulette.
+        Payoff - 6:1
+        """
         bet_type = "Basket"
         payoff = 6
         earning = 0
@@ -617,6 +720,10 @@ def roulette():
         return earning
 
     def halves():
+        """
+        Bet where the player bets on either the first (1-18) or second (19-36) half of numbers on the roulette board.
+        Payoff - 1:1
+        """
         bet_type = "Halves"
         payoff = 1
         earning = 0
@@ -652,6 +759,10 @@ def roulette():
         return earning
 
     def bet_color_red():
+        """
+        Bet where the player bets on all of the numbers that are in red squares on the roulette board.
+        Payoff - 1:1
+        """
         bet_type = "All Reds"
         payoff = 1
         earning = 0
@@ -677,6 +788,10 @@ def roulette():
         return earning
 
     def bet_color_black():
+        """
+        Bet where the player bets on all of the numbers that are in black squares on the roulette board.
+        Payoff - 1:1
+        """
         bet_type = "All Blacks"
         payoff = 1
         earning = 0
@@ -702,6 +817,10 @@ def roulette():
         return earning
 
     def bet_odd():
+        """
+        Bet where the player bets on all of the odd numbers on the roulette board.
+        Payoff - 1:1
+        """
         bet_type = "All Odds"
         payoff = 1
         earning = 0
@@ -727,6 +846,10 @@ def roulette():
         return earning
 
     def bet_even():
+        """
+        Bet where the player bets on all of the even numbers on the roulette board.
+        Payoff - 1:1
+        """
         bet_type = "All Evens"
         payoff = 1
         earning = 0
@@ -752,6 +875,10 @@ def roulette():
         return earning
 
     def dozens():
+        """
+        Bet where the player bets on one of the three dozens of numbers on the roulette board: [1-12, 13-24, 25-36].
+        Payoff - 2:1
+        """
         bet_type = "Dozens"
         payoff = 2
         earning = 0
@@ -790,6 +917,10 @@ def roulette():
         return earning
 
     def column():
+        """
+        Bet where the player bets on one of the three columns of the roulette board.
+        Payoff - 2:1
+        """
         bet_type = "Columns"
         payoff = 2
         earning = 0
@@ -832,6 +963,7 @@ def roulette():
         return earning
     # END bet functions
 
+    # Receive player's opening choice.
     this_type = opening()
     if this_type == '1':
         game_type = "American Roulette"
@@ -844,21 +976,12 @@ def roulette():
     net_winnings = 0
 
     roulette_choices = [str(x) for x in range(0,37)]
-    # American Roulette has an extra number.
+    # American Roulette has an extra number on the board.
     if this_type == '1':
         roulette_choices.append('00')
 
     # Set up roulette board row and column list representations as well as various groups.
-    roulette_board_rows, roulette_board_columns = init_roulette_board()
-    reds = ['1','3','5','7','9','12','14','16','18','21','23','25','27','28','30','32','34','36']
-    blacks = ['2','4','6','8','10','11','13','15','17','19','20','22','24','26','29','31','33','35']
-    evens = ['2','4','6','8','10','12','14','16','18','20','22','24','26','28','30','32','34','36']
-    odds = ['1','3','5','7','9','11','13','15','17','19','21','23','25','27','29','31','33','35']
-    first_half = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18']
-    second_half = ['19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36']
-    first_dozen = ['1','2','3','4','5','6','7','8','9','10','11','12']
-    second_dozen = ['13','14','15','16','17','18','19','20','21','22','23','24']
-    third_dozen = ['25','26','27','28','29','30','31','32','33','34','35','36']
+    roulette_board_rows, roulette_board_columns, reds, blacks, evens, odds, first_half, second_half, first_dozen, second_dozen, third_dozen = init_roulette_board()
 
     # initialize layout reference GUI.
     layout_ref = tkinter.Tk()
@@ -874,6 +997,7 @@ def roulette():
     layout_ref.after(0, game_loop)
     layout_ref.mainloop()
 
+    # Give player overview of net earnings
     if net_winnings < 0:
         print("Counting all of the rounds you played today, you ended up losing a total of $%s.\n" % abs(net_winnings))
     elif net_winnings == 0:
@@ -881,3 +1005,7 @@ def roulette():
     else:
         print("Counting all of the rounds you played today, you ended up gaining a total of $%s.\n" % abs(net_winnings))
     input("(Press enter to return to Center Square...)")
+
+if __name__ == "__main__":
+    print("To play this game, run 'launch.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

@@ -29,7 +29,7 @@ def force_exit_program():
     SystemExit exception in the thread/module where it is called. Since we are usually several modules deep during
     program execution, sys.exit() often does not work as intended. In these cases, it is more appropriate to call
     os._exit() because it provides a more sledgehammer-like approach to leaving the program. (The parameter '0' in
-    os._exit() represents the exit code.)
+    os._exit() represents the normal exit code.)
     """
     globals.clear_screen()
     print(Fore.RED + "You have left the program. Thank you for playing.\n")
@@ -60,7 +60,7 @@ def prompt_for_save():
 
 def save_game():
     """
-    Saves the game by writing the player's attributes to a file called "save.json" in the game directory.
+    Saves the game by writing the player's attributes to a JSON file called "save.json" in the game directory.
     """
     player = globals.this_player
     save_data = {}
@@ -95,5 +95,5 @@ def exit_sequence():
     exit_program()
 
 if __name__ == "__main__":
-    print("To play this game, run 'start_here.py.'.\n"
+    print("To play this game, run 'launch.py.'.\n"
           "For more information about this file, see 'readme.txt'.")

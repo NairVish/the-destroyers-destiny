@@ -81,6 +81,7 @@ class Battle:
         :param enemy_name: The name of the enemy (for the enemy's __init__ function).
         :param type: The type of the enemy (for the enemy's __init__ function).
         :param custom_parameters: A string that denotes a custom battle parameter.
+            * At the moment, there is only one custom parameter: "dummy", which indicates battle practice.
         Initialized a battle with an enemy. Also, determines possible XP gained from the battle as well
         as the player's max health.
         """
@@ -91,8 +92,6 @@ class Battle:
                 self.p_max_health = globals.this_player.total_health
                 self.power_attack_used = False
                 self.custom_param = custom_parameters
-            elif custom_parameters == 'arena':
-                pass
             return
         self.enemy = Enemy(enemy_name, type)
         self.possible_xp = int(self.enemy.level) + 3
@@ -237,5 +236,5 @@ class Battle:
             print("\n")
 
 if __name__ == "__main__":
-    print("To play this game, run 'start_here.py.'.\n"
+    print("To play this game, run 'launch.py.'.\n"
           "For more information about this file, see 'readme.txt'.")

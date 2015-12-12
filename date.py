@@ -1,8 +1,17 @@
+"""
+Handles the date mechanic.
+"""
+
+__author__ = "Vishnu Nair"
+
 import globals
 from random import randrange
 
 
 def init_dates():
+    """
+    Initializes to memory all possible choices for all components of the date.
+    """
     global months
     months = ["First Depth",
               "Sun's Darkness",
@@ -79,6 +88,10 @@ def init_dates():
 
 
 def string_date(date_list):
+    """
+    Converts a date list into a string.
+    :param date_list: The input date list.
+    """
     day_of_week = date_list[0]
     day = date_list[1]
     month = date_list[2]
@@ -90,6 +103,11 @@ def string_date(date_list):
     return whole_date_string
 
 def advance_date(standalone=True):
+    """
+    Advances the date.
+    :param standalone: Boolean that indicates whether or not we're advancing independent of globals.this_player.day,
+    which is used for main quest stage tracking.
+    """
     globals.this_player.date[1] += 1
     globals.this_player.date_num_days += 1
 
@@ -115,3 +133,7 @@ def advance_date(standalone=True):
         globals.this_player.money += money
         input("Press enter to continue...")
         globals.clear_screen()
+
+if __name__ == "__main__":
+    print("To play this game, run 'launch.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

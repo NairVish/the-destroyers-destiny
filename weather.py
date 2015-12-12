@@ -1,7 +1,18 @@
+"""
+Handles the weather mechanic.
+"""
+
+__author__ = "Vishnu Nair"
+
 import date
 from random import choice
 
+
 def init_weather():
+    """
+    Initializes to memory all possible choices for all components of the weather as well as information needed
+    to pick the day's weather.
+    """
     global regular_conditions
     regular_conditions = [
         'Sunny',
@@ -35,7 +46,12 @@ def init_weather():
         'fall' : list(range(54,73))
     }
 
-def determine_weather(date_list): # we need temp, weather cond, and season
+def determine_weather(date_list):
+    """
+    Returns a dictionary representing the weather.
+    The weather is determined according to the date provided, which determines the season.
+    :param date_list: The input date list.
+    """
     month = date_list[2]
     this_season = None
     weather = {}
@@ -55,4 +71,12 @@ def determine_weather(date_list): # we need temp, weather cond, and season
     return weather
 
 def string_weather(weather):
+    """
+    Stringifys the weather.
+    :param weather: The input weather dictionary.
+    """
     return ("%s°F, %s" % (weather['temp'], weather['condition']))
+
+if __name__ == "__main__":
+    print("To play this game, run 'launch.py.'.\n"
+          "For more information about this file, see 'readme.txt'.")

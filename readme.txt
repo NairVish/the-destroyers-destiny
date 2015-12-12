@@ -1,6 +1,6 @@
 The Destroyer's Destiny
     A Game by Vishnu Nair
-    CSC 11300 Project 1
+    CSC 11300 Projects 1 & 2
 
 To start the game, run the file "start_here.py".
 
@@ -16,8 +16,12 @@ To start the game, run the file "start_here.py".
     * sidequest.py - handles the sidequest mechanic
     * start_here.py - the game launch module
     * start_state.py - handles the start sequence for the game
-    * tabulate.py (from PyPI) - "pretty-prints" tabular data [credit for this module goes to the module's creator]
+    * tabulate.py (THIRD-PARTY MODULE) - "pretty-prints" tabular data [credit for this module goes to the module's creator]
     * terminal.py - handles the terminal sequence
+    * center_square.py [NEW] - handles the minigames/activities associated with Center Square
+    * date.py [NEW] - handles the date mechanic
+    * weather.py [NEW] - handles the weather mechanic
+    * colorama (THIRD-PARTY MODULE) [NEW] - provides colored terminal text
 
 Other data files:
     * caves_hideaways.txt - holds names for dungeons for the sidequest mechanic
@@ -29,3 +33,6 @@ Other data files:
     * rare_loot.csv - holds all rare loot names and their values
     * side_enemies.txt - hold names for all enemies that can be encountered in sidequests
     * weapons.csv - holds weapon names, powers, and costs
+    * arena_enemies.txt [NEW] - holds the names of all enemies that can be encountered in the battle arena
+    * American Roulette.gif [NEW] - the layout for the American Roulette board
+    * European Roulette.gif [NEW] - the layout for the European Roulette board

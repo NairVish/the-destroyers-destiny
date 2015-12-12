@@ -21,7 +21,7 @@ def print_intro():
     globals.clear_screen()
     intro_text = (
         "THE DESTROYER'S DESTINY\n"
-        "\tCSC 11300 Project 1\n"
+        "\tCSC 11300 Projects 1 & 2\n"
         "\tBy: Vishnu Nair\n\n"
         "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
@@ -63,12 +63,9 @@ def find_save():
     """
     result = False
     if 'save.json' in os.listdir(os.getcwd()):
-        result = True
-
-    if result is False:
-        return None
-    else:
         return open('save.json','r')
+    else:
+        return None
 
 
 def load_player():
@@ -104,5 +101,5 @@ def startSequence():
     load_player()
 
 if __name__ == "__main__":
-    print("To play this game, run 'start_here.py.'.\n"
+    print("To play this game, run 'launch.py.'.\n"
           "For more information about this file, see 'readme.txt'.")

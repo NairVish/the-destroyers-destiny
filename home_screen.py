@@ -18,7 +18,13 @@ init(autoreset=True)
 
 
 class Home:
+    """
+    The main home screen class.
+    """
     def __init__(self):
+        """
+        Initializes the home screen by selecting the day's weather.
+        """
         self.weather = weather.determine_weather(globals.this_player.date)
         self.weather_string = weather.string_weather(self.weather)
 
@@ -122,5 +128,5 @@ class Home:
         return inp
 
 if __name__ == "__main__":
-    print("To play this game, run 'start_here.py.'.\n"
+    print("To play this game, run 'launch.py.'.\n"
           "For more information about this file, see 'readme.txt'.")
