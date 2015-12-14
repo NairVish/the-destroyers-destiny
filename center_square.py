@@ -73,7 +73,7 @@ def battle_arena():
         elif this_player in participants:
             print("You will be battling against %s in Match 1.\n" % participants[1])
         else:
-            print("You were eliminated from the tournament and will not be participating in further rounds.\n")
+            print(Fore.RED + "You were eliminated from the tournament and will not be participating in further rounds.\n")
 
         input("(Press enter to start the round...)")
         globals.clear_screen()
@@ -152,7 +152,7 @@ def battle_arena():
                 eliminated.append(this_battle_participants[1])
             start = 1
         else:
-            start = 2
+            start = 0
 
         num_matches = int(len(tourney_participants) / 2)
         for match in range(start, num_matches):
