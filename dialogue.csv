@@ -64,7 +64,7 @@
 "Wait, how do you know where these guys are?",r,65
 "Volun: I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
 "You see, we have been engaging in 'diplomacy' talks with the Valst'r for years now. They were angry about something and demanded to enslave everyone on Nira. Then suddenly, they invade us. We didn't even know why until just a few days back when they called you the 'Destroyer' or something...",rn,0
-"And how do you expect these missiles to get there in time? If I'm correct, then the nearest *star* is light-years away.",r,67
+"And how do you expect these missiles to get there in time? If I'm correct, the nearest *star* is light-years away.",r,67
 "Volun: Ah, you underestimate us there. Surely, you've heard that nothing can go past the speed of light. Well, that's rubbish! We've created something called a 'warp drive.' Basically, we've found a way to configure the energy-density field around these missiles such that...",rn,0
 "OK! OK! What on Nira do you want us to do?",r,69
 "Volun: It's simple. You and your assistant here are going to launch these missiles.",rn,0

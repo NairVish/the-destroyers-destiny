@@ -450,9 +450,9 @@ def roulette():
         if your_choice != result:
             print("Sorry, you lost this round.\n")
         else:
-            print("Amazing! You won! How on Nira did you do that?!")
+            print("Amazing! How on Nira did you do that?!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -580,9 +580,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -618,9 +617,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -677,9 +675,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -711,9 +708,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -750,9 +746,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -779,9 +774,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -808,9 +802,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("Press enter to continue...")
@@ -837,9 +830,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("Press enter to continue...")
@@ -866,9 +858,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("Press enter to continue...")
@@ -908,9 +899,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("Press enter to continue...")
@@ -954,9 +944,8 @@ def roulette():
         if result not in your_choice:
             print("Sorry, you lost this round.\n")
         else:
-            print("Awesome! You won!")
             winnings = wager * payoff
-            print("You won $%s!" % str(winnings))
+            print("Awesome! You won $%s!\n" % str(winnings))
             globals.this_player.money += winnings
             earning += winnings
         input("Press enter to continue...")

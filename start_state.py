@@ -57,11 +57,10 @@ def show_start_menu():  # The startup menu
 
 def find_save():
     """
-    Looks for a game save file in the current working directory.
+    Looks for a game save file (called 'save.json') in the current working directory.
     If not found, returns None.
     If found, returns opened file.
     """
-    result = False
     if 'save.json' in os.listdir(os.getcwd()):
         return open('save.json','r')
     else:

@@ -5,12 +5,13 @@ Handles all functions that deal with the player itself.
 
 __author__ = 'Vishnu Nair'
 
-from random import randrange
-
 import globals
 import date
 from random import choice, randrange
 from tabulate import tabulate
+from colorama import Fore, init
+
+init(autoreset=True)
 
 
 class Player:
@@ -292,9 +293,9 @@ class Player:
 
         if globals.this_player.assistant is True:
             money = randrange(5, 15)
-            print("Assistant Alert: Merlona made $%s today." % money)
+            print(Fore.GREEN + "Assistant Alert: Merlona made $%s today.\n" % money)
             globals.this_player.money += money
-            input("Press enter to continue...")
+            input("(Press enter to continue...)")
             globals.clear_screen()
 
 
