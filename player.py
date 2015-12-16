@@ -130,7 +130,7 @@ class Player:
             print('\t' + item)
         if len(self.inventory) == 0:
             print('\tNone')
-        input("\nPress enter to return to previous screen...")
+        input("\n(Press enter to return to previous screen...)")
         globals.clear_screen()
 
     def toggle_assistant_flag(self):
@@ -321,5 +321,5 @@ class Weapon:
 
 
 if __name__ == "__main__":
-    print("To play this game, run 'launch.py.'.\n"
+    print("To play this game, run 'launch.py'.\n"
           "For more information about this file, see 'readme.txt'.")

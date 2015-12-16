@@ -129,11 +129,11 @@ def advance_date(standalone=True):
     if standalone is True and globals.this_player.assistant is True:
         globals.clear_screen()
         money = randrange(1, 4)
-        print("Assistant Alert: Merlona made $%s today." % money)
+        print("Assistant Alert: Merlona made $%s today.\n" % money)
         globals.this_player.money += money
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         globals.clear_screen()
 
 if __name__ == "__main__":
-    print("To play this game, run 'launch.py.'.\n"
+    print("To play this game, run 'launch.py'.\n"
           "For more information about this file, see 'readme.txt'.")

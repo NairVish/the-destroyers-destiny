@@ -203,5 +203,5 @@ def stage4():
     globals.clear_screen()
 
 if __name__ == "__main__":
-    print("To play this game, run 'launch.py.'.\n"
+    print("To play this game, run 'launch.py'.\n"
           "For more information about this file, see 'readme.txt'.")

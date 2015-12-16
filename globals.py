@@ -17,6 +17,8 @@ def init_globals():
     """
     Initializes all necessary global variables.
     """
+    print("Loading required data...\n")
+
     with open("caves_hideaways.txt", 'r') as cave_file: # dungeon names for side quests
         all_caves = cave_file.readlines()
         global cave_names
@@ -206,5 +208,5 @@ class GameOver(Exception):
     pass
 
 if __name__ == "__main__":
-    print("To play this game, run 'launch.py.'.\n"
+    print("To play this game, run 'launch.py'.\n"
           "For more information about this file, see 'readme.txt'.")

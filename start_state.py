@@ -19,15 +19,12 @@ def print_intro():
     Prints the intro screen.
     """
     globals.clear_screen()
-    intro_text = (
+    print(
         "THE DESTROYER'S DESTINY\n"
         "\tCSC 11300 Projects 1 & 2\n"
         "\tBy: Vishnu Nair\n\n"
         "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
-    print(intro_text)
-    time.sleep(2.5)
-    globals.clear_screen()
 
 
 def show_start_menu():  # The startup menu
@@ -35,7 +32,7 @@ def show_start_menu():  # The startup menu
     Prints the main startup menu and requests user input of either starting New Game, continuing (if save is found),
     or quitting.
     """
-    print('Main Menu'.upper())
+    print('MAIN MENU')
     print('\t1. Start a new game.')
     accepted_answers = ['1','q']
     save = find_save()
@@ -95,10 +92,12 @@ def startSequence():
     """
     Executes start sequence for start state
     """
-    globals.init_globals()
     print_intro()
+    globals.init_globals()
+    time.sleep(2.3)
+    globals.clear_screen()
     load_player()
 
 if __name__ == "__main__":
-    print("To play this game, run 'launch.py.'.\n"
+    print("To play this game, run 'launch.py'.\n"
           "For more information about this file, see 'readme.txt'.")
