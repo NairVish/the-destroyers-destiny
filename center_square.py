@@ -167,11 +167,19 @@ def battle_arena():
 
     # Give the player a second choice at proceeding
     answer = opening()
+
     if answer == 'n':
         print("On second thought, you'd rather save your energy for some other endeavor. Accordingly, you run out "
               "of the arena as fast as you can.\n")
         input("(Press enter to return to Center Square...)")
         globals.clear_screen()
+        return
+
+    if globals.this_player.current_weapon is None:
+        print("However, as you walk toward the registration booth, you're hit with the sudden realization that you don't "
+              "own a weapon.\n\nHow are you going to fight without a weapon?\n\n"
+              "Accordingly, you sulk out of the arena and back into the city.\n")
+        input("(Press enter to return to Center Square...)")
         return
 
     # Establish tournament participants
@@ -216,6 +224,14 @@ def battle_practice():
     print("But you're here, so you ultimately decide to fulfill your destiny and whack on a dummy until you get bored.\n")
     input("(Press enter to start whacking...)")
     globals.clear_screen()
+
+    if globals.this_player.current_weapon is None:
+        print("Alas, you realize that you don't have a weapon to whack the dummy with.\n\n"
+              "Faced with no way around this predicament, you have no choice but to leave the Battle Practice Area and "
+              "hope that you get a weapon by some gracious act of war.\n")
+        input("(Press enter to return to Center Square...)")
+        return
+
     curr = battle.Battle(custom_parameters="dummy")
     curr.do_battle()
 
@@ -344,9 +360,11 @@ def roulette():
         """
         Receives and validates the player's wager.
         """
-        wager = input("Please enter your wager: $")
+        wager = input("Please enter your wager, enter 'q' if you wish to turn back: $")
         while True:
             try:
+                if wager == 'q':
+                    return wager
                 wager = float(wager)
             except ValueError:
                 wager = input("You have entered an invalid amount. Please try again: $")
@@ -437,6 +455,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = input("What number will you bet on? ")
@@ -452,7 +474,7 @@ def roulette():
         else:
             print("Amazing! How on Nira did you do that?!")
             winnings = wager * payoff
-            print("You won $%s!\n" % str(winnings))
+            print("You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -468,6 +490,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         inp = input("Please select the ROW of the first number you would like to bet on.\n"
@@ -581,7 +607,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -597,6 +623,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         inp = input("Please select the row of numbers you would like to bet on.\n"
@@ -618,7 +648,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -634,6 +664,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         inp = input("Please select the first row of numbers you would like to bet on.\n"
@@ -676,7 +710,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -693,6 +727,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = ['0','1','2','3']
@@ -709,7 +747,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -725,6 +763,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         print("Halves\n"
@@ -747,7 +789,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -763,6 +805,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = reds
@@ -775,7 +821,7 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
         input("(Press enter to continue...)")
@@ -791,6 +837,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = blacks
@@ -803,10 +853,10 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         return earning
 
     def bet_odd():
@@ -819,6 +869,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = odds
@@ -831,10 +885,10 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         return earning
 
     def bet_even():
@@ -847,6 +901,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         your_choice = evens
@@ -859,10 +917,10 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         return earning
 
     def dozens():
@@ -875,6 +933,10 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         print("Dozens\n"
@@ -900,10 +962,10 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         return earning
 
     def column():
@@ -916,12 +978,16 @@ def roulette():
         earning = 0
         bet_header(bet_type, payoff)
         wager = get_wager()
+
+        if wager == 'q':
+            return earning
+
         globals.this_player.money -= wager
         earning -= wager
         print("Columns:\n"
               "\t1. First Column\n"
               "\t2. Second Column\n"
-              "\t3. Third Column")
+              "\t3. Third Column\n")
         print("Here, a 'column' is one of three large columns on the roulette board that comprise of 12 numbers each.\n"
               "For example, the first column comprises of the following: ['1','4','7','10','13','16','19','22','25','28','31','34'] "
               "and so on.\n"
@@ -945,24 +1011,33 @@ def roulette():
             print("Sorry, you lost this round.\n")
         else:
             winnings = wager * payoff
-            print("Awesome! You won $%s!\n" % str(winnings))
+            print("Awesome! You won $%.2f!\n" % winnings)
             globals.this_player.money += winnings
             earning += winnings
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
         return earning
     # END bet functions
 
+    # Set house min and max bets to arbitrary numbers.
+    min_bet = 3
+    max_bet = 15
+    net_winnings = 0
+
     # Receive player's opening choice.
     this_type = opening()
+
+    # Determine if player actually has enough money to participate
+    if globals.this_player.money < min_bet:
+        print("Unfortunately, the only way to throw away your money is to actually have some money.\n\n"
+              "Thus, you have no choice but to leave.\n")
+        input("(Press enter to return to Center Square...)")
+        return
+
+    # Set game type
     if this_type == '1':
         game_type = "American Roulette"
     else:
         game_type = "European Roulette"
-
-    # Set min and max bets to arbitrary numbers.
-    min_bet = 3
-    max_bet = 15
-    net_winnings = 0
 
     roulette_choices = [str(x) for x in range(0,37)]
     # American Roulette has an extra number on the board.
@@ -988,11 +1063,11 @@ def roulette():
 
     # Give player overview of net earnings
     if net_winnings < 0:
-        print("Counting all of the rounds you played today, you ended up losing a total of $%s.\n" % abs(net_winnings))
+        print("Counting all of the rounds you played today, you ended up losing a total of $%.2f.\n" % abs(net_winnings))
     elif net_winnings == 0:
         print("Counting all of the rounds you played, you ended up neither gaining nor losing money!\n")
     else:
-        print("Counting all of the rounds you played today, you ended up gaining a total of $%s.\n" % abs(net_winnings))
+        print("Counting all of the rounds you played today, you ended up gaining a total of $%.2f.\n" % abs(net_winnings))
     input("(Press enter to return to Center Square...)")
 
 if __name__ == "__main__":

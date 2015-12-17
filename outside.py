@@ -111,7 +111,7 @@ class Outdoors:
 
         loc = "The Market"
         self.header(loc)
-        print("Just as you reach the market, you hear vendors practically begging for your business. You "
+        print("You know you've reached the market because you hear vendors practically begging for your business. You "
               "eventually set your sights on three businesses...\n")
         while True:
             inp = print_menu()

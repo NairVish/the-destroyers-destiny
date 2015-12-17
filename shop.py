@@ -107,9 +107,9 @@ def selling():
     print("Your current money: $%.2f\n" % globals.this_player.money)
 
     if not globals.this_player.inventory:
-        print("The Rich Guy: You have nothing to sell me. Why on Nira are you here?")
+        print("The Rich Guy: You have nothing to sell me. Why on Nira are you here?\n")
         print(Fore.RED + "<Alert: You have nothing in your inventory. Come back when you have something to sell.>\n")
-        input("Press enter to return home...")
+        input("(Press enter to return to the Market...)")
         return
 
     print("The Rich Guy: I'm an insanely rich guy that likes to buy stuff. What would you like to sell to me?\n")

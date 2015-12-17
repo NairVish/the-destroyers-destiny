@@ -121,7 +121,7 @@ class Player:
         print("Total Health: %s" % self.total_health)
         print("Total Attack: %s" % self.attack)
         print("Total Defense: %s" % self.defense)
-        print("Current Money: $%s" % self.money)
+        print("Current Money: $%.2f" % self.money)
         print("Current Weapon: %s" % self.current_weapon)
         print("Adventure started on: %s" % date.string_date(self.start_date))
         print("Days since adventure start: %s" % self.date_num_days)
@@ -130,7 +130,7 @@ class Player:
             print('\t' + item)
         if len(self.inventory) == 0:
             print('\tNone')
-        input("\n(Press enter to return to previous screen...)")
+        input("\n(Press enter to return...)")
         globals.clear_screen()
 
     def toggle_assistant_flag(self):
@@ -177,7 +177,7 @@ class Player:
 
         if number_of_potions is 0:
             print("You have no potions in your inventory that you can use right now.\n")
-            input("Press enter to return...")
+            input("(Press enter to return...)")
             globals.clear_screen()
             return
         print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
@@ -239,7 +239,7 @@ class Player:
         print("WEAPON CHOOSER\n")
         if number_of_weapons is 0:
             print("You have no weapons to equip.\n")
-            input("Press enter to continue...")
+            input("(Press enter to return...)")
             return
         print(tabulate(tabular_weapon_inv, headers=["No.", "Name", "Power"], tablefmt="fancy_grid"))
 
@@ -263,7 +263,7 @@ class Player:
             w_name = globals.weapon_names[globals.weapon_names.index(tabular_weapon_inv[inp][1])]
             print("The %s has been equipped." % w_name)
             self.current_weapon = Weapon(w_name)
-            input("Press enter to return home...")
+            input("Press enter to return...")
 
         globals.clear_screen()
 
@@ -280,7 +280,7 @@ class Player:
                 print('* ' + item)
             print('\n')
 
-        input("Press enter to return home...")
+        input("(Press enter to return...)")
 
     def sleep(self):
         """

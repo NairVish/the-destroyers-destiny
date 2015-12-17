@@ -5,10 +5,11 @@ Handles and contains all definitions for the terminal sequence of the main quest
 __author__ = 'Vishnu Nair'
 
 import getpass
-from time import sleep
-
 import globals
+from time import sleep
+from colorama import Fore, init
 
+init(autoreset=True)
 
 def terminal():
     """
@@ -66,9 +67,9 @@ def stage1():
             globals.clear_screen()
             print("Loading self-destruction program...\n")
             sleep(3)
-            print("Fatal error: Self-destruction program not configured.\n"
+            print(Fore.RED + "Fatal error: Self-destruction program not configured.\n"
                   "Operation aborted.\n")
-            input("Press enter to continue...")
+            input("(Press enter to return to the previous menu...)")
             inp = print_menu()
         elif inp is '3':
             globals.clear_screen()
@@ -80,7 +81,7 @@ def stage1():
                   "* Overall: OK!\n"
                   "* Guidance systems: Ready!\n"
                   "* Hexonium status: Dormant. Ready for ultimate reactions.\n")
-            input("Press enter to continue...")
+            input("(Press enter to return to the previous menu...)")
             inp = print_menu()
         elif inp is '4':
             print("-launch: quit: Quitting failed. Once started, missile launch procedure cannot be aborted.")
@@ -100,12 +101,10 @@ def stage2():
     inp = print_menu()
     while True:
         if inp is not '1':
-            globals.clear_screen()
-            print("MissileLaunch: Invalid option.\n")
-            input("Press any button to return to previous menu.")
+            print(Fore.RED + "-launch: %s: Invalid option." % inp)
         else:
             return
-        inp = print_menu()
+        inp = receive_input_2()
 
 
 def stage3():
@@ -130,7 +129,7 @@ def stage3():
             word = print_menu()
             continue
         else:
-            print("You have entered an invalid password. Please try again.")
+            print(Fore.RED + "You have entered an invalid password. Please try again.")
             word = getpass.getpass()
     globals.clear_screen()
     print("Preparing missile systems...Done!\n"
@@ -159,8 +158,8 @@ def stage3():
     sleep(0.5)
     print("1...")
     sleep(0.5)
-    print("Lift-off of both missiles reported!\n")
-    input("Press enter to continue...")
+    print(Fore.GREEN + "Lift-off of both missiles reported!\n")
+    input("(Press enter to continue...)")
 
 
 def text_interlude():
@@ -196,10 +195,10 @@ def stage4():
     print("Lost contact with missile 2.")
     print("...\n"
           "...")
-    print("Missile launch program to Valst'r Home Planet is presumed succeeded.\n"
+    print(Fore.GREEN + "Missile launch program to Valst'r Home Planet is presumed succeeded.\n"
           "EXIT SUCCESS.\n")
 
-    input("Press enter to exit...")
+    input("(Press enter to exit...)")
     globals.clear_screen()
 
 if __name__ == "__main__":

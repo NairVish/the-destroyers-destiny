@@ -1,5 +1,6 @@
-TestSaves/
+Test Saves/
 __pycache__/
+Other Files/
 .idea/
 *.json
 *.data

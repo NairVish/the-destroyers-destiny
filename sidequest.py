@@ -152,7 +152,7 @@ class Sidequest():
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
         print("However, you have to remember that the roads between the\n"
               "provinces are dangerous, and that you'll encounter loads of enemies...\n")
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon("A Random Road", self.dungeon_length, "looter")
         curr.traverse_dungeon()
@@ -162,7 +162,7 @@ class Sidequest():
         print("%s is extremely thankful for delivering the message.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
 
-        input("Press enter to return home...")
+        input("(Press enter to return home...)")
 
     def execute_kidnap(self):
         """
@@ -170,7 +170,7 @@ class Sidequest():
         """
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
               "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.object_pronoun))
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
@@ -180,7 +180,7 @@ class Sidequest():
         print("%s's family is extremely thankful to you for saving %s.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, self.object_pronoun, str(reward)))
 
-        input("Press enter to return home...")
+        input("(Press enter to return home...)")
 
 
     def execute_scare(self):
@@ -191,7 +191,7 @@ class Sidequest():
               "However, the bandits have stepped out of line and have stopped listening to %s.\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
               % (self.quest_giver, self.possessive_pronoun, self.object_pronoun, self.quest_giver))
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
@@ -201,7 +201,7 @@ class Sidequest():
         print("The bandits will cause no more trouble for %s after your rampage.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
 
-        input("Press enter to return home...")
+        input("(Press enter to return home...)")
 
     def execute_gang(self):
         """
@@ -210,7 +210,7 @@ class Sidequest():
         print("The imperial police have asked for your help in assualting a gang's hideout.\n\n"
               "The gang is notorious for unimaginable crimes, and it is up to you to stop\n"
               "their evil ways.\n")
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "mobster")
         curr.traverse_dungeon()
@@ -220,7 +220,7 @@ class Sidequest():
         print("The gang won't terrorize any one else now that you've destroyed them.\n"
               "You have been given $%s for your efforts.\n" % (str(reward)))
 
-        input("Press enter to return home...")
+        input("(Press enter to return home...)")
 
     def execute_recovery(self):
         """
@@ -229,7 +229,7 @@ class Sidequest():
         print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n\n"
               "Your job is simple. You break into the bandits' hideout, destroy the bandits,\n"
               "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))
-        input("Press enter to continue...")
+        input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
@@ -239,7 +239,7 @@ class Sidequest():
         print("%s will be forever thankful to you for retrieving %s family's heirloom.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, self.possessive_pronoun, str(reward)))
 
-        input("Press enter to return home...")
+        input("(Press enter to return home...)")
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

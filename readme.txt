@@ -43,7 +43,7 @@ Other data files:
 Changes from Project 1:
     * NEW: Game now keeps track of dates based on a fictional calendar.
     * NEW: Game now determines the weather for each day, including temperature and condition (based on the current season).
-    * NEW: The player can now traverse his/her home city, allowing them to visit certain locations.
+    * NEW: The player can now traverse his/her home city, allowing them to visit certain locations. Accordingly, the shops have been moved into this mechanic.
     * NEW: The player can now perform a power attack once per battle which deals 25% more damage.
     * NEW: Added a few mini-games: roulette, battle arena, and battle practice area.
     * NEW: Colored text now printed in certain situations.
@@ -51,5 +51,6 @@ Changes from Project 1:
         * Source: "https://stackoverflow.com/questions/6418678/resize-the-terminal-with-python".
     * CHANGED: Save data is now written to and loaded from JSON files.
     * CHANGED: The game over exception now works correctly.
+    * CHANGED: Made game easier (i.e. playable) at higher levels.
     * CHANGED: When Ctrl-C is pressed, a message indicating that the player has left the game is now printed instead of a traceback.
     * CHANGED: Other minor fixes and enhancements.

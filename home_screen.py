@@ -77,7 +77,7 @@ class Home:
                         print(Fore.RED + "You are an Unknown.\n"
                               "Unknowns are not allowed to view or participate in quests on the quest board.\n"
                               "You must return home.\n")
-                        input("Press enter to continue...")
+                        input("(Press enter to continue...)")
                         globals.clear_screen()
                         continue
                     date_advanced = sidequest.quest_board()
@@ -92,7 +92,7 @@ class Home:
                           "It's right before you went into that fateful encounter.\n")
                     print("<Note: All loot collected and XP gained will carry over. However, you have\n"
                           "lost the reward for this sidequest.>\n")
-                    input("Press enter to continue...")
+                    input("(Press enter to continue...)")
                 if date_advanced is True:
                     self.weather = weather.determine_weather(globals.this_player.date)
                     self.weather_string = weather.string_weather(self.weather)
