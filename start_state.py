@@ -21,10 +21,10 @@ def print_intro():
     """
     globals.clear_screen()
     print(
-        "THE DESTROYER'S DESTINY\n"
-        "\tCSC 11300 Projects 1 & 2\n"
-        "\tBy: Vishnu Nair\n\n"
-        "(C) 2015 Vishnu Nair. All rights reserved.\n"
+            "THE DESTROYER'S DESTINY\n"
+            "\tCSC 11300 Projects 1 & 2\n"
+            "\tBy: Vishnu Nair\n\n"
+            "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
 
 
@@ -35,11 +35,11 @@ def show_start_menu():  # The startup menu
     """
     print('MAIN MENU')
     print('\t1. Start a new game.')
-    accepted_answers = ['1','q']
+    accepted_answers = ['1', 'q']
     save = find_save()
     if save is not None:
         print('\t2. Continue from existing save.')
-        accepted_answers = ['1','2','q']
+        accepted_answers = ['1', '2', 'q']
     print('\tq. Quit.\n')
     answer = input('Choose your desired option: ')
     while answer not in accepted_answers:
@@ -60,7 +60,7 @@ def find_save():
     If found, returns opened file.
     """
     if 'save.json' in os.listdir(os.getcwd()):
-        return open('save.json','r')
+        return open('save.json', 'r')
     else:
         return None
 
@@ -89,7 +89,7 @@ def load_player():
     globals.clear_screen()
 
 
-def startSequence():
+def start_sequence():
     """
     Executes start sequence for start state
     """
@@ -98,6 +98,7 @@ def startSequence():
     time.sleep(2.3)
     globals.clear_screen()
     load_player()
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

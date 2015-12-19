@@ -17,12 +17,13 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def game_sequence():
     """
     Executes the game sequence from start to finish.
     """
     try:
-        start_state.startSequence()
+        start_state.start_sequence()
         game_loop()
         exit.exit_sequence()
     except KeyboardInterrupt:
@@ -43,7 +44,7 @@ def game_loop():
         player_stage = globals.this_player.main_quest_stage
         curr = globals.dialogue_type[player_stage]
 
-        if curr.startswith('c'):    # 'c': immediately continue with dialogue
+        if curr.startswith('c'):  # 'c': immediately continue with dialogue
             print(globals.dialogue[player_stage] + '\n')
             globals.this_player.main_quest_stage += 1
         elif curr.startswith('m'):  # 'm': show home screen
@@ -79,12 +80,12 @@ def game_loop():
                         return
                     else:
                         globals.this_player.sleep()
-        elif curr is 'p':   # 'p': pause until user presses 'enter' key
+        elif curr is 'p':  # 'p': pause until user presses 'enter' key
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
             globals.clear_screen()
             globals.this_player.main_quest_stage += 1
-        elif curr.startswith('sw'):     # 'sw': initiate first weapon selection just before first main quest dungeon
+        elif curr.startswith('sw'):  # 'sw': initiate first weapon selection just before first main quest dungeon
             print(globals.dialogue[player_stage] + '\n')
             globals.clear_screen()
             sw_tabular = [['0.', globals.weapon_names[0], globals.weapon_powers[0]],
@@ -133,7 +134,8 @@ def game_loop():
             globals.clear_screen()
             print("You: " + globals.dialogue[globals.this_player.main_quest_stage] + '\n')
             globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
-        elif curr.startswith('d'):  # 'd': initiate main quest dungeon; NOTE: sidequest dungeons are handled by the home screen
+        elif curr.startswith(
+                'd'):  # 'd': initiate main quest dungeon; NOTE: sidequest dungeons are handled by the home screen
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to continue...)")
             # game_over_reversion_target = globals.this_player.main_quest_stage
@@ -156,8 +158,9 @@ def game_loop():
                     curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr",
                                            main_quest=True)
                     curr.traverse_dungeon()
-                elif player_stage > 70 and player_stage < 80:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17, enemy_type="valstr",
+                elif 70 < player_stage < 80:
+                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17,
+                                           enemy_type="valstr",
                                            main_quest=True)
                     curr.traverse_dungeon()
             except KeyboardInterrupt:
@@ -176,11 +179,12 @@ def game_loop():
                 globals.this_player.main_quest_stage = game_over_reversion_target
             else:
                 globals.this_player.main_quest_stage += 1
-        elif curr.startswith("term"):   # 'term': initiate terminal sequence
+        elif curr.startswith("term"):  # 'term': initiate terminal sequence
             print(globals.dialogue[player_stage] + '\n')
             input("(Press enter to proceed...)")
             terminal.terminal()
             globals.this_player.main_quest_stage += 1
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

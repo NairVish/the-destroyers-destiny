@@ -15,6 +15,7 @@ class Cell:
     """
     The Cell class holds all the information about the current cell in a dungeon.
     """
+
     def __init__(self, name, num_cell, enemy_type, final=False):
         """
         :param name: The name of the dungeon (used in some cases to determine the cell's enemy).
@@ -31,20 +32,20 @@ class Cell:
             self.enemy = self.enemy_selector()
             self.loot = None
         else:
-            self.determineProperty()
+            self.determine_property()
 
-    def determineProperty(self):
+    def determine_property(self):
         """
         Determines whether the player will face an enemy, find loot, or encounter nothing in a cell.
         """
-        result = randrange(0,100)
-        if result in range(0,10):               # 10% chance for nothing.
+        result = randrange(0, 100)
+        if result in range(0, 10):  # 10% chance for nothing.
             self.enemy = None
             self.loot = None
-        elif result in range(20,40):            # 20% chance for loot.
+        elif result in range(20, 40):  # 20% chance for loot.
             self.enemy = None
             self.loot = self.loot_selector()
-        else:                                   # 70# chance for enemy.
+        else:  # 70% chance for enemy.
             self.enemy = self.enemy_selector()
             self.loot = None
 
@@ -52,8 +53,8 @@ class Cell:
         """
         Returns a random piece of loot. There is a 5% chance of getting rare loot.
         """
-        result = randrange(0,100)
-        if result in range(0,5):
+        result = randrange(0, 100)
+        if result in range(0, 5):
             return choice(globals.rare_loot_names)
         else:
             return choice(globals.loot_names)
@@ -93,6 +94,7 @@ class Dungeon:
     """
     The Dungeon class holds all the information about the current dungeon.
     """
+
     def __init__(self, init_name, init_length, enemy_type, main_quest=False):
         """
         :param init_name: The name of the dungeon.
@@ -150,7 +152,7 @@ class Dungeon:
             print("You've found the following loot: %s" % self.cell.loot)
             inp = input("Would you like to add it to your inventory?\n"
                         "You can sell it later for some more money. (y/n) ")
-            accepted_answers = ['y','n']
+            accepted_answers = ['y', 'n']
             while inp not in accepted_answers:
                 inp = input("You have entered an invalid option. Please try again: ")
             if inp is 'y':
@@ -174,6 +176,7 @@ class Dungeon:
         """
         Accepts and processes input from the dungeon menu.
         """
+
         def print_menu():
             """
             Prints out the dungeon menu and returns the player's input to the parent function.
@@ -185,7 +188,7 @@ class Dungeon:
             return input("Choose an option: ")
 
         inp = print_menu()
-        
+
         if inp is 'a':
             globals.clear_screen()
 
@@ -196,7 +199,7 @@ class Dungeon:
                 inp = input("You have entered an invalid option. Please enter a valid option: ")
                 continue
             else:
-                if inp not in range(1,4):
+                if inp not in range(1, 4):
                     inp = input("You have entered an invalid option. Please enter a valid option: ")
                     continue
                 if inp is 'a':
@@ -243,7 +246,8 @@ class Dungeon:
                 if curr.startswith("c"):
                     print(globals.dialogue[player_stage] + '\n')
                     if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
-                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
+                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
+                            globals.this_player.main_quest_stage]
                     else:
                         globals.this_player.main_quest_stage += 1
                 elif curr.startswith("p"):
@@ -251,7 +255,8 @@ class Dungeon:
                     input("(Press enter to continue...)")
                     globals.clear_screen()
                     if globals.dialogue_jump_targets[globals.this_player.main_quest_stage] != 0:
-                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
+                        globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
+                            globals.this_player.main_quest_stage]
                     else:
                         globals.this_player.main_quest_stage += 1
                 elif curr.startswith("rn"):
@@ -276,12 +281,14 @@ class Dungeon:
                     globals.this_player.main_quest_stage += selection
                     globals.clear_screen()
                     print("You: " + globals.dialogue[globals.this_player.main_quest_stage] + '\n')
-                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage]
-                    globals.this_player.main_quest_stage
+                    globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
+                        globals.this_player.main_quest_stage]
             print(globals.dialogue[globals.this_player.main_quest_stage] + '\n')
             if globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] != 0:
-                globals.this_player.main_quest_stage = globals.dialogue_jump_targets[globals.this_player.main_quest_stage + 1] - 1
+                globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
+                                                           globals.this_player.main_quest_stage + 1] - 1
             input("(Press enter to continue...)")
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

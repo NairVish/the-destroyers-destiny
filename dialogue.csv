@@ -52,7 +52,7 @@
 "Merlona: I was meaning to ask you something. You see, the Valst'r's first attack completely destroyed my home.",c,0
 "I was wondering if I could stay at your place for a while. I promise I won't bother you.",rn,0
 "Sure! You can stay with me! I don't mind. (Honestly speaking, it's the least you could do for her help...)",r,54
-"Oh! Thank you! Thank you! Thank you! I promise you won't regret it.",p,0
+"Oh! Thank you! Thank you! Thank you! I promise you you won't regret it.",p,0
 "<Player Note: Merlona has moved in with you! She can now accompany you on your sidequests and will make small, random amounts of money every day.>",m,0
 "After a couple of days of rest, you and your assistant are invited to the Imperial Palace. If you're being invited to the palace, then this must be important...",c,0
 "The two of you are being briefed by the Commander of the Imperial forces. His name is Volun. The plan?",p,0
@@ -89,4 +89,4 @@
 "In the following days, you and Merlona are considered international heroes. The two of you are given many awards, titles, gadgets, and other stuff. You go to so many events and get so many things that you eventually lose track of everything.",c,0
 "Soon, everything goes back to normal.",p,0
 "At home, you are at peace because the Valst'r are no more and you, as the Destroyer, have fulfilled your destiny.",p,0
-"<Player Note: Congratulations, you have finished the main questline and have saved the world from utter destruction! Feel free to continue playing the side quests. I hope you enjoyed playing this game!>",m,0
+"<Player Note: Congratulations, you have finished the main questline and have saved the world from utter destruction! Feel free to continue playing the sidequests and minigames. I hope you enjoyed playing this game!>",m,0

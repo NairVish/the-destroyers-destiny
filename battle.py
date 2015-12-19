@@ -12,10 +12,12 @@ import globals
 
 init(autoreset=True)
 
+
 class Enemy:
     """
     The Enemy class holds all the data for the enemy in a battle.
     """
+
     def __init__(self, enemy_name, enemy_type=None):
         """
         :param enemy_name: The enemy's name.
@@ -45,21 +47,21 @@ class Enemy:
         equal that of the player.
         """
         if self.enemy_type is "reg":
-            return globals.this_player.level-0.5
+            return globals.this_player.level - 0.5
         elif self.enemy_type is "boss":
             return globals.this_player.level
 
     def determine_attack_level(self):
         if self.enemy_type is "reg":
-            return globals.this_player.attack*0.5
+            return globals.this_player.attack * 0.5
         elif self.enemy_type is "boss":
-            return globals.this_player.attack*0.95
+            return globals.this_player.attack * 0.95
 
     def determine_defense_level(self):
         if self.enemy_type is "reg":
-            return globals.this_player.defense*0.5
+            return globals.this_player.defense * 0.5
         elif self.enemy_type is "boss":
-            return globals.this_player.defense*0.95
+            return globals.this_player.defense * 0.95
 
     def determine_health(self):
         """
@@ -67,19 +69,20 @@ class Enemy:
         have 95% of the player's health.
         """
         if self.enemy_type is "reg":
-            return int(globals.this_player.total_health*0.5)
+            return int(globals.this_player.total_health * 0.5)
         else:
-            return int(globals.this_player.total_health*0.95)
+            return int(globals.this_player.total_health * 0.95)
 
 
 class Battle:
     """
     The Battle class holds all data for and executes the battle mechanic.
     """
-    def __init__(self, enemy_name=None, type="reg", custom_parameters=None):
+
+    def __init__(self, enemy_name=None, battle_type="reg", custom_parameters=None):
         """
         :param enemy_name: The name of the enemy (for the enemy's __init__ function).
-        :param type: The type of the enemy (for the enemy's __init__ function).
+        :param battle_type: The battle_type of the enemy (for the enemy's __init__ function).
         :param custom_parameters: A string that denotes a custom battle parameter.
             * At the moment, there is only one custom parameter: "dummy", which indicates battle practice.
         Initialized a battle with an enemy. Also, determines possible XP gained from the battle as well
@@ -93,7 +96,7 @@ class Battle:
                 self.power_attack_used = False
                 self.custom_param = custom_parameters
             return
-        self.enemy = Enemy(enemy_name, type)
+        self.enemy = Enemy(enemy_name, battle_type)
         self.possible_xp = int(self.enemy.level) + 3
         # NOTE: player health is globals.this_player.current_health
         self.p_max_health = globals.this_player.total_health
@@ -113,7 +116,7 @@ class Battle:
         globals.clear_screen()
         if globals.this_player.current_health <= 0:
             print(Fore.RED + "You have no health remaining! "
-                  "You have whited out.")
+                             "You have whited out.")
             raise globals.GameOver()
         else:
             globals.this_player.current_health = globals.this_player.total_health
@@ -149,10 +152,11 @@ class Battle:
         elif skip is True:
             print(Fore.RED + "You lost your turn because you used a potion!")
         else:
-            p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5)
+            p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (
+            self.enemy.defense * 0.5)
             if skip is None:
                 self.power_attack_used = True
-                p_damage = p_damage * 1.25
+                p_damage *= 1.25
                 print(Fore.GREEN + "You dealt %.1f damage in a power attack to the enemy!" % p_damage)
             else:
                 print(Fore.GREEN + "You dealt %.1f damage to the enemy!" % p_damage)
@@ -161,21 +165,21 @@ class Battle:
                 self.possible_xp += 0.1
 
         if globals.this_player.assistant is True:
-            prob = randrange(0,100)
-            if prob in range(0,10):
-                a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (self.enemy.defense * 0.5))/4
+            prob = randrange(0, 100)
+            if prob in range(0, 10):
+                a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (
+                self.enemy.defense * 0.5)) / 4
                 self.enemy.health -= a_damage
                 print(Fore.GREEN + "Merlona dealt %.1f damage to the enemy!" % a_damage)
         if self.enemy.health <= 0:
             return
 
         if self.enemy.enemy_type == "boss":
-            e_damage = self.enemy.attack - (globals.this_player.defense/3)
+            e_damage = self.enemy.attack - (globals.this_player.defense / 3)
         else:
             e_damage = self.enemy.attack
         print(Fore.RED + "The enemy dealt %.1f damage to you!\n" % e_damage)
         globals.this_player.current_health -= e_damage
-
 
     def show_menu(self):
         """
@@ -234,6 +238,7 @@ class Battle:
             print("\n\t6. Leave Battle Practice\n")
         else:
             print("\n")
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

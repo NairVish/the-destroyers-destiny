@@ -14,6 +14,7 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def weapon_shop():
     """
     Handles all actions associated with the weapon shop: 'The Crazy Weapons Specialist.'
@@ -49,11 +50,12 @@ def weapon_shop():
             globals.this_player.inventory.append(globals.weapon_names[inp])
             globals.this_player.money -= cost
             globals.clear_screen()
-            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (globals.weapon_names[inp], globals.this_player.money))
+            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (
+            globals.weapon_names[inp], globals.this_player.money))
             print(tabulate(globals.tabular_weapons, headers=["No.", "Weapon Name", "Weapon Power", "Cost ($)"],
-                   tablefmt="rst") + '\n')
+                           tablefmt="rst") + '\n')
             inp = input(
-                "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
+                    "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
 
 def potion_shop():
@@ -88,12 +90,12 @@ def potion_shop():
             globals.this_player.inventory.append(globals.potion_names[inp])
             globals.this_player.money -= cost
             globals.clear_screen()
-            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (globals.potion_names[inp], globals.this_player.money))
+            print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (
+            globals.potion_names[inp], globals.this_player.money))
             print(tabulate(globals.tabular_potions, headers=["No.", "Name", "Strength (Points)", "Type", "Cost ($)"],
-                   tablefmt="rst") + '\n')
+                           tablefmt="rst") + '\n')
             inp = input(
-                "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
-
+                    "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
 
 def selling():
@@ -118,9 +120,7 @@ def selling():
     items_to_remove = []
     num = 0
     for item in globals.this_player.inventory:
-        tmp = []
-        tmp.append(num)
-        tmp.append(item)
+        tmp = [num, item]
         if item in globals.potion_names:
             val = globals.potion_cost[globals.potion_names.index(item)]
         elif item in globals.weapon_names:
@@ -170,10 +170,11 @@ def selling():
             tabular_data[inp][2] = "SOLD!"
             print(tabulate(tabular_data, headers=['No.', 'Item Name', 'Value ($)']) + '\n')
             inp = input(
-                "Please enter the number of another item you would like to sell, else enter the letter 'q' to leave: ")
+                    "Please enter the number of another item you would like to sell, else enter the letter 'q' to leave: ")
 
     for item in items_to_remove:
         globals.this_player.inventory.remove(item)
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

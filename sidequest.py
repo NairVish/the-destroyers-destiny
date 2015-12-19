@@ -18,6 +18,7 @@ import exit
 from random import randrange, choice
 from time import sleep
 
+
 def setup_quest_board():
     """
     Sets up quest board by randomly selecting three types of quests (may be the same)
@@ -30,13 +31,13 @@ def setup_quest_board():
     global names
     global home_cities
 
-    numbers = range(0,3)
+    numbers = range(0, 3)
     curr_types = []
     descriptions = []
     names = []
     home_cities = []
 
-    for num in numbers:
+    for _ in numbers:
         curr = choice(Sidequest.types)
         curr_types.append(curr)
         descriptions.append(Sidequest.quest_dict[curr])
@@ -47,12 +48,7 @@ def setup_quest_board():
     quest_tabulate = []
 
     for num in numbers:
-        tmp = []
-        tmp.append(num)
-        tmp.append(curr_types[num])
-        tmp.append(descriptions[num])
-        tmp.append(names[num])
-        tmp.append(home_cities[num])
+        tmp = [num, curr_types[num], descriptions[num], names[num], home_cities[num]]
         quest_tabulate.append(tmp)
 
 
@@ -64,7 +60,7 @@ def quest_board():
     print("QUEST BOARD")
     print("Welcome to the quest board!\n")
     print(tabulate.tabulate(quest_tabulate, headers=["No.", "Type", "Description", "Job Giver", "Home City"]))
-    accepted_answers = ['0','1','2','q']
+    accepted_answers = ['0', '1', '2', 'q']
     inp = input("\nWhat job would you like to take? To go back, enter the letter 'q': ")
     while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
@@ -85,7 +81,7 @@ def quest_board():
     return True
 
 
-class Sidequest():
+class Sidequest:
     """
     The Sidequest class handles all information about and executes the desired sidequest.
     """
@@ -157,7 +153,7 @@ class Sidequest():
         curr = dungeon.Dungeon("A Random Road", self.dungeon_length, "looter")
         curr.traverse_dungeon()
 
-        reward = randrange(15,26)
+        reward = randrange(15, 26)
         globals.this_player.money += reward
         print("%s is extremely thankful for delivering the message.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
@@ -169,19 +165,19 @@ class Sidequest():
         Executes the search and rescue sidequest.
         """
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
-              "It is up to you to break into the bandits' hideout and save %s!\n" % (self.quest_giver, self.giver_city, self.object_pronoun))
+              "It is up to you to break into the bandits' hideout and save %s!\n" % (
+              self.quest_giver, self.giver_city, self.object_pronoun))
         input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
 
-        reward = randrange(15,26)
+        reward = randrange(15, 26)
         globals.this_player.money += reward
         print("%s's family is extremely thankful to you for saving %s.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, self.object_pronoun, str(reward)))
 
         input("(Press enter to return home...)")
-
 
     def execute_scare(self):
         """
@@ -196,7 +192,7 @@ class Sidequest():
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
 
-        reward = randrange(15,26)
+        reward = randrange(15, 26)
         globals.this_player.money += reward
         print("The bandits will cause no more trouble for %s after your rampage.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, str(reward)))
@@ -215,7 +211,7 @@ class Sidequest():
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "mobster")
         curr.traverse_dungeon()
 
-        reward = randrange(15,26)
+        reward = randrange(15, 26)
         globals.this_player.money += reward
         print("The gang won't terrorize any one else now that you've destroyed them.\n"
               "You have been given $%s for your efforts.\n" % (str(reward)))
@@ -234,12 +230,13 @@ class Sidequest():
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
         curr.traverse_dungeon()
 
-        reward = randrange(20,30)
+        reward = randrange(20, 30)
         globals.this_player.money += reward
         print("%s will be forever thankful to you for retrieving %s family's heirloom.\n"
               "You have been given $%s for your efforts.\n" % (self.quest_giver, self.possessive_pronoun, str(reward)))
 
         input("(Press enter to return home...)")
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

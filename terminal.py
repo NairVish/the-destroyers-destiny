@@ -11,6 +11,7 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def terminal():
     """
     Executes the terminal sequence.
@@ -40,6 +41,7 @@ def stage1():
     """
     Executes stage 1 of the terminal sequence.
     """
+
     def print_menu():
         globals.clear_screen()
         print("WELCOME TO THE MISSILE COMMAND MENU!\n"
@@ -55,6 +57,9 @@ def stage1():
     inp = print_menu()
     while True:
         while inp not in accepted_answers:
+            if len(inp) == 0:
+                inp = receive_input()
+                continue
             if inp.startswith(('pwd', 'ls', 'rm', 'mv', 'bash', 'sudo', 'awk', 'sed')):
                 print("-launch: %s: Normal shell functions disabled. Operation aborted." % (inp.split(' ', 1)[0]))
                 inp = receive_input()
@@ -68,7 +73,7 @@ def stage1():
             print("Loading self-destruction program...\n")
             sleep(3)
             print(Fore.RED + "Fatal error: Self-destruction program not configured.\n"
-                  "Operation aborted.\n")
+                             "Operation aborted.\n")
             input("(Press enter to return to the previous menu...)")
             inp = print_menu()
         elif inp is '3':
@@ -92,6 +97,7 @@ def stage2():
     """
     Executes stage 2 of the terminal sequence.
     """
+
     def print_menu():
         globals.clear_screen()
         print("Select any one of the following already-configured celestial entities:\n"
@@ -100,7 +106,9 @@ def stage2():
 
     inp = print_menu()
     while True:
-        if inp is not '1':
+        if len(inp) == 0:
+            pass
+        elif inp is not '1':
             print(Fore.RED + "-launch: %s: Invalid option." % inp)
         else:
             return
@@ -111,6 +119,7 @@ def stage3():
     """
     Executes stage 3 of the terminal sequence.
     """
+
     def print_menu():
         globals.clear_screen()
         print("Please type in the launch password to finalize the procedure.\n"
@@ -123,8 +132,8 @@ def stage3():
         if word == "hint":
             globals.clear_screen()
             print(
-                "Merlona: If I remember correctly, it has the word 'Destroy' in it as the second part of the password. " \
-                "I believe the first part of the password is who we're trying to destroy. Lowercase too.\n")
+                    "Merlona: If I remember correctly, it has the word 'Destroy' in it as the second part of the password. "
+                    "I believe the first part of the password is who we're trying to destroy. Lowercase too.\n")
             input("(Press enter to continue...)")
             word = print_menu()
             continue
@@ -169,8 +178,10 @@ def text_interlude():
     globals.clear_screen()
     print(
         "You and your assistant look at the other screens in the room that are tracking the missiles. It is five agonizing minutes before the missiles reach the Valst'r's home system. You realize that the Imperial Commander wasn't joking when he was talking about the warp drive.\n")
-    print("On the radars, you notice other objects trying to head toward the missiles, but the missiles evade these objects with ease.\n")
-    print("The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from the radars.\n")
+    print(
+        "On the radars, you notice other objects trying to head toward the missiles, but the missiles evade these objects with ease.\n")
+    print(
+        "The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from the radars.\n")
     print("You look back at the main screen...\n")
     input("(Press enter to continue...)")
 
@@ -180,7 +191,7 @@ def stage4():
     Executes stage 4 of the terminal sequence.
     """
     globals.clear_screen()
-    print("Missiles currently en route to destination...",end="")
+    print("Missiles currently en route to destination...", end="")
     sleep(1)
     print("Done!\n"
           "...\n"
@@ -196,10 +207,11 @@ def stage4():
     print("...\n"
           "...")
     print(Fore.GREEN + "Missile launch program to Valst'r Home Planet is presumed succeeded.\n"
-          "EXIT SUCCESS.\n")
+                       "EXIT SUCCESS.\n")
 
     input("(Press enter to exit...)")
     globals.clear_screen()
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

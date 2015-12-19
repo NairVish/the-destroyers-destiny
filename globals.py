@@ -19,17 +19,17 @@ def init_globals():
     """
     print("Loading required data...\n")
 
-    with open("caves_hideaways.txt", 'r') as cave_file: # dungeon names for side quests
+    with open("caves_hideaways.txt", 'r') as cave_file:  # dungeon names for side quests
         all_caves = cave_file.readlines()
         global cave_names
         cave_names = [cave.rstrip('\n') for cave in all_caves]
 
-    with open("provinces.txt", 'r') as province_file:   # province names
+    with open("provinces.txt", 'r') as province_file:  # province names
         all_provinces = province_file.readlines()
         global province_names
         province_names = [province.strip() for province in all_provinces]
 
-    with open("arena_enemies.txt", 'r') as arena_enemies_file: # enemy names for battle arena
+    with open("arena_enemies.txt", 'r') as arena_enemies_file:  # enemy names for battle arena
         all_arena_enemies = arena_enemies_file.readlines()
         global arena_enemy_names
         arena_enemy_names = [arena_enemy.rstrip('\n') for arena_enemy in all_arena_enemies]
@@ -43,7 +43,7 @@ def init_globals():
         people_names.append(row[0])
         people_genders.append(row[1])
 
-    global potion_names     # all potion data
+    global potion_names  # all potion data
     potion_names = []
     global potion_powers
     potion_powers = []
@@ -61,16 +61,11 @@ def init_globals():
         potion_powers.append(float(row[1]))
         potion_type.append(row[2])
         potion_cost.append(float(row[3]))
-        tmp = []
-        tmp.append(num)
-        tmp.append(row[0])
-        tmp.append(float(row[1]))
-        tmp.append(row[2])
-        tmp.append(float(row[3]))
+        tmp = [num, row[0], float(row[1]), row[2], float(row[3])]
         tabular_potions.append(tmp)
         num += 1
 
-    global weapon_names     # all weapon data
+    global weapon_names  # all weapon data
     weapon_names = []
     global weapon_powers
     weapon_powers = []
@@ -85,15 +80,11 @@ def init_globals():
         weapon_names.append(row[0])
         weapon_powers.append(float(row[1]))
         weapon_cost.append(float(row[2]))
-        tmp = []
-        tmp.append(num)
-        tmp.append(row[0])
-        tmp.append(float(row[1]))
-        tmp.append(float(row[2]))
+        tmp = [num, row[0], float(row[1]), float(row[2])]
         tabular_weapons.append(tmp)
         num += 1
 
-    global loot_names   # all loot data
+    global loot_names  # all loot data
     loot_names = []
     global rare_loot_names
     rare_loot_names = []
@@ -112,7 +103,7 @@ def init_globals():
         rare_loot_names.append(row[0])
         rare_loot_values.append(row[1])
 
-    global main_quest_enemies   # all necessary main quest data
+    global main_quest_enemies  # all necessary main quest data
     global main_quest_bosses
     global main_quest_dungeons
     main_quest_bosses = ["Valst'r Lieutenant General", "Valst'r General", "Valst'r Commander-in-Chief"]
@@ -121,7 +112,7 @@ def init_globals():
         all_enemies = main_enemy_fIle.readlines()
         main_quest_enemies = [enemy.rstrip('\n') for enemy in all_enemies]
 
-    global side_enemy_types     # all necessary side quest data
+    global side_enemy_types  # all necessary side quest data
     global side_quest_enemies
     side_enemy_types = ["bandit", "looter", "mobster"]
     side_quest_enemies = []
@@ -132,13 +123,13 @@ def init_globals():
             group = group.split(', ')
             side_quest_enemies.append(group)
 
-    global dialogue             # all dialogue data
+    global dialogue  # all dialogue data
     global dialogue_type
     global dialogue_jump_targets
     dialogue = []
     dialogue_type = []
     dialogue_jump_targets = []
-    all_dialogue = csv.reader(open("dialogue.csv",'r'))
+    all_dialogue = csv.reader(open("dialogue.csv", 'r'))
     for row in all_dialogue:
         dialogue.append(row[0])
         dialogue_type.append(row[1])
@@ -184,14 +175,15 @@ def declare_existing_player(save_data):
                                 init_defense=save_data['defense'],
                                 init_main_quest_stage=save_data['main_quest_stage'],
                                 init_money=save_data['money'],
-                                init_assistant= save_data['assistant'],
-                                init_weapon= save_data['weapon'],
+                                init_assistant=save_data['assistant'],
+                                init_weapon=save_data['weapon'],
                                 init_day=save_data['day'],
                                 init_sidequest=save_data['sidequests'],
                                 init_inventory=save_data['inventory'],
                                 init_date=save_data['date'],
                                 start_date=save_data['start_date'],
                                 init_date_num_days=save_data['date_num_days'])
+
 
 def clear_screen():
     """
@@ -206,6 +198,7 @@ class GameOver(Exception):
     An empty game over exception.
     """
     pass
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

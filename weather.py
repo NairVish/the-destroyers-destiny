@@ -25,26 +25,27 @@ def init_weather():
     ]
 
     global seasons
-    seasons = {'winter' : [date.months[0], date.months[1], date.months[2]],
-               'spring' : [date.months[3], date.months[4], date.months[5]],
-               'summer' : [date.months[6], date.months[7], date.months[8]],
-               'fall' : [date.months[9], date.months[10], date.months[11]]}
+    seasons = {'winter': [date.months[0], date.months[1], date.months[2]],
+               'spring': [date.months[3], date.months[4], date.months[5]],
+               'summer': [date.months[6], date.months[7], date.months[8]],
+               'fall': [date.months[9], date.months[10], date.months[11]]}
 
     global season_specific_conditions
     season_specific_conditions = {
-        'winter' : ['Blizzard', 'Light Snow'],
-        'spring' : ['Sunny and Breezy'],
-        'summer' : ['Sunny and Breezy', 'Hazy'],
-        'fall' : ['Sunny and Breezy']
+        'winter': ['Blizzard', 'Light Snow'],
+        'spring': ['Sunny and Breezy'],
+        'summer': ['Sunny and Breezy', 'Hazy'],
+        'fall': ['Sunny and Breezy']
     }
 
     global temp_ranges
     temp_ranges = {
-        'winter' : list(range(-20,36)),
-        'spring' : list(range(45,69)),
-        'summer' : list(range(78,116)),
-        'fall' : list(range(54,73))
+        'winter': list(range(-20, 36)),
+        'spring': list(range(45, 69)),
+        'summer': list(range(78, 116)),
+        'fall': list(range(54, 73))
     }
+
 
 def determine_weather(date_list):
     """
@@ -70,12 +71,14 @@ def determine_weather(date_list):
 
     return weather
 
+
 def string_weather(weather):
     """
     Stringifys the weather.
     :param weather: The input weather dictionary.
     """
-    return ("%s°F, %s" % (weather['temp'], weather['condition']))
+    return "%s°F, %s" % (weather['temp'], weather['condition'])
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

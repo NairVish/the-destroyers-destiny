@@ -29,6 +29,7 @@ class Outdoors:
     The Outdoors class holds information about the weather outside in the city. It also holds member functions
     related to traversing available areas in the city.
     """
+
     def __init__(self, init_weather):
         """
         Initializes the outdoor class with the weather and current date.
@@ -68,6 +69,7 @@ class Outdoors:
         """
         Handles the first stage of the city traversal: Outside the player's home.
         """
+
         def print_menu():
             """
             Prints a list of available options and returns the player's input.
@@ -98,6 +100,7 @@ class Outdoors:
         """
         Handles the market stage of the city traversal.
         """
+
         def print_menu():
             """
             Prints a list of available options and returns the player's input.
@@ -136,6 +139,7 @@ class Outdoors:
         """
         Handles the Center Square stage of the city traversal.
         """
+
         def print_menu():
             """
             Prints a list of available options and returns the player's input.
@@ -172,6 +176,7 @@ class Outdoors:
 
             globals.clear_screen()
             self.header(loc)
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

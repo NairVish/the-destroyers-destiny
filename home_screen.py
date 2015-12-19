@@ -5,7 +5,6 @@ Handles all activities related to the home screen.
 __author__ = 'Vishnu Nair'
 
 import globals
-import shop
 import sidequest
 import date
 import exit
@@ -21,6 +20,7 @@ class Home:
     """
     The main home screen class.
     """
+
     def __init__(self):
         """
         Initializes the home screen by selecting the day's weather.
@@ -34,7 +34,7 @@ class Home:
         """
         print("HOME SCREEN\n")
 
-        print("Day %s" % str(globals.this_player.date_num_days+1))
+        print("Day %s" % str(globals.this_player.date_num_days + 1))
         print("%s, Level %d" % (globals.this_player, globals.this_player.level))
         print("Home Province: %s" % globals.this_player.home)
         print("Date: %s" % date.string_date(globals.this_player.date))
@@ -50,11 +50,10 @@ class Home:
         print("\t8. Exit (and Save).\n")
 
         inp = input("What would you like to do? ")
-        accepted_answers = ['1','2','3','4','5','6','7','8']
+        accepted_answers = ['1', '2', '3', '4', '5', '6', '7', '8']
         while inp not in accepted_answers:
             inp = input("You have entered an invalid option. Please try again: ")
         return inp
-
 
     def process_home(self):
         """
@@ -75,8 +74,8 @@ class Home:
                 try:
                     if globals.this_player.sidequests is False:
                         print(Fore.RED + "You are an Unknown.\n"
-                              "Unknowns are not allowed to view or participate in quests on the quest board.\n"
-                              "You must return home.\n")
+                                         "Unknowns are not allowed to view or participate in quests on the quest board.\n"
+                                         "You must return home.\n")
                         input("(Press enter to continue...)")
                         globals.clear_screen()
                         continue
@@ -108,7 +107,6 @@ class Home:
                 return True
             globals.clear_screen()
 
-
     def print_shop_selector(self):
         """
         Prints shop selection screen and returns user input.
@@ -121,11 +119,12 @@ class Home:
         print("\t4. Return to Home Screen.\n")
 
         inp = input("Where would you like to go? ")
-        accepted_answers = ['1','2','3','4','5']
+        accepted_answers = ['1', '2', '3', '4', '5']
         while inp not in accepted_answers:
             inp = input("You have entered an invalid option. Please try again: ")
 
         return inp
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

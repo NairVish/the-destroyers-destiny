@@ -42,15 +42,15 @@ def prompt_for_save():
     """
     globals.clear_screen()
     inp = input("Would you like to save the game? (y/n) ")
-    accepted_answers = ['y','n']
+    accepted_answers = ['y', 'n']
     while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again:")
     if inp is 'y':
         save_game()
         globals.clear_screen()
         print(Fore.GREEN + "Save data has been written to a file named 'save.json' in the "
-              "game's directory. If such a file already existed, it has been "
-              "overwritten.\n")
+                           "game's directory. If such a file already existed, it has been "
+                           "overwritten.\n")
         return
     else:
         globals.clear_screen()
@@ -63,29 +63,17 @@ def save_game():
     Saves the game by writing the player's attributes to a JSON file called "save.json" in the game directory.
     """
     player = globals.this_player
-    save_data = {}
-    save_data['name'] = player.name
-    save_data['home'] = player.home
-    save_data['level'] = player.level
-    save_data['xp'] = player.xp
-    save_data['target_xp'] = player.target_xp
-    save_data['health'] = player.current_health
-    save_data['attack'] = player.attack
-    save_data['defense'] = player.defense
-    save_data['main_quest_stage'] = player.main_quest_stage
-    save_data['money'] = player.money
-    save_data['assistant'] = player.assistant
-    save_data['weapon'] = str(player.current_weapon)
-    save_data['day'] = player.day
-    save_data['sidequests'] = player.sidequests
-    save_data['inventory'] = player.inventory
-    save_data['date'] = player.date
-    save_data['start_date'] = player.start_date
-    save_data['date_num_days'] = player.date_num_days
+    save_data = {'name': player.name, 'home': player.home, 'level': player.level, 'xp': player.xp,
+                 'target_xp': player.target_xp, 'health': player.current_health, 'attack': player.attack,
+                 'defense': player.defense, 'main_quest_stage': player.main_quest_stage, 'money': player.money,
+                 'assistant': player.assistant, 'weapon': str(player.current_weapon), 'day': player.day,
+                 'sidequests': player.sidequests, 'inventory': player.inventory, 'date': player.date,
+                 'start_date': player.start_date, 'date_num_days': player.date_num_days}
 
-    with open("save.json",'w') as save:
+    with open("save.json", 'w') as save:
         save.truncate()
         json.dump(save_data, save)
+
 
 def exit_sequence():
     """
@@ -93,6 +81,7 @@ def exit_sequence():
     """
     prompt_for_save()
     exit_program()
+
 
 if __name__ == "__main__":
     print("To play this game, run 'launch.py'.\n"

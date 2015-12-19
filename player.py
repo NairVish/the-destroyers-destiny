@@ -94,7 +94,7 @@ class Player:
             * Level is increased by 1.
         """
         if self.xp > self.target_xp:
-            self.xp = self.xp - self.target_xp
+            self.xp -= self.target_xp
         else:
             self.xp = 0
         self.target_xp += 5
@@ -213,7 +213,7 @@ class Player:
                 globals.clear_screen()
                 print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
                 inp = input(
-                    "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
+                        "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
         for item in items_to_remove:
             del globals.this_player.inventory[item]
