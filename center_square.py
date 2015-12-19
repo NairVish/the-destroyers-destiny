@@ -8,9 +8,8 @@ import globals
 import tkinter
 import battle
 import exit
-import random
 from time import sleep
-from random import choice
+from random import choice, sample, shuffle
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -21,7 +20,8 @@ def battle_arena():
     Function for an eight-player, single-elimination battle tournament that the player can participate in.
     Each of the player's battles is a boss fight and is fought in real-time. The program randomly chooses the
     winners of the remaining fights. If the player is eliminated, the rest of the tournament is simulated.
-    Eliminated participants are removed from the list of tournament participants.
+    Eliminated participants are removed from the list of tournament participants. If the player is still in the
+    tournament, he/she is always in position 0 of the list.
     """
 
     def opening():
@@ -49,8 +49,8 @@ def battle_arena():
         """
         Displays the matches in each round before the round begins.
         :param participants: A list of participants in the round.
-            * In this list, match n-1's participants are in positions 2*n and 2*n+1. So, match 1's participants are
-            in positions 0 and 1.
+            * In this list, match n's participants are in positions 2(n-1) and 2(n-1)+1. So, for example, match 1's
+            participants are in positions 0 and 1.
             * If the player is still in the tournament, he/she is always in position 0.
         """
         num_matches = int(len(participants)/2)
@@ -157,7 +157,7 @@ def battle_arena():
         num_matches = int(len(tourney_participants) / 2)
         for match in range(start, num_matches):
             curr_match = [tourney_participants[2*match], tourney_participants[2*match+1]]
-            winner = random.choice(curr_match)
+            winner = choice(curr_match)
             for participant in curr_match:
                 if participant != winner:
                     eliminated.append(participant)
@@ -175,16 +175,17 @@ def battle_arena():
         globals.clear_screen()
         return
 
+    # Check if player actually has a weapon
     if globals.this_player.current_weapon is None:
         print("However, as you walk toward the registration booth, you're hit with the sudden realization that you don't "
               "own a weapon.\n\nHow are you going to fight without a weapon?\n\n"
-              "Accordingly, you sulk out of the arena and back into the city.\n")
+              "So, you sulk out of the arena and back into the city.\n")
         input("(Press enter to return to Center Square...)")
         return
 
     # Establish tournament participants
-    tourney_participants = random.sample(globals.arena_enemy_names, 7)
-    random.shuffle(tourney_participants)
+    tourney_participants = sample(globals.arena_enemy_names, 7)
+    shuffle(tourney_participants)
     this_player = globals.this_player.name
     tourney_participants.insert(0, this_player)
 
@@ -211,6 +212,7 @@ def battle_arena():
 
     input("(Press enter to return to Center Square...)")
 
+
 def battle_practice():
     """
     Function to initiate the battle practice mechanic. The mechanic itself is handled by the battle class, which is
@@ -225,6 +227,7 @@ def battle_practice():
     input("(Press enter to start whacking...)")
     globals.clear_screen()
 
+    # Check if player actually has a weapon
     if globals.this_player.current_weapon is None:
         print("Alas, you realize that you don't have a weapon to whack the dummy with.\n\n"
               "Faced with no way around this predicament, you have no choice but to leave the Battle Practice Area and "
@@ -232,6 +235,7 @@ def battle_practice():
         input("(Press enter to return to Center Square...)")
         return
 
+    # Initiate battle
     curr = battle.Battle(custom_parameters="dummy")
     curr.do_battle()
 
@@ -334,7 +338,7 @@ def roulette():
               "\t11. Dozens Bet (bet on a consecutive dozen, 2:1)\n"
               "\t12. Columns Bet (bet on one of the three vertical columns, 2:1)\n")
         inp = input("Enter the number of the bet you would like to make, else enter 'q' to leave: ")
-        accepted_answers = [str(x) for x in range(0,13)]
+        accepted_answers = [str(x) for x in range(1,13)]
         accepted_answers.append('q')
         while inp not in accepted_answers:
             inp = input("You have entered an invalid option. Please try again: ")
@@ -656,7 +660,7 @@ def roulette():
 
     def double_street():
         """
-        Bet where the player bets on two rows of three numbers, that are adjacent to each other on the roulette board.
+        Bet where the player bets on two rows of three numbers that are adjacent to each other on the roulette board.
         Payoff - 5:1
         """
         bet_type = "Double Street"

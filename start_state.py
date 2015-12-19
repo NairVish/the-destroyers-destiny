@@ -14,6 +14,7 @@ from colorama import Fore, init
 
 init(autoreset=True)
 
+
 def print_intro():
     """
     Prints the intro screen.
