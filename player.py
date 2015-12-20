@@ -191,26 +191,27 @@ class Player:
                 inp = input("You did not enter a number. Please enter a valid option: ")
             else:
                 if tabular_potion_inv[inp][0] is "USED!" or inp >= len(globals.this_player.inventory):
-                    inp = input("You have entered an invalid option. Please enter a valid option: ")
+                    print(Fore.RED + "You have entered an invalid option.")
+                    inp = input("Please try again: ")
                     continue
+                globals.clear_screen()
                 item_to_remove = self.inventory.index(tabular_potion_inv[inp][1])
                 type = tabular_potion_inv[inp][2]
                 boost = tabular_potion_inv[inp][3]
-                if type is "health":
+                if type == "health":
                     self.current_health += boost
                     if self.current_health > self.total_health:
                         self.current_health = self.total_health
-                        print("Current health increased by %s points!" % boost)
-                elif type is "attack":
+                        print(Fore.GREEN + "Current health increased by %s points!\n" % boost)
+                elif type == "attack":
                     self.attack += boost
-                    print("Attack increased by %s points!" % boost)
-                elif type is "defense":
+                    print(Fore.GREEN + "Attack increased by %s points!\n" % boost)
+                elif type == "defense":
                     self.defense += boost
-                    print("Defense increased by %s points!" % boost)
+                    print(Fore.GREEN + "Defense increased by %s points!\n" % boost)
                 items_to_remove.append(item_to_remove)
                 for index in range(0, 4):
                     tabular_potion_inv[inp][index] = "USED!"
-                globals.clear_screen()
                 print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
                 inp = input(
                         "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
@@ -252,18 +253,20 @@ class Player:
             except ValueError:
                 if inp is 'q':
                     break
-                inp = input("That is an invalid option. Please try again: ")
+                print(Fore.RED + "That is an invalid option.")
+                inp = input("Please try again: ")
             else:
                 if inp >= len(globals.weapon_names):
-                    inp = input("That is an invalid option. Please try again: ")
+                    print(Fore.RED + "That is an invalid option.")
+                    inp = input("Please try again: ")
                     continue
                 input_legal = True
 
         if inp is not 'q':
             w_name = globals.weapon_names[globals.weapon_names.index(tabular_weapon_inv[inp][1])]
-            print("The %s has been equipped." % w_name)
+            print(Fore.GREEN + "\nThe %s has been equipped.\n" % w_name)
             self.current_weapon = Weapon(w_name)
-            input("Press enter to return...")
+            input("(Press enter to return...)")
 
         globals.clear_screen()
 

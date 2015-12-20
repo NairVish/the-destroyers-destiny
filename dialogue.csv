@@ -57,9 +57,9 @@
 "After a couple of days of rest, you and your assistant are invited to the Imperial Palace. If you're being invited to the palace, then this must be important...",c,0
 "The two of you are being briefed by the Commander of the Imperial forces. His name is Volun. The plan?",p,0
 "Volun: After much thought and deliberation, we have come to this decision:",c,0
-"We are going to launch two missiles loaded with Hexonium. As you may or may not know, the fission and fusion reactions of Hexonium are extremely powerful. So powerful, in fact, that they are thousands to millions of times more powerful than the atomic bombs that were created a couple of hundred years ago.",c,0
+"We are going to launch two missiles loaded with Hexonium at the Valst'r's home planet. As you may or may not know, the fission and fusion reactions of Hexonium are extremely powerful. So powerful, in fact, that they are thousands to millions of times more powerful than the atomic bombs that were created a couple of hundred years ago.",c,0
 "Which means... (He looks at you intently.)",p,0
-"Volun: That we can destroy the Valst'r home planet hundreds of times over and wipe them from the face of the universe!",rn,0
+"Volun: That we can destroy the Valst'r's home planet hundreds of times over and wipe them from the face of the universe!",rn,0
 "Uhh...",r,64
 "Wait, how do you know where these guys are?",r,65
 "Volun: I'll take that as sign of understanding. And, yes, we know where the Valst'r home planet is. I'll tell you how we know.",c,0
@@ -76,7 +76,7 @@
 "valstrDestroy",d,76
 "You reach the central room and encounter Astar'r...once again",c_interrupt,0
 "Astar'r: So, you've finally reached me...",c,0
-"Let's get to the point here. (unsheathes weapons)",p,0
+"Let's get to the point here. (takes out weapons)",p,0
 "Astar'r: Prepare to die!",b,0
 "Merlona: So, he's dead?",rn,0
 "Looks like it.",r,82

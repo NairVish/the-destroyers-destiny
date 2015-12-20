@@ -360,7 +360,11 @@ def roulette():
         :param payoff: The payoff of this bet.
         """
         print("ROULETTE: %s" % bet_type)
-        print("Payoff: %s:1" % str(payoff))
+        print(("Payoff: %s:1" % str(payoff)), end='')
+        if payoff == 1:
+            print(" (Even Money)")
+        else:
+            print("")
         print("Your money: $%.2f" % float(globals.this_player.money))
         print("Minimum Bet: $%s" % min_bet)
         print("Maximum Bet: $%s\n" % max_bet)

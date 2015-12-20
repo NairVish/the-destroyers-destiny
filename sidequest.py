@@ -143,10 +143,10 @@ class Sidequest:
         """
         Executes the delivery sidequest.
         """
-        print("%s from %s needs you to deliver a package to someone.\n"
-              "Do this simple quest, and you'll get a modest reward.\n"
+        print("%s from %s needs you to deliver a package to someone.\n\n"
+              "Do this simple quest, and you'll get a modest reward. "
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
-        print("However, you have to remember that the roads between the\n"
+        print("However, you have to remember that the roads between the "
               "provinces are dangerous, and that you'll encounter loads of enemies...\n")
         input("(Press enter to continue...)")
 
