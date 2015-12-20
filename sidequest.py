@@ -143,7 +143,7 @@ class Sidequest:
         """
         Executes the delivery sidequest.
         """
-        print("%s from %s needs you to deliver a package to someone.\n\n"
+        print("%s, from %s, needs you to deliver a package to someone.\n\n"
               "Do this simple quest, and you'll get a modest reward. "
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
         print("However, you have to remember that the roads between the "
@@ -183,8 +183,8 @@ class Sidequest:
         """
         Executes the intimidation sidequest.
         """
-        print("%s hired a group of bandits to sabotage %s competitors in the business.\n"
-              "However, the bandits have stepped out of line and have stopped listening to %s.\n"
+        print("%s hired a group of bandits to sabotage %s competitors in the business.\n\n"
+              "However, the bandits have stepped out of line and have stopped listening to %s.\n\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
               % (self.quest_giver, self.possessive_pronoun, self.object_pronoun, self.quest_giver))
         input("(Press enter to continue...)")
@@ -204,7 +204,7 @@ class Sidequest:
         Executes the gang assault sidequest.
         """
         print("The imperial police have asked for your help in assualting a gang's hideout.\n\n"
-              "The gang is notorious for unimaginable crimes, and it is up to you to stop\n"
+              "The gang is notorious for unimaginable crimes, and it is up to you to stop "
               "their evil ways.\n")
         input("(Press enter to continue...)")
 
@@ -223,7 +223,7 @@ class Sidequest:
         Executes the item recovery sidequest.
         """
         print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n\n"
-              "Your job is simple. You break into the bandits' hideout, destroy the bandits,\n"
+              "Your job is simple. You break into the bandits' hideout, destroy the bandits, "
               "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))
         input("(Press enter to continue...)")
 

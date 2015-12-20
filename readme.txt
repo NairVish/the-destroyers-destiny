@@ -47,7 +47,7 @@ Changes from Project 1:
     * NEW: The player can now perform a power attack once per battle which deals 25% more damage.
     * NEW: Added a few mini-games: roulette, battle arena, and battle practice area.
     * NEW: Colored text now printed in certain situations.
-    * NEW: On launch, the game now changes the terminal window size to 28 rows by 80 columns in terminals that support the changing of windows sizes using escape character sequences.
+    * NEW: On launch, the game now changes the terminal window size to 28 rows by 103 columns in terminals that support the changing of windows sizes using escape character sequences.
         * Source: "https://stackoverflow.com/questions/6418678/resize-the-terminal-with-python".
     * CHANGED: Save data is now written to and loaded from JSON files.
     * CHANGED: The game over exception now works correctly.
