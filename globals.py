@@ -13,10 +13,34 @@ import outside
 import player
 import weather
 
-cave_names, province_names, arena_enemy_names, people_names, people_genders, potion_names, potion_powers, \
-    potion_type, potion_cost, tabular_potions, weapon_names, weapon_powers, weapon_cost, tabular_weapons, loot_names, \
-    rare_loot_names, loot_values, rare_loot_values, main_quest_enemies, main_quest_bosses, main_quest_dungeons, \
-    side_enemy_types, side_quest_enemies, dialogue, dialogue_type, dialogue_jump_targets, this_player = None
+# Assign initial None type to some variables used globally
+cave_names = None
+province_names = None
+arena_enemy_names = None
+people_names = None
+people_genders = None
+potion_names = None
+potion_powers = None
+potion_type = None
+potion_cost = None
+tabular_potions = None
+weapon_names = None
+weapon_powers = None
+weapon_cost = None
+tabular_weapons = None
+loot_names = None
+rare_loot_names = None
+loot_values = None
+rare_loot_values = None
+main_quest_enemies = None
+main_quest_bosses = None
+main_quest_dungeons = None
+side_enemy_types = None
+side_quest_enemies = None
+dialogue = None
+dialogue_type = None
+dialogue_jump_targets = None
+this_player = None
 
 
 def init_globals():

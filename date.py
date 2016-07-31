@@ -8,7 +8,11 @@ from random import randrange
 
 import globals
 
-months, days_of_the_week, days_in_each_month, day_in_strings = None
+# Assign initial None type to some variables used globally
+months = None
+days_of_the_week = None
+days_in_each_month = None
+day_in_strings = None
 
 
 def init_dates():
