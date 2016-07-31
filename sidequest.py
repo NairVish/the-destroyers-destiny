@@ -166,7 +166,7 @@ class Sidequest:
         """
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
               "It is up to you to break into the bandits' hideout and save %s!\n" % (
-              self.quest_giver, self.giver_city, self.object_pronoun))
+                  self.quest_giver, self.giver_city, self.object_pronoun))
         input("(Press enter to continue...)")
 
         curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")

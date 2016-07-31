@@ -4,8 +4,9 @@ Handles the weather mechanic.
 
 __author__ = "Vishnu Nair"
 
-import date
 from random import choice
+
+import date
 
 
 def init_weather():

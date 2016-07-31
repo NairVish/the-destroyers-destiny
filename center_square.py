@@ -4,12 +4,13 @@ Handles all minigames/activities in Center Square in the player's home city.
 
 __author__ = "Vishnu Nair"
 
-import globals
 import tkinter
+from random import choice, sample, shuffle
+from time import sleep
+
 import battle
 import exit
-from time import sleep
-from random import choice, sample, shuffle
+import globals
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -186,7 +187,8 @@ def battle_arena():
         return
 
     # Establish tournament participants
-    tourney_participants = sample(globals.arena_enemy_names, 7)
+    number_of_participants_minus_player = 7
+    tourney_participants = sample(globals.arena_enemy_names, number_of_participants_minus_player)
     shuffle(tourney_participants)
     this_player = globals.this_player.name
     tourney_participants.insert(0, this_player)

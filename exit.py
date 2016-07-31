@@ -4,10 +4,11 @@ Handles the game's exit sequence, including saving the game.
 
 __author__ = 'Vishnu Nair'
 
-import sys
-import globals
 import json
 import os
+import sys
+
+import globals
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -63,12 +64,24 @@ def save_game():
     Saves the game by writing the player's attributes to a JSON file called "save.json" in the game directory.
     """
     player = globals.this_player
-    save_data = {'name': player.name, 'home': player.home, 'level': player.level, 'xp': player.xp,
-                 'target_xp': player.target_xp, 'health': player.current_health, 'attack': player.attack,
-                 'defense': player.defense, 'main_quest_stage': player.main_quest_stage, 'money': player.money,
-                 'assistant': player.assistant, 'weapon': str(player.current_weapon), 'day': player.day,
-                 'sidequests': player.sidequests, 'inventory': player.inventory, 'date': player.date,
-                 'start_date': player.start_date, 'date_num_days': player.date_num_days}
+    save_data = {'name': player.name,
+                 'home': player.home,
+                 'level': player.level,
+                 'xp': player.xp,
+                 'target_xp': player.target_xp,
+                 'health': player.current_health,
+                 'attack': player.attack,
+                 'defense': player.defense,
+                 'main_quest_stage': player.main_quest_stage,
+                 'money': player.money,
+                 'assistant': player.assistant,
+                 'weapon': str(player.current_weapon),
+                 'day': player.day,
+                 'sidequests': player.sidequests,
+                 'inventory': player.inventory,
+                 'date': player.date,
+                 'start_date': player.start_date,
+                 'date_num_days': player.date_num_days}
 
     with open("save.json", 'w') as save:
         save.truncate()

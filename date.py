@@ -4,8 +4,11 @@ Handles the date mechanic.
 
 __author__ = "Vishnu Nair"
 
-import globals
 from random import randrange
+
+import globals
+
+months, days_of_the_week, days_in_each_month, day_in_strings = None
 
 
 def init_dates():

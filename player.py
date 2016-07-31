@@ -5,11 +5,12 @@ Handles all functions that deal with the player itself.
 
 __author__ = 'Vishnu Nair'
 
-import globals
-import date
 from random import choice, randrange
-from tabulate import tabulate
+
+import date
+import globals
 from colorama import Fore, init
+from tabulate import tabulate
 
 init(autoreset=True)
 
@@ -214,7 +215,7 @@ class Player:
                     tabular_potion_inv[inp][index] = "USED!"
                 print(tabulate(tabular_potion_inv, headers=["No.", "Potion Name", "Type", "Strength (Points)"]) + '\n')
                 inp = input(
-                        "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
+                    "Please enter the number of another potion you would like to use, else enter the letter 'q' to leave: ")
 
         for item in items_to_remove:
             del globals.this_player.inventory[item]

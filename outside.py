@@ -4,11 +4,11 @@ Handles activities related to the outdoor/city mechanic.
 
 __author__ = "Vishnu Nair"
 
+import center_square
 import globals
 import shop
-import center_square
-from weather import string_weather
 from date import string_date
+from weather import string_weather
 
 
 def init_outdoors():
@@ -33,7 +33,7 @@ class Outdoors:
     def __init__(self, init_weather):
         """
         Initializes the outdoor class with the weather and current date.
-        :param init_weather: The weather in the form a dictionary with the 'condition' and 'temp' keys.
+        :param init_weather: The weather in the form of a dictionary with the 'condition' and 'temp' keys.
         """
         self.weather = init_weather
         self.date = globals.this_player.date

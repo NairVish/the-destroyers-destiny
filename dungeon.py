@@ -49,7 +49,8 @@ class Cell:
             self.enemy = self.enemy_selector()
             self.loot = None
 
-    def loot_selector(self):
+    @staticmethod
+    def loot_selector():
         """
         Returns a random piece of loot. There is a 5% chance of getting rare loot.
         """

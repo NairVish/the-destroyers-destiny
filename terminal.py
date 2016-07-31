@@ -5,8 +5,9 @@ Handles and contains all definitions for the terminal sequence of the main quest
 __author__ = 'Vishnu Nair'
 
 import getpass
-import globals
 from time import sleep
+
+import globals
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -119,6 +120,7 @@ def stage3():
     """
     Executes stage 3 of the terminal sequence.
     """
+    password = "valstrDestroy"
 
     def print_menu():
         globals.clear_screen()
@@ -128,12 +130,12 @@ def stage3():
         return getpass.getpass()
 
     word = print_menu()
-    while word != "valstrDestroy":
+    while word != password:
         if word == "hint":
             globals.clear_screen()
             print(
-                    "Merlona: If I remember correctly, it has the word 'Destroy' in it as the second part of the password. "
-                    "I believe the first part of the password is who we're trying to destroy. Lowercase too.\n")
+                "Merlona: If I remember correctly, it has the word 'Destroy' in it as the second part of the password. "
+                "I believe the first part of the password is who we're trying to destroy. Lowercase too.\n")
             input("(Press enter to continue...)")
             word = print_menu()
             continue

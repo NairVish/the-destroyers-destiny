@@ -9,8 +9,8 @@ There are three shops in the game:
 __author__ = 'Vishnu Nair'
 
 import globals
-from tabulate import tabulate
 from colorama import Fore, init
+from tabulate import tabulate
 
 init(autoreset=True)
 
@@ -51,11 +51,11 @@ def weapon_shop():
             globals.this_player.money -= cost
             globals.clear_screen()
             print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (
-            globals.weapon_names[inp], globals.this_player.money))
+                globals.weapon_names[inp], globals.this_player.money))
             print(tabulate(globals.tabular_weapons, headers=["No.", "Weapon Name", "Weapon Power", "Cost ($)"],
                            tablefmt="rst") + '\n')
             inp = input(
-                    "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
+                "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
 
 def potion_shop():
@@ -91,11 +91,11 @@ def potion_shop():
             globals.this_player.money -= cost
             globals.clear_screen()
             print(Fore.GREEN + "<Alert: %s has been added to your inventory. You have $%.2f left.>\n" % (
-            globals.potion_names[inp], globals.this_player.money))
+                globals.potion_names[inp], globals.this_player.money))
             print(tabulate(globals.tabular_potions, headers=["No.", "Name", "Strength (Points)", "Type", "Cost ($)"],
                            tablefmt="rst") + '\n')
             inp = input(
-                    "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
+                "Please enter the number of another item you would like to buy, else enter the letter 'q' to leave: ")
 
 
 def selling():
@@ -170,7 +170,7 @@ def selling():
             tabular_data[inp][2] = "SOLD!"
             print(tabulate(tabular_data, headers=['No.', 'Item Name', 'Value ($)']) + '\n')
             inp = input(
-                    "Please enter the number of another item you would like to sell, else enter the letter 'q' to leave: ")
+                "Please enter the number of another item you would like to sell, else enter the letter 'q' to leave: ")
 
     for item in items_to_remove:
         globals.this_player.inventory.remove(item)

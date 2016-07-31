@@ -5,12 +5,18 @@ Contains all variables and functions that will be referenced by almost every oth
 __author__ = 'Vishnu Nair'
 
 import csv
-import player
 import os
 import random
+
 import date
-import weather
 import outside
+import player
+import weather
+
+cave_names, province_names, arena_enemy_names, people_names, people_genders, potion_names, potion_powers, \
+    potion_type, potion_cost, tabular_potions, weapon_names, weapon_powers, weapon_cost, tabular_weapons, loot_names, \
+    rare_loot_names, loot_values, rare_loot_values, main_quest_enemies, main_quest_bosses, main_quest_dungeons, \
+    side_enemy_types, side_quest_enemies, dialogue, dialogue_type, dialogue_jump_targets, this_player = None
 
 
 def init_globals():

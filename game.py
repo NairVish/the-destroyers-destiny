@@ -5,15 +5,15 @@ Executes the game sequence and the main game loop.
 
 __author__ = 'Vishnu Nair'
 
-import start_state
+import dungeon
 import exit
 import globals
-import terminal
 import home_screen
 import player
-import dungeon
-from tabulate import tabulate
+import start_state
+import terminal
 from colorama import Fore, init
+from tabulate import tabulate
 
 init(autoreset=True)
 

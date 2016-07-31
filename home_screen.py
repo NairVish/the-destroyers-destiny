@@ -4,13 +4,12 @@ Handles all activities related to the home screen.
 
 __author__ = 'Vishnu Nair'
 
-import globals
-import sidequest
 import date
 import exit
-import weather
+import globals
 import outside
-
+import sidequest
+import weather
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -107,7 +106,8 @@ class Home:
                 return True
             globals.clear_screen()
 
-    def print_shop_selector(self):
+    @staticmethod
+    def print_shop_selector():
         """
         Prints shop selection screen and returns user input.
         """

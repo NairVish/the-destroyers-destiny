@@ -5,10 +5,11 @@ Handles all activities related to the battle mechanic.
 
 __author__ = 'Vishnu Nair'
 
-from random import randrange
-from colorama import Fore, init
 import math
+from random import randrange
+
 import globals
+from colorama import Fore, init
 
 init(autoreset=True)
 
@@ -52,12 +53,20 @@ class Enemy:
             return globals.this_player.level
 
     def determine_attack_level(self):
+        """
+        Determines and returns the enemy's attack. Regular enemies have half the player's attack; bosses
+        have 95% of the player's attack.
+        """
         if self.enemy_type is "reg":
             return globals.this_player.attack * 0.5
         elif self.enemy_type is "boss":
             return globals.this_player.attack * 0.95
 
     def determine_defense_level(self):
+        """
+        Determines and returns the enemy's defense. Regular enemies have half the player's defense; bosses
+        have 95% of the player's defense.
+        """
         if self.enemy_type is "reg":
             return globals.this_player.defense * 0.5
         elif self.enemy_type is "boss":
@@ -66,7 +75,7 @@ class Enemy:
     def determine_health(self):
         """
         Determines and returns the enemy's health. Regular enemies have half the player's health; bosses
-        have 95% of the player's health.
+        have 95% of the player's health (all are rounded down to the nearest integer).
         """
         if self.enemy_type is "reg":
             return int(globals.this_player.total_health * 0.5)
@@ -143,7 +152,8 @@ class Battle:
         """
         Determines damage cast by the player to the enemy using a (frankly overly complex) formula and deducts from
         the enemy's health and vice versa. If the the player's assistant flag is set to True, there is a small (10%)
-        chance that the assistant will attack too. If the skip flag is True, the player's turn is skipped.
+        chance that the assistant will attack too on a given turn. If the skip flag is True, the player's turn is
+        skipped.
         """
         skip = self.show_menu()
         globals.clear_screen()
@@ -153,7 +163,7 @@ class Battle:
             print(Fore.RED + "You lost your turn because you used a potion!")
         else:
             p_damage = globals.this_player.attack + globals.this_player.current_weapon.power - (
-            self.enemy.defense * 0.5)
+                self.enemy.defense * 0.5)
             if skip is None:
                 self.power_attack_used = True
                 p_damage *= 1.25
@@ -168,7 +178,7 @@ class Battle:
             prob = randrange(0, 100)
             if prob in range(0, 10):
                 a_damage = (globals.this_player.attack + globals.this_player.current_weapon.power - (
-                self.enemy.defense * 0.5)) / 4
+                    self.enemy.defense * 0.5)) / 4
                 self.enemy.health -= a_damage
                 print(Fore.GREEN + "Merlona dealt %.1f damage to the enemy!" % a_damage)
         if self.enemy.health <= 0:

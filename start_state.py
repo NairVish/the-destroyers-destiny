@@ -4,13 +4,13 @@ Handles the start sequence for the game.
 
 __author__ = 'Vishnu Nair'
 
+import json
 import os
 import time
-import globals
-import json
-from exit import exit_program
 
+import globals
 from colorama import Fore, init
+from exit import exit_program
 
 init(autoreset=True)
 
@@ -21,10 +21,10 @@ def print_intro():
     """
     globals.clear_screen()
     print(
-            "THE DESTROYER'S DESTINY\n"
-            "\tCSC 11300 Projects 1 & 2\n"
-            "\tBy: Vishnu Nair\n\n"
-            "(C) 2015 Vishnu Nair. All rights reserved.\n"
+        "THE DESTROYER'S DESTINY\n"
+        "\tCSC 11300 Projects 1 & 2\n"
+        "\tBy: Vishnu Nair\n\n"
+        "(C) 2015 Vishnu Nair. All rights reserved.\n"
     )
 
 
@@ -39,7 +39,7 @@ def show_start_menu():  # The startup menu
     save = find_save()
     if save is not None:
         print('\t2. Continue from existing save.')
-        accepted_answers = ['1', '2', 'q']
+        accepted_answers.append('2')
     print('\tq. Quit.\n')
     answer = input('Choose your desired option: ')
     while answer not in accepted_answers:
