@@ -52,11 +52,9 @@ def prompt_for_save():
         print(Fore.GREEN + "Save data has been written to a file named 'save.json' in the "
                            "game's directory. If such a file already existed, it has been "
                            "overwritten.\n")
-        return
     else:
         globals.clear_screen()
         print(Fore.RED + "The game was not saved.\n")
-        return
 
 
 def save_game():

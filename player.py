@@ -277,7 +277,7 @@ class Player:
         """
         print("YOUR INVENTORY\n")
 
-        if len(self.inventory) is 0:
+        if not self.inventory:
             print("You have nothing in your inventory.\n")
         else:
             for item in self.inventory:

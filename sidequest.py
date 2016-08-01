@@ -18,6 +18,7 @@ import exit
 from random import randrange, choice
 from time import sleep
 
+number_of_quests_to_show = 3
 
 def setup_quest_board():
     """
@@ -31,18 +32,18 @@ def setup_quest_board():
     global names
     global home_cities
 
-    numbers = range(0, 3)
+    numbers = range(0, number_of_quests_to_show)
     curr_types = []
     descriptions = []
     names = []
     home_cities = []
 
     for _ in numbers:
-        curr = choice(Sidequest.types)
+        curr = choice(Sidequest.quest_types)
         curr_types.append(curr)
         descriptions.append(Sidequest.quest_dict[curr])
         names.append(choice(globals.people_names))
-        home_cities.append(choice(globals.province_names))
+        home_cities.append(globals.select_province())
 
     global quest_tabulate
     quest_tabulate = []
@@ -60,7 +61,8 @@ def quest_board():
     print("QUEST BOARD")
     print("Welcome to the quest board!\n")
     print(tabulate.tabulate(quest_tabulate, headers=["No.", "Type", "Description", "Job Giver", "Home City"]))
-    accepted_answers = ['0', '1', '2', 'q']
+    accepted_answers = [str(num) for num in range(0, number_of_quests_to_show)]
+    accepted_answers.append('q')
     inp = input("\nWhat job would you like to take? To go back, enter the letter 'q': ")
     while inp not in accepted_answers:
         inp = input("You have entered an invalid option. Please try again: ")
@@ -85,12 +87,12 @@ class Sidequest:
     """
     The Sidequest class handles all information about and executes the desired sidequest.
     """
-    types = ['delivery', 'kidnap', 'scare', 'gang', 'recovery']
-    quest_dict = {'delivery': "Deliver a message for someone.",
-                  'kidnap': "Search and rescue mission.",
-                  'scare': "An intimidation job.",
-                  'gang': "Assault a gang's hideout.",
-                  'recovery': "Recover a lost/stolen item."}
+    quest_types = ['delivery', 'kidnap', 'scare', 'gang', 'recovery']
+    quest_dict = {quest_types[0]: "Deliver a message for someone.",
+                  quest_types[1]: "Search and rescue mission.",
+                  quest_types[2]: "An intimidation job.",
+                  quest_types[3]: "Assault a gang's hideout.",
+                  quest_types[4]: "Recover a lost/stolen item."}
 
     def __init__(self, type, dungeon_name, giver, giver_gender, origin_city):
         """
@@ -128,21 +130,25 @@ class Sidequest:
         """
         globals.clear_screen()
         sleep(0.1)
-        if self.type is 'delivery':
+        if self.type == self.quest_types[0]:
             self.execute_delivery()
-        elif self.type is 'kidnap':
+        elif self.type == self.quest_types[1]:
             self.execute_kidnap()
-        elif self.type is 'scare':
+        elif self.type == self.quest_types[2]:
             self.execute_scare()
-        elif self.type is 'gang':
+        elif self.type == self.quest_types[3]:
             self.execute_gang()
-        elif self.type is 'recovery':
+        elif self.type == self.quest_types[4]:
             self.execute_recovery()
 
     def execute_delivery(self):
         """
         Executes the delivery sidequest.
         """
+        # Custom dungeon parameters
+        c_dungeon_name = "A Random Road"
+        enemy_type = "looter"
+
         print("%s, from %s, needs you to deliver a package to someone.\n\n"
               "Do this simple quest, and you'll get a modest reward. "
               "Sounds simple enough, right?\n" % (self.quest_giver, self.giver_city))
@@ -150,7 +156,7 @@ class Sidequest:
               "provinces are dangerous, and that you'll encounter loads of enemies...\n")
         input("(Press enter to continue...)")
 
-        curr = dungeon.Dungeon("A Random Road", self.dungeon_length, "looter")
+        curr = dungeon.Dungeon(c_dungeon_name, self.dungeon_length, enemy_type)
         curr.traverse_dungeon()
 
         reward = randrange(15, 26)
@@ -164,12 +170,15 @@ class Sidequest:
         """
         Executes the search and rescue sidequest.
         """
+        # Custom dungeon parameters
+        enemy_type = "bandit"
+
         print("%s, a citizen of %s, has been kidnapped by bandits!\n\n"
               "It is up to you to break into the bandits' hideout and save %s!\n" % (
                   self.quest_giver, self.giver_city, self.object_pronoun))
         input("(Press enter to continue...)")
 
-        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, enemy_type)
         curr.traverse_dungeon()
 
         reward = randrange(15, 26)
@@ -183,13 +192,16 @@ class Sidequest:
         """
         Executes the intimidation sidequest.
         """
+        # Custom dungeon parameters
+        enemy_type = "bandit"
+
         print("%s hired a group of bandits to sabotage %s competitors in the business.\n\n"
               "However, the bandits have stepped out of line and have stopped listening to %s.\n\n"
               "It is up to you to intimidate the bandit leader into always following %s's orders.\n"
               % (self.quest_giver, self.possessive_pronoun, self.object_pronoun, self.quest_giver))
         input("(Press enter to continue...)")
 
-        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, enemy_type)
         curr.traverse_dungeon()
 
         reward = randrange(15, 26)
@@ -203,12 +215,15 @@ class Sidequest:
         """
         Executes the gang assault sidequest.
         """
+        # Custom dungeon parameters
+        enemy_type = "mobster"
+
         print("The imperial police have asked for your help in assualting a gang's hideout.\n\n"
               "The gang is notorious for unimaginable crimes, and it is up to you to stop "
               "their evil ways.\n")
         input("(Press enter to continue...)")
 
-        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "mobster")
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, enemy_type)
         curr.traverse_dungeon()
 
         reward = randrange(15, 26)
@@ -222,12 +237,15 @@ class Sidequest:
         """
         Executes the item recovery sidequest.
         """
+        # Custom dungeon parameters
+        enemy_type = "bandit"
+
         print("%s, from %s, has asked you to recover a precious heirloom that some bandits stole.\n\n"
               "Your job is simple. You break into the bandits' hideout, destroy the bandits, "
               "and retrieve the stolen item.\n" % (self.quest_giver, self.giver_city))
         input("(Press enter to continue...)")
 
-        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, "bandit")
+        curr = dungeon.Dungeon(self.dungeon_name, self.dungeon_length, enemy_type)
         curr.traverse_dungeon()
 
         reward = randrange(20, 30)

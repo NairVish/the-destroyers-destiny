@@ -241,8 +241,7 @@ def battle_practice():
         return
 
     # Initiate battle
-    curr = battle.Battle(custom_parameters="dummy")
-    curr.do_battle()
+    battle.Battle(custom_parameters="dummy").do_battle()
 
 
 def roulette():
@@ -459,7 +458,7 @@ def roulette():
                     layout_ref.destroy()
                     exit.force_exit_program()
 
-    # Bet functions. All bet functions return the player's net winnings.
+    ### Bet functions. All bet functions return the player's net winnings. ###
     def straight_up():
         """
         Bet where the player bets on exactly one number on the roulette board.
@@ -1032,7 +1031,7 @@ def roulette():
         input("(Press enter to continue...)")
         return earning
 
-    # END bet functions
+    ### END bet functions ###
 
     # Set house min and max bets to arbitrary numbers.
     min_bet = 3
@@ -1049,16 +1048,15 @@ def roulette():
         input("(Press enter to return to Center Square...)")
         return
 
+    roulette_choices = [str(x) for x in range(0, 37)]
+
     # Set game type
     if this_type == '1':
+        # American Roulette has an extra number on the board.
         game_type = "American Roulette"
+        roulette_choices.append('00')
     else:
         game_type = "European Roulette"
-
-    roulette_choices = [str(x) for x in range(0, 37)]
-    # American Roulette has an extra number on the board.
-    if this_type == '1':
-        roulette_choices.append('00')
 
     # Set up roulette board row and column list representations as well as various groups.
     roulette_board_rows, roulette_board_columns, reds, blacks, evens, odds, first_half, second_half, first_dozen, second_dozen, third_dozen = init_roulette_board()

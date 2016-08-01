@@ -34,10 +34,12 @@ def game_loop():
     """
     The main game loop. Handles all main quest stage advancement (outside of main dungeons). Also handles all dialogue
     output, responses, main quest dungeons, initial weapon selection, and terminal sequence initiation. Loops using
-    data from dialogue.csv until we return from the home screen. We return when True is returned from the home screen.
+    data from dialogue.csv until we return from the home screen. We return from this function when True is returned
+    from the home screen.
     """
     alert_day = None
     game_over_reversion_target = None
+    final_main_quest_stage = 91
 
     while True:  # until we hit a return statement
 
@@ -48,10 +50,9 @@ def game_loop():
             print(globals.dialogue[player_stage] + '\n')
             globals.this_player.main_quest_stage += 1
         elif curr.startswith('m'):  # 'm': show home screen
-            if player_stage == 91:
+            if player_stage == final_main_quest_stage:
                 print(globals.dialogue[player_stage] + '\n')
-                home_scr = home_screen.Home()
-                exit_bool = home_scr.process_home()
+                exit_bool = home_screen.Home().process_home()
                 if exit_bool is True:
                     return
                 else:
@@ -59,8 +60,7 @@ def game_loop():
             elif alert_day is None:
                 print(globals.dialogue[player_stage] + '\n')
                 alert_day = globals.this_player.day + 2
-                home_scr = home_screen.Home()
-                exit_bool = home_scr.process_home()
+                exit_bool = home_screen.Home().process_home()
                 if exit_bool is True:
                     return
                 else:
@@ -74,8 +74,7 @@ def game_loop():
                     alert_day = None
                 else:
                     print(globals.dialogue[player_stage] + '\n')
-                    home_scr = home_screen.Home()
-                    exit_bool = home_scr.process_home()
+                    exit_bool = home_screen.Home().process_home()
                     if exit_bool is True:
                         return
                     else:
@@ -93,19 +92,10 @@ def game_loop():
                           ['2.', globals.weapon_names[2], globals.weapon_powers[2]]]
             print(tabulate(sw_tabular, headers=['No.', 'Weapon Name', 'Damage']) + '\n')
             inp = input("Enter the number of the weapon you would like to take: ")
-            accepted_answers = [0, 1, 2]
-            input_legal = False
-            while input_legal is False:
-                try:
-                    inp = int(inp)
-                except ValueError:
-                    inp = input("You have entered an invalid option. Please try again: ")
-                    continue
-                else:
-                    if inp in accepted_answers:
-                        input_legal = True
-                    else:
-                        inp = input("You have entered an invalid option. Please try again: ")
+            accepted_answers = ['0', '1', '2']
+            while inp not in accepted_answers:
+                inp = input("You have entered an invalid option. Please try again: ")
+            inp = int(inp)
             globals.this_player.inventory.append(globals.weapon_names[inp])
             for num in range(0, 3):
                 globals.this_player.inventory.append(globals.potion_names[0])
@@ -143,29 +133,26 @@ def game_loop():
                 globals.this_player.main_quest_stage = globals.dialogue_jump_targets[
                     globals.this_player.main_quest_stage]
             try:
-                if player_stage < 15:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[0] % globals.this_player.home,
-                                           init_length=10, enemy_type="valstr", main_quest=True)
-                    curr.traverse_dungeon()
+                if player_stage < 15:   # ballpark estimate
+                    dungeon.Dungeon(init_name=globals.main_quest_dungeons[0] % globals.this_player.home,
+                                init_length=10, enemy_type="valstr", main_quest=True).traverse_dungeon()
                     globals.this_player.toggle_sidequest_flag()
                 elif curr.endswith('sneak'):
                     globals.this_player.toggle_assistant_flag()
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11,
-                                           enemy_type="valstr", main_quest=True)
-                    curr.traverse_dungeon()
+                    dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=11,
+                                enemy_type="valstr", main_quest=True).traverse_dungeon()
                 elif curr.endswith('fight'):
                     globals.this_player.toggle_assistant_flag()
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr",
-                                           main_quest=True)
-                    curr.traverse_dungeon()
-                elif 70 < player_stage < 80:
-                    curr = dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17,
-                                           enemy_type="valstr",
-                                           main_quest=True)
-                    curr.traverse_dungeon()
+                    dungeon.Dungeon(init_name=globals.main_quest_dungeons[1], init_length=7, enemy_type="valstr",
+                                main_quest=True).traverse_dungeon()
+                elif 70 < player_stage < 80:    # ballpark estimate
+                    dungeon.Dungeon(init_name=globals.main_quest_dungeons[2], init_length=17,
+                                enemy_type="valstr", main_quest=True).traverse_dungeon()
             except KeyboardInterrupt:
                 exit.force_exit_program()
             except:
+                # We're using a broad catch clause here because specifically handling globals.GameOver doesn't work for
+                # some reason. We're assuming here that no other exceptions will be thrown.
                 print(Fore.RED + "<Alert: Your current health has reached zero!>\n")
                 print("As the world fades to black, a white light suddenly flashes before you.\n"
                       "In an instant, you find yourself back at your home. You look at the time.\n"

@@ -140,7 +140,7 @@ def stage3():
             word = print_menu()
             continue
         else:
-            print(Fore.RED + "You have entered an invalid password. Please try again.")
+            print(Fore.RED + "Sorry, try again.")
             word = getpass.getpass()
     globals.clear_screen()
     print("Preparing missile systems...Done!\n"
@@ -149,26 +149,9 @@ def stage3():
           "All systems ready!\n"
           "Starting countdown...")
     sleep(2)
-    print("10...")
-    sleep(0.5)
-    print("9...")
-    sleep(0.5)
-    print("8...")
-    sleep(0.5)
-    print("7...")
-    sleep(0.5)
-    print("6...")
-    sleep(0.5)
-    print("5...")
-    sleep(0.5)
-    print("4...")
-    sleep(0.5)
-    print("3...")
-    sleep(0.5)
-    print("2...")
-    sleep(0.5)
-    print("1...")
-    sleep(0.5)
+    for num in range(0, 10):
+        print(str(10 - num) + "...")
+        sleep(0.5)
     print(Fore.GREEN + "Lift-off of both missiles reported!\n")
     input("(Press enter to continue...)")
 
@@ -179,11 +162,15 @@ def text_interlude():
     """
     globals.clear_screen()
     print(
-        "You and your assistant look at the other screens in the room that are tracking the missiles. It is five agonizing minutes before the missiles reach the Valst'r's home system. You realize that the Imperial Commander wasn't joking when he was talking about the warp drive.\n")
+        "You and your assistant look at the other screens in the room that are tracking the missiles. It is five "
+        "agonizing minutes before the missiles reach the Valst'r's home system. You realize that the Imperial Commander "
+        "wasn't joking when he was talking about the warp drive.\n")
     print(
-        "On the radars, you notice other objects trying to head toward the missiles, but the missiles evade these objects with ease.\n")
+        "On the radars, you notice other objects trying to head toward the missiles, but the missiles evade these "
+        "objects with ease.\n")
     print(
-        "The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second before disappearing from the radars.\n")
+        "The two missiles head toward opposite sides of the Valst'r home planet and stay there for one final second "
+        "before disappearing from the radars.\n")
     print("You look back at the main screen...\n")
     input("(Press enter to continue...)")
 

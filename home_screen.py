@@ -66,12 +66,11 @@ class Home:
             if inp is '1':
                 return False
             elif inp is '2':
-                out = outside.Outdoors(self.weather)
-                out.traverse()
+                outside.Outdoors(self.weather).traverse()
             elif inp is '3':
                 date_advanced = False
                 try:
-                    if globals.this_player.sidequests is False:
+                    if not globals.this_player.sidequests:
                         print(Fore.RED + "You are an Unknown.\n"
                                          "Unknowns are not allowed to view or participate in quests on the quest board.\n"
                                          "You must return home.\n")
@@ -79,10 +78,13 @@ class Home:
                         globals.clear_screen()
                         continue
                     date_advanced = sidequest.quest_board()
-                    sidequest.setup_quest_board()
+                    if date_advanced:
+                        sidequest.setup_quest_board()
                 except KeyboardInterrupt:
                     exit.force_exit_program()
                 except:
+                    # We're using a broad catch clause here because specifically handling globals.GameOver doesn't work
+                    # for some reason. We're assuming here that no other exceptions will be thrown.
                     globals.clear_screen()
                     print(Fore.RED + "<Alert: Your current health has reached zero!>\n")
                     print("As the world fades to black, a white light suddenly flashes before you.\n"
@@ -91,7 +93,7 @@ class Home:
                     print("<Note: All loot collected and XP gained will carry over. However, you have\n"
                           "lost the reward for this sidequest.>\n")
                     input("(Press enter to continue...)")
-                if date_advanced is True:
+                if date_advanced:
                     self.weather = weather.determine_weather(globals.this_player.date)
                     self.weather_string = weather.string_weather(self.weather)
             elif inp is '4':

@@ -6,7 +6,7 @@ __author__ = 'Vishnu Nair'
 
 import csv
 import os
-import random
+from random import choice
 
 import date
 import outside
@@ -174,7 +174,7 @@ def select_province():
     """
     Selects and returns a random province from the list of provinces.
     """
-    return random.choice(province_names)
+    return choice(province_names)
 
 
 def declare_new_player(name):
@@ -185,8 +185,7 @@ def declare_new_player(name):
     variable.
     """
     global this_player
-    province = select_province()
-    this_player = player.Player(name, province)
+    this_player = player.Player(name, select_province())
 
 
 def declare_existing_player(save_data):
@@ -225,7 +224,7 @@ def clear_screen():
 
 class GameOver(Exception):
     """
-    An empty game over exception.
+    An empty exception that is raised when the player's health reaches zero.
     """
     pass
 
