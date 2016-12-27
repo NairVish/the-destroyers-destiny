@@ -16,13 +16,11 @@ To start the game, run the file "launch.py".
     * shop.py - handles the shop mechanic
     * sidequest.py - handles the sidequest mechanic
     * start_state.py - handles the start sequence for the game
-    * tabulate.py (THIRD-PARTY MODULE) - "pretty-prints" tabular data
     * terminal.py - handles the terminal sequence
     * center_square.py [NEW] - handles the minigames/activities associated with Center Square
     * date.py [NEW] - handles the date mechanic
     * outside,py [NEW] - contains the definition for the city class and handles the player's city traversal
     * weather.py [NEW] - handles the weather mechanic
-    * colorama (THIRD-PARTY MODULE) [NEW] - provides colored terminal text
 
 Other data files:
     * caves_hideaways.txt - holds names for dungeons for the sidequest mechanic
