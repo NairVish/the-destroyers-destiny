@@ -1,6 +1,6 @@
-This is a text-based game I created for two projects for a class I took on Python. I have worked on it a bit since. Below is the README that was submitted along with the project submission; however, it does not necessarily reflect the changes I have made since.
+This is a text-based game I created for two projects for a class I took on Python. I have worked on it a bit since. Below is the README that was submitted with the project submission; however, it does not necessarily reflect the changes I have made since.
 
----------------------------------------------------------------------------------------------------------
+----------------------------------
 
 The Destroyer's Destiny
     A Game by Vishnu Nair
